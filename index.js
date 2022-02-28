@@ -1,7 +1,8 @@
 //Import Required Modules
 const express = require("express");
 const mongoose = require("mongoose");
-const defaultRoute = require("./routes/index");
+const defaultRouter = require("./routes/index");
+const rolesRouter = require("./routes/role")
 const dotenv = require("dotenv");
 
 //Get Configuration Variables
@@ -17,7 +18,8 @@ mongoose
     //   app.use(express.json())
     app.use(express.urlencoded({ extended: true }));
 
-    app.use("/", defaultRoute);
+    app.use("/", defaultRouter);
+    app.use("/api/v1/roles", rolesRouter);
 
     app.listen(PORT, () => {
       console.log(`Server Connected And App Is Running On Port #: ${PORT}`);
