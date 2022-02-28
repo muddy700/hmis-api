@@ -8,13 +8,13 @@ router.get("/", async (req, res) => {
     const roles = await Role.find();
     res.status(200).send(roles);
   } catch (error) {
-    // res.status(500).send("Failed to fetch roles");
     res.status(500).send({ error: error });
   }
 });
 
 //Create New Role
 router.post("/", async (req, res) => {
+  //Initialize new instance/doc
   const role = new Role({
     role_name: req.body.role_name,
   });
@@ -80,7 +80,7 @@ router.delete("/:id", async (req, res) => {
       res.status(200).send("Role deleted successfull.");
     } catch (error) {
       //Throw error if failed to delete the doc
-      res.status(400).send({ error: error });
+      res.status(500).send({ error: error });
     }
   } catch (error) {
     //Throw error if no document found

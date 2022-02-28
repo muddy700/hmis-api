@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-module.exports = router
-
 router.get('/', async (req, res) => {
-    res.status(200).send('Hellow Buddy!')
+    res.status(200).send('Hellow Buddy! 👋 ')
 })
+
+module.exports = router
