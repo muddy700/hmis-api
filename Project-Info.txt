@@ -1,0 +1,197 @@
+
+Project Title: Healthcare Management System
+
+Project Deliverable: REST APIs
+
+Tools Used: NodeJS, ExpressJS, MongoDB(Mongoose), JWT
+
+<===== Tables/Collections =====>
+-User
+-Role
+-Patient 
+-Appointment
+-Encounter
+-Symptoms
+-Diagnosis 
+-Lab Test Template
+-Lab Test
+-Medicine
+-Sales Invoice
+-Mode of Payment 
+
+<===== Embeded Documents =====>
+    -Vital Sign (Array)
+    -Address (Object)
+    -Dispensed Medicine (Array)
+    -Sales Item (Array)
+
+<===== Tables/Collections With Properties =====>
+-> User:
+    -Username
+    -First Name
+    -Last Name
+    -Full Name
+    -Date of Birth
+    -Email
+    -Phone
+    -Gender
+    -Status: ie.. Active/Disabled
+    -Password
+    -Profile Image
+    -Role: {Role Id} 
+    -Address: {Address Table}
+
+-> Role:
+    -Role Name: ie.. Receiptionist, Cashier, Doctor, Lab Technician, Pharmacy
+
+-> Patient:
+    -First Name
+    -Last Name
+    -Full Name
+    -Date of Birth
+    -Email
+    -Phone
+    -Gender
+    -Address: {Address Table}
+    -Vital Sign: [{Vital Sign Table}]
+
+-> Vital Sign:
+    -Date and Time Taken
+    -Taken By/Practitioner: {User Id}
+    -Weight
+    -Height
+    -Body Temperature
+    -Blood Pressure
+
+-> Appointment:
+    -Date and Time
+    -Doctor/Practitioner: {User Id}
+    -Patient: {Patient Id}
+    -Price
+    -Status: ie.. open, closed
+    -Invoiced: Bool
+
+-> Encounter:
+    -Date and Time
+    -Reference Appointment: {appointment_id}
+    -Doctor/Practitioner: {User Id}
+    -Patient: {Patient Id}
+    -Status: ie.. Open/Closed
+    -Symptoms: [{Symptoms Table/Ids}]
+    -Diagnosis: [{Diagnosis Table/Ids}]
+    -Lab Test: [{Lab Test Table}]
+    -Final Diagnosis: [{Diagnosis Table/Ids}]
+    -Medicine:[{Dispensed Medicine Table}]
+
+-> Lab Test Template:
+    -Lab Test Name
+    -Lab Test Items: [{name, normalRange, result}]
+    -Price
+
+-> Lab Test:
+    -Test Template Id
+    -Date and Time
+    -Lab Technician: {User Id}
+    -Custom Result
+    -Invoiced
+    -Status: ie..completed/In-progress
+
+-> Medicine:
+    -Drug Code
+    -Drug Name
+    -Price
+    -Dosage
+
+-> Dispensed Medicine:
+    -Drug Id
+    -Quantity
+    -Grand Price
+    -Invoiced
+
+-> Sales Invoice
+    -Date Created
+    -Due Date
+    -Patient/Customer: {Patient Id}
+    -Mode of Payment: {Mode of payment Id}
+    -Items: [{Sales Item Table}]
+    -Total Amount
+    -Status: ie.. paid/pending
+    -Cashier/Received By: {User Id}
+
+-> Sales Item:
+    -Item Collection Name
+    -Item Id
+    -Item Price @ 1
+    -Quantity
+    -Grand Price
+
+-> Address:
+    -Street
+    -City
+    -State
+    -PostalCode
+
+-> Mode of payment:
+    -name
+
+-> Symptoms:
+    -name
+
+-> Diagnosis:
+    -name
+
+<===== Implementation Steps =====>
+
+==> Day 1
+-Project Initialization
+    -Create Project
+    -Install all required dependencies
+    -Perform initial project configurations. ie..Import some dependencies required to start/run project like express.
+    -Run  project
+
+-Connect project with git
+    -Create github repository
+    -Link git repo with project
+    -Push initial project changes
+
+-Create Users and Roles table (Schema and Model)
+-Create API end-points to handle CRUD operations for the above tables
+-Test end-points created (unit test) and make some modifications if any
+-Stage, commit and push changes made separately/grouped based on features (@feature with its own commit) to github
+
+==> Day 2
+-Create and handle Authentication and Authorization logics by creating end-points for register, login and logout
+-Test Logics Created (unit test) and make some modifications if any
+-Stage, commit and push changes made separately/grouped based on features (@feature with its own commit) to github
+
+==> Day 3
+-Create Schema, Model and API end-points to handle CRUD for independent tables(Collections with no foreign key) as listed below
+    -Patient
+    -Symptoms
+    -Diagnosis 
+    -Lab Test Template
+    -Mode of payment
+    -Medicine
+-Test end-points created (unit test) and make some modifications if any
+-Stage, commit and push changes made separately/grouped based on features (@feature with its own commit) to github
+
+==> Day 4
+-Create Schema, Model and API end-points to handle CRUD for dependent tables(Collections with foreign key) as listed below
+    -Appointment
+    -Encounter
+    -Lab Test
+    -Sales Invoice
+-Test end-points created (unit test) and make some modifications if any
+-Stage, commit and push changes made separately/grouped based on features (@feature with its own commit) to github
+
+==> Day 5
+    -Test the whole system APIs (System testing)
+    -Documenting REST APIs with swagger-ui(if required) or any other Interface Description Language
+    -Deploy
+
+<===== Project Dependencies =====>
+    -express => For handling routes
+    -mongooose / mongoDB => For managing database
+    -nodemon => For auto-restart server when changes are made
+    -jsonwebtoken => For authentication
+    -dotenv => For handling configuration Data(configuration environmental variables in .env)
