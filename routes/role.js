@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-//Create new role
+//Create New Role
 router.post("/", async (req, res) => {
   const role = new Role({
     role_name: req.body.role_name,
@@ -26,5 +26,15 @@ router.post("/", async (req, res) => {
     res.status(200).send(role);
   } catch (error) {
     res.status(400).send({ error: error });
+  }
+});
+
+//Get Role By Id
+router.get("/:id", async (req, res) => {
+  try {
+    const role = await Role.findById(req.params.id);
+    res.status(200).send(role);
+  } catch (error) {
+    res.status(404).send(`No role found with id: ${req.params.id} `);
   }
 });
