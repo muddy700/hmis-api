@@ -12,4 +12,21 @@ router.get("/", async (req, res) => {
   }
 });
 
+//Create New User
+router.post("/", async (req, res) => {
+  //Initialize new instance/doc
+  const user = new User(req.body);
+
+  //   const user = new User({
+  //     role_name: req.body.role_name,
+  //   });
+
+  try {
+    const response = await user.save();
+    res.status(200).send(user);
+  } catch (error) {
+    res.status(400).send({ error: error });
+  }
+});
+
 module.exports = router;
