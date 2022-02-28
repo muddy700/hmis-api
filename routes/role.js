@@ -2,8 +2,6 @@ const express = require("express");
 const Role = require("../models/Role");
 const router = express.Router();
 
-module.exports = router;
-
 //Get All Roles
 router.get("/", async (req, res) => {
   try {
@@ -61,3 +59,33 @@ router.patch("/:id", async (req, res) => {
     res.status(404).send({ error: `No role found with id: ${req.params.id} ` });
   }
 });
+
+//Delete an existing role
+router.delete("/:id", async (req, res) => {
+  try {
+    //Check if document exists
+    const role = await Role.findById(req.params.id);
+    //If got null response, return error and exit function
+    if (!role) {
+      res
+        .status(404)
+        .send({ error: `No role found with id: ${req.params.id} ` });
+      return;
+    }
+
+    //If found the doc
+    //Delete the document
+    try {
+      const response = await Role.deleteOne({ _id: req.params.id });
+      res.status(200).send("Role deleted successfull.");
+    } catch (error) {
+      //Throw error if failed to delete the doc
+      res.status(400).send({ error: error });
+    }
+  } catch (error) {
+    //Throw error if no document found
+    res.status(404).send({ error: `No role found with id: ${req.params.id} ` });
+  }
+});
+
+module.exports = router;
