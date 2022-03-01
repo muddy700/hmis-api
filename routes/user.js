@@ -30,4 +30,14 @@ router.post("/", async (req, res) => {
   }
 });
 
+//Get User By Id
+router.get("/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).populate("role");
+    res.status(200).send(user);
+  } catch (error) {
+    res.status(404).send({ error: `No User found with id: ${req.params.id} ` });
+  }
+});
+
 module.exports = router;
