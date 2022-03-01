@@ -34,6 +34,13 @@ router.post("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id).populate("role");
+    //If got null response, return error and exit function
+    if (!user) {
+      res
+        .status(404)
+        .send({ error: `No user found with id: ${req.params.id} ` });
+      return;
+    }
     res.status(200).send(user);
   } catch (error) {
     res.status(404).send({ error: `No User found with id: ${req.params.id} ` });
