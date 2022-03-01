@@ -15,7 +15,7 @@ const userSchema = mongoose.Schema(
     profile_image: String,
     status: Boolean,
     password: { type: String, required: true, minlength: 8 },
-    role: { type: mongoose.Schema.Types.ObjectId, ref: "Role" },
+    role: { type: mongoose.Schema.Types.ObjectId, ref: "Role", required: true },
     address: { type: addressSchema },
   },
   { versionKey: false }
