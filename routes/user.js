@@ -40,4 +40,33 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+
+//Delete an existing user
+router.delete("/:id", async (req, res) => {
+  try {
+    //Check if user exists
+    const user = await User.findById(req.params.id);
+    //If got null response, return error and exit function
+    if (!user) {
+      res
+        .status(404)
+        .send({ error: `No user found with id: ${req.params.id} ` });
+      return;
+    }
+
+    //If user found
+    //Delete user
+    try {
+      const response = await User.deleteOne({ _id: req.params.id });
+      res.status(200).send("User deleted successfull.");
+    } catch (error) {
+      //Throw error if failed to delete user
+      res.status(500).send({ error: error });
+    }
+  } catch (error) {
+    //Throw error if no user found
+    res.status(404).send({ error: `No user found with id: ${req.params.id} ` });
+  }
+});
+
 module.exports = router;
