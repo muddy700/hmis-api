@@ -5,7 +5,7 @@ const router = express.Router();
 //Get All Users
 router.get("/", async (req, res) => {
   try {
-    const users = await User.find().populate('role');
+    const users = await User.find().populate("role");
     res.status(200).send(users);
   } catch (error) {
     res.status(500).send({ error: error });
@@ -14,12 +14,13 @@ router.get("/", async (req, res) => {
 
 //Create New User
 router.post("/", async (req, res) => {
+  //Append full-name
+  const payload = {
+    ...req.body,
+    full_name: req.body.first_name + " " + req.body.last_name,
+  };
   //Initialize new instance/doc
-  const user = new User(req.body);
-
-  //   const user = new User({
-  //     role_name: req.body.role_name,
-  //   });
+  const user = new User(payload);
 
   try {
     const response = await user.save();
