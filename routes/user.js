@@ -40,6 +40,62 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+//Update Existing User
+router.patch("/:id", async (req, res) => {
+  try {
+    //Check if user exists
+    const user = await User.findById(req.params.id);
+
+    //Ignore read only properties
+    const { username, date_created, full_name, ...remainingData } = req.body;
+
+    //Retrieve modified properties
+    const modifiedProperties = Object.keys(remainingData);
+
+    //Loop and update only properties with data
+    modifiedProperties.forEach((key, index) => {
+      if (!remainingData[key]) {
+        // console.log(`${key} has no value`);
+      } else if (key === "address") {
+        //Handle embedded doc
+        let oldAddress = user[key];
+        const newAddress = remainingData[key];
+
+        if (!oldAddress) user[key] = newAddress;
+        else {
+          //Loop and update only properties with data
+          Object.keys(newAddress).forEach((prop, index) => {
+            if (newAddress[prop]) oldAddress[prop] = newAddress[prop];
+          });
+        }
+      } else {
+        user[key] = remainingData[key];
+
+        //Update full-name if required
+        if (key === "first_name") {
+          user["full_name"] =
+            remainingData["first_name"] + " " + user["last_name"];
+        }
+        if (key === "last_name") {
+          user["full_name"] =
+            user["first_name"] + " " + remainingData["last_name"];
+        }
+      }
+    });
+
+    //Save changes
+    try {
+      const response = await user.save();
+      res.status(200).send(user);
+    } catch (error) {
+      //Throw error if failed to save changes
+      res.status(400).send({ error: error });
+    }
+  } catch (error) {
+    //Throw error if no user found
+    res.status(404).send({ error: `No user found with id: ${req.params.id} ` });
+  }
+});
 
 //Delete an existing user
 router.delete("/:id", async (req, res) => {
