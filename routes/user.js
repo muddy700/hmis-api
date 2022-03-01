@@ -1,9 +1,11 @@
 const express = require("express");
 const User = require("../models/User");
+const createToken = require("../token");
+const authenticate = require("../authentication");
 const router = express.Router();
 
 //Get All Users
-router.get("/", async (req, res) => {
+router.get("/", authenticate, async (req, res) => {
   try {
     const users = await User.find().populate("role");
     res.status(200).send(users);
@@ -13,7 +15,7 @@ router.get("/", async (req, res) => {
 });
 
 //Create New User
-router.post("/", async (req, res) => {
+router.post("/", authenticate, async (req, res) => {
   //Append full-name
   const payload = {
     ...req.body,
@@ -24,14 +26,22 @@ router.post("/", async (req, res) => {
 
   try {
     const response = await user.save();
-    res.status(200).send(user);
+    //create access token
+    try {
+      const token = await createToken({ userId: user._id });
+      res.status(200).send({ user, token });
+    } catch (error) {
+      res
+        .status(500)
+        .send({ message: "Failed to create token.", error: error });
+    }
   } catch (error) {
     res.status(400).send({ error: error });
   }
 });
 
 //Get User By Id
-router.get("/:id", async (req, res) => {
+router.get("/:id", authenticate, async (req, res) => {
   try {
     const user = await User.findById(req.params.id).populate("role");
     //If got null response, return error and exit function
@@ -48,7 +58,7 @@ router.get("/:id", async (req, res) => {
 });
 
 //Update Existing User
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", authenticate, async (req, res) => {
   try {
     //Check if user exists
     const user = await User.findById(req.params.id);
@@ -105,7 +115,7 @@ router.patch("/:id", async (req, res) => {
 });
 
 //Delete an existing user
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authenticate, async (req, res) => {
   try {
     //Check if user exists
     const user = await User.findById(req.params.id);
