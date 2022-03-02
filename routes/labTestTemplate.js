@@ -27,4 +27,17 @@ router.post("/", async (req, res) => {
     res.status(400).send({ error: error });
   }
 });
+
+//Get Lab Test Template By Id
+router.get("/:id", async (req, res) => {
+  try {
+    const labTestTemplate = await LabTestTemplate.findById(req.params.id);
+    res.status(200).send(labTestTemplate);
+  } catch (error) {
+    res
+      .status(404)
+      .send({ error: `No lab-Test-Template found with id: ${req.params.id} ` });
+  }
+});
+
 module.exports = router
