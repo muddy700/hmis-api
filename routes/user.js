@@ -4,10 +4,12 @@ const createToken = require("../token");
 const authenticate = require("../authentication");
 const router = express.Router();
 
+const userProjector = { password: 0 };
+
 //Get All Users
 router.get("/", authenticate, async (req, res) => {
   try {
-    const users = await User.find().populate("role");
+    const users = await User.find({}, userProjector).populate("role");
     res.status(200).send(users);
   } catch (error) {
     res.status(500).send({ error: error });
@@ -43,7 +45,7 @@ router.post("/", authenticate, async (req, res) => {
 //Get User By Id
 router.get("/:id", authenticate, async (req, res) => {
   try {
-    const user = await User.findById(req.params.id).populate("role");
+    const user = await User.findById(req.params.id, userProjector).populate("role");
     //If got null response, return error and exit function
     if (!user) {
       res
