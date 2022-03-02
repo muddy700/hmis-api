@@ -39,4 +39,27 @@ router.get("/:id", async (req, res) => {
 
 
 
+//Update Existing Diagnosis
+router.patch("/:id", async (req, res) => {
+  try {
+    //Check if document exists
+    const diagnosis = await Diagnosis.findById(req.params.id);
+
+    //Update only modified properties
+    if (req.body.name) diagnosis.name = req.body.name;
+
+    //Save changes
+    try {
+      const response = await diagnosis.save();
+      res.status(200).send(diagnosis);
+    } catch (error) {
+      //Throw error if failed to save changes
+      res.status(400).send({ error: error });
+    }
+  } catch (error) {
+    //Throw error if no document found
+    res.status(404).send({ error: `No diagnosis found with id: ${req.params.id} ` });
+  }
+});
+
 module.exports = router
