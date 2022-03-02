@@ -5,9 +5,10 @@ const defaultRouter = require("./routes/index");
 const rolesRouter = require("./routes/role");
 const usersRouter = require("./routes/user");
 const loginRouter = require("./routes/login");
-const paymentModeRouter = require("./routes/paymentMode");
+const paymentModesRouter = require("./routes/paymentMode");
+const symptomsRouter = require("./routes/symptom");
 const dotenv = require("dotenv");
-const bodyParser = require("body-parser");
+const bodyParser = require("body-parser"); //todo: uninstall if not used
 
 //Get Configuration Variables
 dotenv.config();
@@ -27,7 +28,8 @@ mongoose
     app.use("/api/v1/roles", rolesRouter);
     app.use("/api/v1/users", usersRouter);
     app.use("/api/v1/login", loginRouter);
-    app.use("/api/v1/payment-modes", paymentModeRouter);
+    app.use("/api/v1/symptoms", symptomsRouter);
+    app.use("/api/v1/payment-modes", paymentModesRouter);
 
     app.listen(PORT, () => {
       console.log(`Server Connected And App Is Running On Port #: ${PORT}`);
