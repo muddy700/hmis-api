@@ -5,6 +5,7 @@ const defaultRouter = require("./routes/index");
 const rolesRouter = require("./routes/role");
 const usersRouter = require("./routes/user");
 const loginRouter = require("./routes/login");
+const paymentModeRouter = require("./routes/paymentMode");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 
@@ -26,6 +27,7 @@ mongoose
     app.use("/api/v1/roles", rolesRouter);
     app.use("/api/v1/users", usersRouter);
     app.use("/api/v1/login", loginRouter);
+    app.use("/api/v1/payment-modes", paymentModeRouter);
 
     app.listen(PORT, () => {
       console.log(`Server Connected And App Is Running On Port #: ${PORT}`);
