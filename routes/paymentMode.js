@@ -12,4 +12,19 @@ router.get("/", async (req, res) => {
   }
 });
 
+//Create New PaymentMode
+router.post("/", async (req, res) => {
+  //Initialize new instance/doc
+  const paymentMode = new PaymentMode({
+    payment_mode_name: req.body.payment_mode_name,
+  });
+
+  try {
+    const response = await paymentMode.save();
+    res.status(200).send(paymentMode);
+  } catch (error) {
+    res.status(400).send({ error: error });
+  }
+});
+
 module.exports = router;
