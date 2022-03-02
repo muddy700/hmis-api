@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const paymentModeSchema = mongoose.Schema(
   {
-    payment_mode_name: { type: String, required: true },
+    payment_mode_name: { type: String, required: true, unique: true },
   },
   { versionKey: false }
 );
