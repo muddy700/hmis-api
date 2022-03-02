@@ -40,7 +40,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-
 //Update Existing LabTestTemplate
 router.patch("/:id", async (req, res) => {
   try {
@@ -66,4 +65,35 @@ router.patch("/:id", async (req, res) => {
       .send({ error: `No lab-Test-Template found with id: ${req.params.id} ` });
   }
 });
-module.exports = router
+
+//Delete an existing lab-Test-Template
+router.delete("/:id", async (req, res) => {
+  try {
+    //Check if document exists
+    const labTestTemplate = await LabTestTemplate.findById(req.params.id);
+    //If got null response, return error and exit function
+    if (!labTestTemplate) {
+      res
+        .status(404)
+        .send({ error: `No lab-Test-Template found with id: ${req.params.id} ` });
+      return;
+    }
+
+    //If found the doc
+    //Delete the document
+    try {
+      const response = await LabTestTemplate.deleteOne({ _id: req.params.id });
+      res.status(200).send("Lab-Test-Template deleted successfull.");
+    } catch (error) {
+      //Throw error if failed to delete the doc
+      res.status(500).send({ error: error });
+    }
+  } catch (error) {
+    //Throw error if no document found
+    res
+      .status(404)
+      .send({ error: `No lab-Test-Template found with id: ${req.params.id} ` });
+  }
+});
+
+module.exports = router;
