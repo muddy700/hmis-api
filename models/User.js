@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const addressSchema = require("./AddressSchema");
+const bcrypt = require("bcryptjs");
+const saltRound = 10;
 
 const userSchema = mongoose.Schema(
   {
@@ -20,6 +22,29 @@ const userSchema = mongoose.Schema(
   },
   { versionKey: false }
 );
+
+userSchema.pre("save", function (next) {
+  const user = this;
+
+  if (this.isModified("password") || this.isNew) {
+    bcrypt.genSalt(saltRound, function (saltError, salt) {
+      if (saltError) {
+        return next(saltError);
+      } else {
+        bcrypt.hash(user.password, salt, function (hashError, hash) {
+          if (hashError) {
+            return next(hashError);
+          } else {
+            user.password = hash;
+            next();
+          }
+        });
+      }
+    });
+  } else {
+    return next();
+  }
+});
 
 const userModel = mongoose.model("User", userSchema);
 
