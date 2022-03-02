@@ -26,4 +26,15 @@ router.post("/", async (req, res) => {
     res.status(400).send({ error: error });
   }
 });
+
+//Get Symptom By Id
+router.get("/:id", async (req, res) => {
+  try {
+    const symptom = await Symptom.findById(req.params.id);
+    res.status(200).send(symptom);
+  } catch (error) {
+    res.status(404).send({ error: `No symptom found with id: ${req.params.id} ` });
+  }
+});
+
 module.exports = router;
