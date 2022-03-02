@@ -27,4 +27,14 @@ router.post("/", async (req, res) => {
   }
 });
 
+//Get PaymentMode By Id
+router.get("/:id", async (req, res) => {
+  try {
+    const paymentMode = await PaymentMode.findById(req.params.id);
+    res.status(200).send(paymentMode);
+  } catch (error) {
+    res.status(404).send({ error: `No payment mode found with id: ${req.params.id} ` });
+  }
+});
+
 module.exports = router;
