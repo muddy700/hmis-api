@@ -12,4 +12,18 @@ router.get("/", async (req, res) => {
   }
 });
 
+//Create New Symptom
+router.post("/", async (req, res) => {
+  //Initialize new instance/doc
+  const symptom = new Symptom({
+    name: req.body.name,
+  });
+
+  try {
+    const response = await symptom.save();
+    res.status(200).send(symptom);
+  } catch (error) {
+    res.status(400).send({ error: error });
+  }
+});
 module.exports = router;
