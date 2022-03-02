@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const roleSchema = mongoose.Schema(
   {
-    role_name: { type: String, required: true },
+    role_name: { type: String, required: true, unique: true},
   },
   { versionKey: false }
 );
