@@ -12,5 +12,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+//Create New Diagnosis
+router.post("/", async (req, res) => {
+  //Initialize new instance/doc
+  const diagnosis = new Diagnosis({
+    name: req.body.name,
+  });
+
+  try {
+    const response = await diagnosis.save();
+    res.status(200).send(diagnosis);
+  } catch (error) {
+    res.status(400).send({ error: error });
+  }
+});
+
 
 module.exports = router
