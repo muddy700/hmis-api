@@ -62,4 +62,32 @@ router.patch("/:id", async (req, res) => {
 });
 
 
+//Delete an existing symptom
+router.delete("/:id", async (req, res) => {
+  try {
+    //Check if document exists
+    const symptom = await Symptom.findById(req.params.id);
+    //If got null response, return error and exit function
+    if (!symptom) {
+      res
+        .status(404)
+        .send({ error: `No symptom found with id: ${req.params.id} ` });
+      return;
+    }
+
+    //If found the doc
+    //Delete the document
+    try {
+      const response = await Symptom.deleteOne({ _id: req.params.id });
+      res.status(200).send("Symptom deleted successfull.");
+    } catch (error) {
+      //Throw error if failed to delete the doc
+      res.status(500).send({ error: error });
+    }
+  } catch (error) {
+    //Throw error if no document found
+    res.status(404).send({ error: `No symptom found with id: ${req.params.id} ` });
+  }
+});
+
 module.exports = router;
