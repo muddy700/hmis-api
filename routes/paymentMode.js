@@ -33,6 +33,31 @@ router.get("/:id", async (req, res) => {
     const paymentMode = await PaymentMode.findById(req.params.id);
     res.status(200).send(paymentMode);
   } catch (error) {
+    res
+      .status(404)
+      .send({ error: `No payment mode found with id: ${req.params.id} ` });
+  }
+});
+
+//Update Existing PaymentMode
+router.patch("/:id", async (req, res) => {
+  try {
+    //Check if document exists
+    const paymentMode = await PaymentMode.findById(req.params.id);
+
+    //Update only modified properties
+    if (req.body.payment_mode_name) paymentMode.payment_mode_name = req.body.payment_mode_name;
+
+    //Save changes
+    try {
+      const response = await paymentMode.save();
+      res.status(200).send(paymentMode);
+    } catch (error) {
+      //Throw error if failed to save changes
+      res.status(400).send({ error: error });
+    }
+  } catch (error) {
+    //Throw error if no document found
     res.status(404).send({ error: `No payment mode found with id: ${req.params.id} ` });
   }
 });
