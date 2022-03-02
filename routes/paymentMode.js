@@ -46,7 +46,8 @@ router.patch("/:id", async (req, res) => {
     const paymentMode = await PaymentMode.findById(req.params.id);
 
     //Update only modified properties
-    if (req.body.payment_mode_name) paymentMode.payment_mode_name = req.body.payment_mode_name;
+    if (req.body.payment_mode_name)
+      paymentMode.payment_mode_name = req.body.payment_mode_name;
 
     //Save changes
     try {
@@ -58,7 +59,39 @@ router.patch("/:id", async (req, res) => {
     }
   } catch (error) {
     //Throw error if no document found
-    res.status(404).send({ error: `No payment mode found with id: ${req.params.id} ` });
+    res
+      .status(404)
+      .send({ error: `No payment mode found with id: ${req.params.id} ` });
+  }
+});
+
+//Delete an existing paymentMode
+router.delete("/:id", async (req, res) => {
+  try {
+    //Check if document exists
+    const paymentMode = await PaymentMode.findById(req.params.id);
+    //If got null response, return error and exit function
+    if (!paymentMode) {
+      res
+        .status(404)
+        .send({ error: `No payment mode found with id: ${req.params.id} ` });
+      return;
+    }
+
+    //If found the doc
+    //Delete the document
+    try {
+      const response = await PaymentMode.deleteOne({ _id: req.params.id });
+      res.status(200).send("Payment mode deleted successfull.");
+    } catch (error) {
+      //Throw error if failed to delete the doc
+      res.status(500).send({ error: error });
+    }
+  } catch (error) {
+    //Throw error if no document found
+    res
+      .status(404)
+      .send({ error: `No payment mode found with id: ${req.params.id} ` });
   }
 });
 
