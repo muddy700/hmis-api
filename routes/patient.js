@@ -181,8 +181,43 @@ router.get("/:patient_id/vital-signs/:vital_sign_id", async (req, res) => {
         res.status(404).send({
           error: `No vital-sign found with id: ${req.params.vital_sign_id} `,
         });
+        return;
       }
       res.status(200).send(vital_sign);
+    } catch (error) {
+      res.status(404).send({
+        error: `No vital-sign found with id: ${req.params.vital_sign_id} `,
+      });
+    }
+  }
+});
+
+//Edit single vital-sign
+router.patch("/:patient_id/vital-signs/:vital_sign_id", async (req, res) => {
+  const patient = await findPatient(req, res);
+  if (patient) {
+    try {
+      const vital_sign = await patient.vital_signs.id(req.params.vital_sign_id);
+      if (!vital_sign) {
+        res.status(404).send({
+          error: `No vital-sign found with id: ${req.params.vital_sign_id} `,
+        });
+        // return
+      } else {
+        //Edit only changed properties
+        Object.keys(req.body).forEach((prop, index) => {
+          if (req.body[prop] && prop !== "date_taken") {
+            vital_sign[prop] = req.body[prop];
+          }
+        });
+        //Save changes
+        try {
+          const response = await patient.save();
+          res.status(200).send(vital_sign);
+        } catch (error) {
+          res.status(400).send({ error: error });
+        }
+      }
     } catch (error) {
       res.status(404).send({
         error: `No vital-sign found with id: ${req.params.vital_sign_id} `,
