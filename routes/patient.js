@@ -124,10 +124,8 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-//End-Points For Managing Vital Signs CRUD
-
-//Get all vital-signs of a patient by patient-id
-router.get("/:patient_id/vital-signs", async (req, res) => {
+//Re-usable function for checking if patient exists
+const findPatient = async (req, res) => {
   try {
     //Check if patient exists
     const patient = await Patient.findById(req.params.patient_id).populate(
@@ -138,17 +136,25 @@ router.get("/:patient_id/vital-signs", async (req, res) => {
       res
         .status(404)
         .send({ error: `No patient found with id: ${req.params.patient_id} ` });
-      return;
+      return false;
     } else {
-      //If patient found, Return Vital Signs
-      res.status(200).send(patient.vital_signs);
+      return patient;
     }
   } catch (error) {
     //Throw error if no patient found
     res
       .status(404)
       .send({ error: `No patient found with id: ${req.params.patient_id} ` });
+    return false;
   }
+};
+
+//End-Points For Managing Vital Signs CRUD
+
+//Get all vital-signs of a patient by patient-id
+router.get("/:patient_id/vital-signs", async (req, res) => {
+  const patient = await findPatient(req, res);
+  if (patient) res.status(200).send(patient.vital_signs);
 });
 
 module.exports = router;
