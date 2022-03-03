@@ -12,4 +12,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+//Create New Medicine
+router.post("/", async (req, res) => {
+  //Initialize new instance/doc
+  const medicine = new Medicine(req.body);
+
+  try {
+    const response = await medicine.save();
+    res.status(200).send(response);
+  } catch (error) {
+    res.status(400).send({ error: error });
+  }
+});
+
 module.exports = router;
