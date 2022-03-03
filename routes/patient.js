@@ -157,4 +157,18 @@ router.get("/:patient_id/vital-signs", async (req, res) => {
   if (patient) res.status(200).send(patient.vital_signs);
 });
 
+//Create new vital-sign and append to a patient
+router.post("/:patient_id/vital-signs", async (req, res) => {
+  const patient = await findPatient(req, res);
+  if (patient) {
+    patient.vital_signs.push(req.body);
+    try {
+      const response = await patient.save();
+      res.status(200).send(response.vital_signs);
+    } catch (error) {
+      res.status(400).send({ error: error });
+    }
+  }
+});
+
 module.exports = router;
