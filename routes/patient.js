@@ -26,4 +26,19 @@ router.post("/", async (req, res) => {
   }
 });
 
+//Get Patient By Id
+router.get("/:id", async (req, res) => {
+  try {
+    const patient = await Patient.findById(req.params.id).populate({
+      path: "vital_signs",
+      populate: { path: "practitioner", select: 'full_name gender -_id' },
+    });
+    res.status(200).send(patient);
+  } catch (error) {
+    res
+      .status(404)
+      .send({ error: `No patient found with id: ${req.params.id} ` });
+  }
+});
+
 module.exports = router;
