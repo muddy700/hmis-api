@@ -171,4 +171,24 @@ router.post("/:patient_id/vital-signs", async (req, res) => {
   }
 });
 
+//Get single vital-sign by patient-id and vital-sign-id
+router.get("/:patient_id/vital-signs/:vital_sign_id", async (req, res) => {
+  const patient = await findPatient(req, res);
+  if (patient) {
+    try {
+      const vital_sign = await patient.vital_signs.id(req.params.vital_sign_id);
+      if (!vital_sign) {
+        res.status(404).send({
+          error: `No vital-sign found with id: ${req.params.vital_sign_id} `,
+        });
+      }
+      res.status(200).send(vital_sign);
+    } catch (error) {
+      res.status(404).send({
+        error: `No vital-sign found with id: ${req.params.vital_sign_id} `,
+      });
+    }
+  }
+});
+
 module.exports = router;
