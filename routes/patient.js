@@ -91,4 +91,34 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
+
+//Delete an existing patient
+router.delete("/:id", async (req, res) => {
+  try {
+    //Check if patient exists
+    const patient = await Patient.findById(req.params.id);
+    //If got null response, return error and exit function
+    if (!patient) {
+      res
+        .status(404)
+        .send({ error: `No patient found with id: ${req.params.id} ` });
+      return;
+    }
+
+    //If patient found
+    //Delete patient
+    try {
+      const response = await Patient.deleteOne({ _id: req.params.id });
+      res.status(200).send("Patient deleted successfull.");
+    } catch (error) {
+      //Throw error if failed to delete patient
+      res.status(500).send({ error: error });
+    }
+  } catch (error) {
+    //Throw error if no patient found
+    res.status(404).send({ error: `No patient found with id: ${req.params.id} ` });
+  }
+});
+
+
 module.exports = router;
