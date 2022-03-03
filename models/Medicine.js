@@ -5,7 +5,7 @@ const medicineSchema = mongoose.Schema({
   drug_name: { type: String, required: true, unique: true },
   price: { type: Number, required: true, unique: true },
   dosage: { type: String, required: true, unique: true },
-});
+}, {versionKey: false});
 
 const medicineModel = mongoose.model("Medicine", medicineSchema);
 
