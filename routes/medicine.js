@@ -25,4 +25,17 @@ router.post("/", async (req, res) => {
   }
 });
 
+//Get Medicine By Id
+router.get("/:id", async (req, res) => {
+  try {
+    const medicine = await Medicine.findById(req.params.id);
+    res.status(200).send(medicine);
+  } catch (error) {
+    res
+      .status(404)
+      .send({ error: `No medicine found with id: ${req.params.id} ` });
+  }
+});
+
+
 module.exports = router;
