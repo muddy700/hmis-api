@@ -43,6 +43,8 @@ patientSchema.pre("save", function (next) {
   ) {
     patient.full_name = patient.first_name + " " + patient.last_name;
     next();
+  } else {
+    next();
   }
 });
 
