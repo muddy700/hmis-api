@@ -3,10 +3,14 @@ const router = express.Router();
 const patientModule = require("../models/Patient");
 const Patient = patientModule.patientModel;
 
+const patientPopulator = {
+  path: "vital_signs",
+  populate: { path: "practitioner", select: "full_name gender -_id" },
+};
 //Get All Patients
 router.get("/", async (req, res) => {
   try {
-    const patients = await Patient.find();
+    const patients = await Patient.find().populate(patientPopulator);
     res.status(200).send(patients);
   } catch (error) {
     res.status(500).send({ error: error });
@@ -29,10 +33,9 @@ router.post("/", async (req, res) => {
 //Get Patient By Id
 router.get("/:id", async (req, res) => {
   try {
-    const patient = await Patient.findById(req.params.id).populate({
-      path: "vital_signs",
-      populate: { path: "practitioner", select: "full_name gender -_id" },
-    });
+    const patient = await Patient.findById(req.params.id).populate(
+      patientPopulator
+    );
     res.status(200).send(patient);
   } catch (error) {
     res
@@ -91,7 +94,6 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
-
 //Delete an existing patient
 router.delete("/:id", async (req, res) => {
   try {
@@ -116,9 +118,37 @@ router.delete("/:id", async (req, res) => {
     }
   } catch (error) {
     //Throw error if no patient found
-    res.status(404).send({ error: `No patient found with id: ${req.params.id} ` });
+    res
+      .status(404)
+      .send({ error: `No patient found with id: ${req.params.id} ` });
   }
 });
 
+//End-Points For Managing Vital Signs CRUD
+
+//Get all vital-signs of a patient by patient-id
+router.get("/:patient_id/vital-signs", async (req, res) => {
+  try {
+    //Check if patient exists
+    const patient = await Patient.findById(req.params.patient_id).populate(
+      patientPopulator
+    );
+    if (!patient) {
+      //If got null response, return error and exit function
+      res
+        .status(404)
+        .send({ error: `No patient found with id: ${req.params.patient_id} ` });
+      return;
+    } else {
+      //If patient found, Return Vital Signs
+      res.status(200).send(patient.vital_signs);
+    }
+  } catch (error) {
+    //Throw error if no patient found
+    res
+      .status(404)
+      .send({ error: `No patient found with id: ${req.params.patient_id} ` });
+  }
+});
 
 module.exports = router;
