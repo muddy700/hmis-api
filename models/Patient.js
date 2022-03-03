@@ -19,8 +19,8 @@ const vitalSignSchema = mongoose.Schema(
 
 const patientSchema = mongoose.Schema(
   {
-    first_name: String,
-    last_name: String,
+    first_name: { type: String, required: true },
+    last_name: { type: String, required: true },
     full_name: String,
     dob: Date,
     email: String,
@@ -32,6 +32,19 @@ const patientSchema = mongoose.Schema(
   },
   { versionKey: false }
 );
+
+patientSchema.pre("save", function (next) {
+  const patient = this;
+
+  if (
+    this.isNew ||
+    this.isModified("first_name") ||
+    this.isModified("last_name")
+  ) {
+    patient.full_name = patient.first_name + " " + patient.last_name;
+    next();
+  }
+});
 
 const patientModel = mongoose.model("Patient", patientSchema);
 
