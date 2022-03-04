@@ -49,6 +49,7 @@ Tools Used: NodeJS, ExpressJS, MongoDB(Mongoose), JWT
     -Last Name
     -Full Name
     -Date of Birth
+    -Date registered
     -Email
     -Phone
     -Gender
@@ -64,7 +65,8 @@ Tools Used: NodeJS, ExpressJS, MongoDB(Mongoose), JWT
     -Blood Pressure
 
 -> Appointment:
-    -Date and Time
+    -Date Created
+    -Appointment Time
     -Doctor/Practitioner: {User Id}
     -Patient: {Patient Id}
     -Price
@@ -85,14 +87,15 @@ Tools Used: NodeJS, ExpressJS, MongoDB(Mongoose), JWT
 
 -> Lab Test Template:
     -Lab Test Name
-    -Lab Test Items: [{name, normalRange, result}]
     -Price
 
 -> Lab Test:
     -Test Template Id
     -Date and Time
     -Lab Technician: {User Id}
-    -Custom Result
+    -Patient: {Patient Id}
+    -Encounter: {Encounter Id}
+    -Test Result
     -Invoiced
     -Status: ie..completed/In-progress
 
@@ -143,43 +146,43 @@ Tools Used: NodeJS, ExpressJS, MongoDB(Mongoose), JWT
 <===== Implementation Steps =====>
 
 ==> Day 1
--Project Initialization
+// -Project Initialization
     -Create Project
     -Install all required dependencies
     -Perform initial project configurations. ie..Import some dependencies required to start/run project like express.
     -Run  project
 
--Connect project with git
+//-Connect project with git
     -Create github repository
     -Link git repo with project
     -Push initial project changes
 
--Create Users and Roles table (Schema and Model)
--Create API end-points to handle CRUD operations for the above tables
--Test end-points created (unit test) and make some modifications if any
--Stage, commit and push changes made separately/grouped based on features (@feature with its own commit) to github
+//-Create Users and Roles table (Schema and Model)
+//-Create API end-points to handle CRUD operations for the above tables
+//-Test end-points created (unit test) and make some modifications if any
+//-Stage, commit and push changes made separately/grouped based on features (@feature with its own commit) to github
 
-==> Day 2
--Create and handle Authentication and Authorization logics by creating end-points for register, login and logout
--Test Logics Created (unit test) and make some modifications if any
--Stage, commit and push changes made separately/grouped based on features (@feature with its own commit) to github
+//==> Day 2
+//-Create and handle Authentication and Authorization logics by creating end-points for register, login and logout
+//-Test Logics Created (unit test) and make some modifications if any
+//-Stage, commit and push changes made separately/grouped based on features (@feature with its own commit) to github
 
 ==> Day 3
 -Create Schema, Model and API end-points to handle CRUD for independent tables(Collections with no foreign key) as listed below
-    -Patient
-    -Symptoms
-    -Diagnosis 
-    -Lab Test Template
-    -Mode of payment
-    -Medicine
+    //-Patient
+    //-Symptoms
+    //-Diagnosis 
+    //-Lab Test Template
+    //-Mode of payment
+    //-Medicine
 -Test end-points created (unit test) and make some modifications if any
 -Stage, commit and push changes made separately/grouped based on features (@feature with its own commit) to github
 
 ==> Day 4
 -Create Schema, Model and API end-points to handle CRUD for dependent tables(Collections with foreign key) as listed below
-    -Appointment
+    //-Appointment
     -Encounter
-    -Lab Test
+   //-Lab Test
     -Sales Invoice
 -Test end-points created (unit test) and make some modifications if any
 -Stage, commit and push changes made separately/grouped based on features (@feature with its own commit) to github
@@ -195,3 +198,16 @@ Tools Used: NodeJS, ExpressJS, MongoDB(Mongoose), JWT
     -nodemon => For auto-restart server when changes are made
     -jsonwebtoken => For authentication
     -dotenv => For handling configuration Data(configuration environmental variables in .env)
+
+
+
+<===== Pending Additional Tasks =====>
+1. Handle Files in mongoDB
+//2. Hash Passwords and skip them when retrieve users
+3. Add .env in .gitignore
+4. Edit user's full-name in schema.pre function not in api routes(post and patch)
+5. Create logout end-point, by storing token in db
+5. Add Diagnosis-code ie.. malaria === B53
+6. Add endpoints to perform CRUD for embedded arrays ie.. in vital-signs
+7. Add filters endpoints ie.. appointments by patient_id, by practitioner_id
+8. Add custom header for authenticating requests ie.. request_source : 'react-app'
