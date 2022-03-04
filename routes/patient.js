@@ -31,17 +31,9 @@ router.post("/", async (req, res) => {
 });
 
 //Get Patient By Id
-router.get("/:id", async (req, res) => {
-  try {
-    const patient = await Patient.findById(req.params.id).populate(
-      patientPopulator
-    );
-    res.status(200).send(patient);
-  } catch (error) {
-    res
-      .status(404)
-      .send({ error: `No patient found with id: ${req.params.id} ` });
-  }
+router.get("/:patient_id", async (req, res) => {
+  const patient = await findPatient(req, res);
+  if (patient) res.status(200).send(patient);
 });
 
 //Update Existing Patient
