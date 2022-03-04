@@ -74,4 +74,21 @@ router.get("/:id", async (req, res) => {
   if (labTest) res.status(200).send(labTest);
 });
 
+//Update Existing labTest
+router.patch("/:id", async (req, res) => {
+  const labTest = await findLabTest(req, res);
+  if (labTest) {
+    // const { date_created, ...remainingData } = req.body;
+    Object.keys(req.body).forEach((prop, index) => {
+      if (req.body[prop]) labTest[prop] = req.body[prop];
+    });
+    try {
+      const response = await labTest.save();
+      res.status(200).send(response);
+    } catch (error) {
+      res.status(400).send({ error: error });
+    }
+  }
+});
+
 module.exports = router;
