@@ -2,10 +2,26 @@ const express = require("express");
 const router = express.Router();
 const LabTest = require("../models/LabTest");
 
+const testTemplatePopulator = {
+  path: "test_template",
+  select: "-_id",
+};
+const labTechincianPopulator = {
+  path: "lab_technician",
+  select: "full_name -_id",
+};
+const patientPopulator = {
+  path: "patient",
+  select: "full_name -_id",
+};
+
 //Get All LabTest
 router.get("/", async (req, res) => {
   try {
-    const labTests = await LabTest.find();
+    const labTests = await LabTest.find()
+      .populate(patientPopulator)
+      .populate(testTemplatePopulator)
+      .populate(labTechincianPopulator);
     res.status(200).send(labTests);
   } catch (error) {
     res.status(500).send({ error: error });
