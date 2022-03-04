@@ -12,6 +12,7 @@ const symptomsRouter = require("./routes/symptom");
 const medicinesRouter = require("./routes/medicine");
 const diagnosisRouter = require("./routes/diagnosis");
 const appointmentsRouter = require("./routes/appointment");
+const labTestsRouter = require("./routes/labTest");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser"); //todo: uninstall if not used
 
@@ -37,6 +38,7 @@ mongoose
     app.use("/api/v1/symptoms", symptomsRouter);
     app.use("/api/v1/diagnosis", diagnosisRouter);
     app.use("/api/v1/medicines", medicinesRouter);
+    app.use("/api/v1/lab-tests", labTestsRouter);
     app.use("/api/v1/appointments", appointmentsRouter);
     app.use("/api/v1/payment-modes", paymentModesRouter);
     app.use("/api/v1/lab-test-templates", labTestTemplateRouter);
