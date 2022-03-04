@@ -60,4 +60,10 @@ router.post("/", async (req, res) => {
   }
 });
 
+//Get appointment by id
+router.get("/:id", async (req, res) => {
+  const appointment = await findAppointment(req, res);
+  if (appointment) res.status(200).send(appointment);
+});
+
 module.exports = router;
