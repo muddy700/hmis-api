@@ -226,28 +226,17 @@ router.patch("/:patient_id/vital-signs/:vital_sign_id", async (req, res) => {
 router.delete("/:patient_id/vital-signs/:vital_sign_id", async (req, res) => {
   const patient = await findPatient(req, res);
   if (patient) {
-    try {
-      const vital_sign = await patient.vital_signs.id(req.params.vital_sign_id);
-      if (!vital_sign) {
-        res.status(404).send({
-          error: `No vital-sign found with id: ${req.params.vital_sign_id} `,
-        });
-        return;
-      } else {
-        try {
-          const response = await Patient.updateOne(
-            { _id: req.params.patient_id },
-            { $pull: { vital_signs: { _id: req.params.vital_sign_id } } }
-          );
-          res.status(200).send("Vital-sign deleted successfull.");
-        } catch (error) {
-          res.status(500).send({ error: error });
-        }
+    const vital_sign = await findVitalSign(req, res, patient);
+    if (vital_sign) {
+      try {
+        const response = await Patient.updateOne(
+          { _id: req.params.patient_id },
+          { $pull: { vital_signs: { _id: req.params.vital_sign_id } } }
+        );
+        res.status(200).send("Vital-sign deleted successfull.");
+      } catch (error) {
+        res.status(500).send({ error: error });
       }
-    } catch (error) {
-      res.status(404).send({
-        error: `No vital-sign found with id: ${req.params.vital_sign_id} `,
-      });
     }
   }
 });
