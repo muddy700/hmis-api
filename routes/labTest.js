@@ -91,4 +91,17 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
+//Delete an existing labTest
+router.delete("/:id", async (req, res) => {
+  const labTest = await findLabTest(req, res);
+  if (labTest) {
+    try {
+      const response = await LabTest.deleteOne({ _id: labTest._id });
+      res.status(200).send("LabTest deleted successfully.");
+    } catch (error) {
+      res.status(500).send({ error: error });
+    }
+  }
+});
+
 module.exports = router;
