@@ -83,4 +83,17 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
+//Delete an existing appointment
+router.delete("/:id", async (req, res) => {
+  const appointment = await findAppointment(req, res);
+  if (appointment) {
+    try {
+      const response = await Appointment.deleteOne({ _id: appointment._id });
+      res.status(200).send("Appointment deleted successfully.");
+    } catch (error) {
+      res.status(500).send({ error: error });
+    }
+  }
+});
+
 module.exports = router;
