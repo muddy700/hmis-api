@@ -66,4 +66,21 @@ router.get("/:id", async (req, res) => {
   if (appointment) res.status(200).send(appointment);
 });
 
+//Update Existing appointment
+router.patch("/:id", async (req, res) => {
+  const appointment = await findAppointment(req, res);
+  if (appointment) {
+    const { date_created, ...remainingData } = req.body;
+    Object.keys(remainingData).forEach((prop, index) => {
+      if (remainingData[prop]) appointment[prop] = remainingData[prop];
+    });
+    try {
+      const response = await appointment.save();
+      res.status(200).send(response);
+    } catch (error) {
+      res.status(400).send({ error: error });
+    }
+  }
+});
+
 module.exports = router;
