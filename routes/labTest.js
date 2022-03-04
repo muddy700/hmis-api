@@ -12,4 +12,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+//Create New LabTest
+router.post("/", async (req, res) => {
+  //Initialize new instance/doc
+  const labTest = new LabTest(req.body);
+
+  try {
+    const response = await labTest.save();
+    res.status(200).send(response);
+  } catch (error) {
+    res.status(400).send({ error: error });
+  }
+});
+
 module.exports = router;
