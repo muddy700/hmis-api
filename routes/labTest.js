@@ -68,4 +68,10 @@ router.post("/", async (req, res) => {
   }
 });
 
+//Get labTest by id
+router.get("/:id", async (req, res) => {
+  const labTest = await findLabTest(req, res);
+  if (labTest) res.status(200).send(labTest);
+});
+
 module.exports = router;
