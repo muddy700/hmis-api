@@ -37,11 +37,9 @@ router.get("/:patient_id", async (req, res) => {
 });
 
 //Update Existing Patient
-router.patch("/:id", async (req, res) => {
-  try {
-    //Check if patient exists
-    const patient = await Patient.findById(req.params.id);
-
+router.patch("/:patient_id", async (req, res) => {
+  const patient = await findPatient(req, res);
+  if (patient) {
     //Ignore read only properties
     const { full_name, date_registered, vital_signs, ...remainingData } =
       req.body;
@@ -78,11 +76,6 @@ router.patch("/:id", async (req, res) => {
       //Throw error if failed to save changes
       res.status(400).send({ error: error });
     }
-  } catch (error) {
-    //Throw error if no patient found
-    res
-      .status(404)
-      .send({ error: `No patient found with id: ${req.params.id} ` });
   }
 });
 
