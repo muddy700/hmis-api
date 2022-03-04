@@ -149,6 +149,25 @@ const findPatient = async (req, res) => {
   }
 };
 
+//Re-usable function for checking if vital-sign exists
+const findVitalSign = async (req, res, patient) => {
+  try {
+    const vital_sign = await patient.vital_signs.id(req.params.vital_sign_id);
+    if (!vital_sign) {
+      res.status(404).send({
+        error: `No vital-sign found with id: ${req.params.vital_sign_id} `,
+      });
+      return false;
+    } else {
+      return vital_sign;
+    }
+  } catch (error) {
+    res.status(404).send({
+      error: `No vital-sign found with id: ${req.params.vital_sign_id} `,
+    });
+    return false;
+  }
+};
 //End-Points For Managing Vital Signs CRUD
 
 //Get all vital-signs of a patient by patient-id
@@ -175,20 +194,8 @@ router.post("/:patient_id/vital-signs", async (req, res) => {
 router.get("/:patient_id/vital-signs/:vital_sign_id", async (req, res) => {
   const patient = await findPatient(req, res);
   if (patient) {
-    try {
-      const vital_sign = await patient.vital_signs.id(req.params.vital_sign_id);
-      if (!vital_sign) {
-        res.status(404).send({
-          error: `No vital-sign found with id: ${req.params.vital_sign_id} `,
-        });
-        return;
-      }
-      res.status(200).send(vital_sign);
-    } catch (error) {
-      res.status(404).send({
-        error: `No vital-sign found with id: ${req.params.vital_sign_id} `,
-      });
-    }
+    const vital_sign = await findVitalSign(req, res, patient);
+    if (vital_sign) res.status(200).send(vital_sign);
   }
 });
 
@@ -240,7 +247,7 @@ router.delete("/:patient_id/vital-signs/:vital_sign_id", async (req, res) => {
       } else {
         try {
           const response = await Patient.updateOne(
-            {_id: req.params.patient_id},
+            { _id: req.params.patient_id },
             { $pull: { vital_signs: { _id: req.params.vital_sign_id } } }
           );
           res.status(200).send("Vital-sign deleted successfull.");
