@@ -12,4 +12,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+//Create New Sales Invoice
+router.post("/", async (req, res) => {
+  //Initialize new instance/doc
+  const salesInvoice = new Salesinvoice(req.body);
+
+  try {
+    const response = await salesInvoice.save();
+    res.status(200).send(response);
+  } catch (error) {
+    res.status(400).send({ error: error });
+  }
+});
+
 module.exports = router;
