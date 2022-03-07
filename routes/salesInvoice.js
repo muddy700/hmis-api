@@ -75,4 +75,20 @@ router.get("/:id", async (req, res) => {
   if (salesInvoice) res.status(200).send(salesInvoice);
 });
 
+
+//Delete an existing salesInvoice
+router.delete("/:id", async (req, res) => {
+  const salesInvoice = await findSalesInvoice(req, res);
+  if (salesInvoice) {
+    //Delete salesInvoice
+    try {
+      const response = await SalesInvoice.deleteOne({ _id: salesInvoice._id });
+      res.status(200).send("Sales-Invoice deleted successfull.");
+    } catch (error) {
+      //Throw error if failed to delete salesInvoice
+      res.status(500).send({ error: error });
+    }
+  }
+});
+
 module.exports = router;
