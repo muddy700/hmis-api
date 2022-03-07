@@ -17,6 +17,29 @@ const paymentModePopulator = {
   select: "payment_mode_name -_id",
 };
 
+//Re-usable function for checking if salesInvoice exists
+const findSalesInvoice = async (req, res) => {
+  try {
+    //Check if salesInvoice exists
+    const salesInvoice = await SalesInvoice.findById(req.params.id);
+    if (!salesInvoice) {
+      //If got null response, return error and exit function
+      res
+        .status(404)
+        .send({ error: `No sales-invoice found with id: ${req.params.id} ` });
+      return false;
+    } else {
+      return salesInvoice;
+    }
+  } catch (error) {
+    //Throw error if no salesInvoice found
+    res
+      .status(404)
+      .send({ error: `No sales-invoice found with id: ${req.params.id} ` });
+    return false;
+  }
+};
+
 //Get All Sales Invoices
 router.get("/", async (req, res) => {
   try {
