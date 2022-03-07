@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const salesItemSchema = mongoose.Schema(
   {
     collection_name: { type: String, required: true },
-    item_id: { type: String, required: true, unique: true },
+    item_id: { type: String, required: true },//Todo:make item-id unique
     price: { type: Number, required: true },
     quantity: { type: Number, required: true },
     grand_price: { type: Number, required: true },
