@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Salesinvoice = require("../models/SalesInvoice");
+const SalesInvoice = require("../models/SalesInvoice");
 
 const patientPopulator = {
   path: "patient",
@@ -21,7 +21,10 @@ const paymentModePopulator = {
 const findSalesInvoice = async (req, res) => {
   try {
     //Check if salesInvoice exists
-    const salesInvoice = await SalesInvoice.findById(req.params.id);
+    const salesInvoice = await SalesInvoice.findById(req.params.id)
+      .populate(patientPopulator)
+      .populate(cashierPopulator)
+      .populate(paymentModePopulator);
     if (!salesInvoice) {
       //If got null response, return error and exit function
       res
@@ -43,7 +46,7 @@ const findSalesInvoice = async (req, res) => {
 //Get All Sales Invoices
 router.get("/", async (req, res) => {
   try {
-    const salesInvoices = await Salesinvoice.find()
+    const salesInvoices = await SalesInvoice.find()
       .populate(patientPopulator)
       .populate(cashierPopulator)
       .populate(paymentModePopulator);
@@ -56,7 +59,7 @@ router.get("/", async (req, res) => {
 //Create New Sales Invoice
 router.post("/", async (req, res) => {
   //Initialize new instance/doc
-  const salesInvoice = new Salesinvoice(req.body);
+  const salesInvoice = new SalesInvoice(req.body);
 
   try {
     const response = await salesInvoice.save();
@@ -64,6 +67,12 @@ router.post("/", async (req, res) => {
   } catch (error) {
     res.status(400).send({ error: error });
   }
+});
+
+//Get SalesInvoice By Id
+router.get("/:id", async (req, res) => {
+  const salesInvoice = await findSalesInvoice(req, res);
+  if (salesInvoice) res.status(200).send(salesInvoice);
 });
 
 module.exports = router;
