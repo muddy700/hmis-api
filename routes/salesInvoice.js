@@ -75,6 +75,27 @@ router.get("/:id", async (req, res) => {
   if (salesInvoice) res.status(200).send(salesInvoice);
 });
 
+//Update Existing SalesInvoice
+router.put("/:id", async (req, res) => {
+  const salesInvoice = await findSalesInvoice(req, res);
+  if (salesInvoice) {
+    //Loop and update only properties with data
+    Object.keys(req.body).forEach((key, index) => {
+      if (req.body[key] && key !== "items") {
+        salesInvoice[key] = req.body[key];
+      }
+    });
+
+    //Save changes
+    try {
+      const response = await salesInvoice.save();
+      res.status(200).send(response);
+    } catch (error) {
+      //Throw error if failed to save changes
+      res.status(400).send({ error: error });
+    }
+  }
+});
 
 //Delete an existing salesInvoice
 router.delete("/:id", async (req, res) => {
