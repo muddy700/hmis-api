@@ -28,22 +28,18 @@ const findEncounter = async (req, res) => {
       .populate(practitionerPopulator);
     if (!encounter) {
       //If got null response, return error and exit function
-      res
-        .status(404)
-        .send({
-          error: `No encounter found with id: ${req.params.encounter_id} `,
-        });
+      res.status(404).send({
+        error: `No encounter found with id: ${req.params.encounter_id} `,
+      });
       return false;
     } else {
       return encounter;
     }
   } catch (error) {
     //Throw error if no encounter found
-    res
-      .status(404)
-      .send({
-        error: `No encounter found with id: ${req.params.encounter_id} `,
-      });
+    res.status(404).send({
+      error: `No encounter found with id: ${req.params.encounter_id} `,
+    });
     return false;
   }
 };
@@ -72,6 +68,12 @@ router.post("/", async (req, res) => {
   } catch (error) {
     res.status(400).send({ error: error });
   }
+});
+
+//Get Encounter By Id
+router.get("/:encounter_id", async (req, res) => {
+  const encounter = await findEncounter(req, res);
+  if (encounter) res.status(200).send(encounter);
 });
 
 module.exports = router;
