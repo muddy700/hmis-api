@@ -109,7 +109,6 @@ router.put("/:encounter_id", async (req, res) => {
   }
 });
 
-
 //Delete an existing encounter
 router.delete("/:encounter_id", async (req, res) => {
   const encounter = await findEncounter(req, res);
@@ -124,5 +123,29 @@ router.delete("/:encounter_id", async (req, res) => {
     }
   }
 });
+
+//CRUD Endpoints for embedded docs
+
+// 1: Symptoms Endpoints
+
+//Re-usable function for checking if symptom exists
+const findSymptom = async (req, res, encounter) => {
+  try {
+    const symptom = await encounter.symptoms.id(req.params.symptom_id);
+    if (!symptom) {
+      res.status(404).send({
+        error: `No symptom found with id: ${req.params.symptom_id} `,
+      });
+      return false;
+    } else {
+      return symptom;
+    }
+  } catch (error) {
+    res.status(404).send({
+      error: `No symptom found with id: ${req.params.symptom_id} `,
+    });
+    return false;
+  }
+};
 
 module.exports = router;
