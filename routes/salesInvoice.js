@@ -132,4 +132,10 @@ const findSalesItem = async (req, res, salesInvoice) => {
   }
 };
 
+//Get all sales-items for a given sales invoice
+router.get("/:id/sales-items", async (req, res) => {
+  const salesInvoice = await findSalesInvoice(req, res);
+  if (salesInvoice) res.status(200).send(salesInvoice.items);
+});
+
 module.exports = router;
