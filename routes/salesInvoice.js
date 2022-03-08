@@ -152,4 +152,13 @@ router.post("/:id/sales-items", async (req, res) => {
   }
 });
 
+//Get single sales-item by sales-item-id and sales-invoice-id
+router.get("/:id/sales-items/:item_id", async (req, res) => {
+  const salesInvoice = await findSalesInvoice(req, res);
+  if (salesInvoice) {
+    const sales_item = await findSalesItem(req, res, salesInvoice);
+    if (sales_item) res.status(200).send(sales_item);
+  }
+});
+
 module.exports = router;
