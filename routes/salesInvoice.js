@@ -141,7 +141,7 @@ router.get("/:id/sales-items", async (req, res) => {
 //Create new sales-item and append to a sales-invoice
 router.post("/:id/sales-items", async (req, res) => {
   const salesInvoice = await findSalesInvoice(req, res);
-  if (salesInvoice) {salesInvoice;
+  if (salesInvoice) {
     salesInvoice.items.push(req.body);
     try {
       const response = await salesInvoice.save();
@@ -158,6 +158,29 @@ router.get("/:id/sales-items/:item_id", async (req, res) => {
   if (salesInvoice) {
     const sales_item = await findSalesItem(req, res, salesInvoice);
     if (sales_item) res.status(200).send(sales_item);
+  }
+});
+
+//Edit single sales-item
+router.patch("/:id/sales-items/:item_id", async (req, res) => {
+  const salesInvoice = await findSalesInvoice(req, res);
+  if (salesInvoice) {
+    const sales_item = await findSalesItem(req, res, salesInvoice);
+    if (sales_item) {
+      //Edit only changed properties
+      Object.keys(req.body).forEach((prop, index) => {
+        if (req.body[prop]) {
+          sales_item[prop] = req.body[prop];
+        }
+      });
+      //Save changes
+      try {
+        const response = await salesInvoice.save();
+        res.status(200).send(sales_item);
+      } catch (error) {
+        res.status(400).send({ error: error });
+      }
+    }
   }
 });
 
