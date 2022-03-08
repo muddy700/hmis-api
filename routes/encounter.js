@@ -148,4 +148,10 @@ const findSymptom = async (req, res, encounter) => {
   }
 };
 
+//Get all symptoms of an encounter by encounter-id
+router.get("/:encounter_id/symptoms", async (req, res) => {
+  const encounter = await findEncounter(req, res);
+  if (encounter) res.status(200).send(encounter.symptoms);
+});
+
 module.exports = router;
