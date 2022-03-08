@@ -138,4 +138,18 @@ router.get("/:id/sales-items", async (req, res) => {
   if (salesInvoice) res.status(200).send(salesInvoice.items);
 });
 
+//Create new sales-item and append to a sales-invoice
+router.post("/:id/sales-items", async (req, res) => {
+  const salesInvoice = await findSalesInvoice(req, res);
+  if (salesInvoice) {salesInvoice;
+    salesInvoice.items.push(req.body);
+    try {
+      const response = await salesInvoice.save();
+      res.status(200).send(response.items);
+    } catch (error) {
+      res.status(400).send({ error: error });
+    }
+  }
+});
+
 module.exports = router;
