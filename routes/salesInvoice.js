@@ -184,4 +184,23 @@ router.patch("/:id/sales-items/:item_id", async (req, res) => {
   }
 });
 
+//Delete single sales-item
+router.delete("/:id/sales-items/:item_id", async (req, res) => {
+  const salesInvoice = await findSalesInvoice(req, res);
+  if (salesInvoice) {
+    const sales_item = await findSalesItem(req, res, salesInvoice);
+    if (sales_item) {
+      try {
+        const response = await SalesInvoice.updateOne(
+          { _id: req.params.id },
+          { $pull: { items: { _id: req.params.item_id } } }
+        );
+        res.status(200).send("Sales-item deleted successfull.");
+      } catch (error) {
+        res.status(500).send({ error: error });
+      }
+    }
+  }
+});
+
 module.exports = router;
