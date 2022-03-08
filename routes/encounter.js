@@ -18,6 +18,36 @@ const patientPopulator = {
   select: "full_name -_id",
 };
 
+//Re-usable function for checking if encounter exists
+const findEncounter = async (req, res) => {
+  try {
+    //Check if encounter exists
+    const encounter = await Encounter.findById(req.params.encounter_id)
+      .populate(patientPopulator)
+      .populate(appointmentPopulator)
+      .populate(practitionerPopulator);
+    if (!encounter) {
+      //If got null response, return error and exit function
+      res
+        .status(404)
+        .send({
+          error: `No encounter found with id: ${req.params.encounter_id} `,
+        });
+      return false;
+    } else {
+      return encounter;
+    }
+  } catch (error) {
+    //Throw error if no encounter found
+    res
+      .status(404)
+      .send({
+        error: `No encounter found with id: ${req.params.encounter_id} `,
+      });
+    return false;
+  }
+};
+
 //Get All Encounters
 router.get("/", async (req, res) => {
   try {
