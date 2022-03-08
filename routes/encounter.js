@@ -76,4 +76,36 @@ router.get("/:encounter_id", async (req, res) => {
   if (encounter) res.status(200).send(encounter);
 });
 
+//Update Existing Encounter
+router.put("/:encounter_id", async (req, res) => {
+  const encounter = await findEncounter(req, res);
+  if (encounter) {
+    //Ignore array properties
+    const {
+      symptoms,
+      diagnosis,
+      lab_tests,
+      lab_test_results,
+      final_diagnosis,
+      medicine,
+      ...remainingData
+    } = req.body;
+
+    //Loop and update only properties with data
+    Object.keys(remainingData).forEach((key, index) => {
+      if (remainingData[key]) {
+        encounter[key] = remainingData[key];
+      }
+    });
+
+    //Save changes
+    try {
+      const response = await encounter.save();
+      res.status(200).send(response);
+    } catch (error) {
+      //Throw error if failed to save changes
+      res.status(400).send({ error: error });
+    }
+  }
+});
 module.exports = router;
