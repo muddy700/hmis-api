@@ -18,11 +18,17 @@ const patientPopulator = {
   select: "full_name -_id",
 };
 
+const symptomPopulator = {
+  path: "symptoms",
+  populate: { path: "symptom", select: "name -_id" },
+};
+
 //Re-usable function for checking if encounter exists
 const findEncounter = async (req, res) => {
   try {
     //Check if encounter exists
     const encounter = await Encounter.findById(req.params.encounter_id)
+      .populate(symptomPopulator)
       .populate(patientPopulator)
       .populate(appointmentPopulator)
       .populate(practitionerPopulator);
@@ -49,6 +55,7 @@ router.get("/", async (req, res) => {
   try {
     const encounters = await Encounter.find()
       .populate(patientPopulator)
+      .populate(symptomPopulator)
       .populate(appointmentPopulator)
       .populate(practitionerPopulator);
     res.status(200).send(encounters);
@@ -152,6 +159,20 @@ const findSymptom = async (req, res, encounter) => {
 router.get("/:encounter_id/symptoms", async (req, res) => {
   const encounter = await findEncounter(req, res);
   if (encounter) res.status(200).send(encounter.symptoms);
+});
+
+//Create new symptom and append to an encounter
+router.post("/:encounter_id/symptoms", async (req, res) => {
+  const encounter = await findEncounter(req, res);
+  if (encounter) {
+    encounter.symptoms.push(req.body);
+    try {
+      const response = await encounter.save();
+      res.status(200).send(response.symptoms);
+    } catch (error) {
+      res.status(400).send({ error: error });
+    }
+  }
 });
 
 module.exports = router;
