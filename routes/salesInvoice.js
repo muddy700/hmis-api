@@ -112,4 +112,24 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+//Re-usable function for checking if sales-item exists
+const findSalesItem = async (req, res, salesInvoice) => {
+  try {
+    const salesItem = await salesInvoice.items.id(req.params.item_id);
+    if (!salesItem) {
+      res.status(404).send({
+        error: `No sales-Item found with id: ${req.params.item_id} `,
+      });
+      return false;
+    } else {
+      return salesItem;
+    }
+  } catch (error) {
+    res.status(404).send({
+      error: `No sales-Item found with id: ${req.params.item_id} `,
+    });
+    return false;
+  }
+};
+
 module.exports = router;
