@@ -175,4 +175,22 @@ router.post("/:encounter_id/symptoms", async (req, res) => {
   }
 });
 
+//Delete single symptom
+router.delete("/:encounter_id/symptoms/:symptom_id", async (req, res) => {
+  const encounter = await findEncounter(req, res);
+  if (encounter) {
+    const symptom = await findSymptom(req, res, encounter);
+    if (symptom) {
+      try {
+        const response = await Encounter.updateOne(
+          { _id: req.params.encounter_id },
+          { $pull: { symptoms: { _id: req.params.symptom_id } } }
+        );
+        res.status(200).send("Symptom deleted successfull.");
+      } catch (error) {
+        res.status(500).send({ error: error });
+      }
+    }
+  }
+});
 module.exports = router;
