@@ -108,4 +108,21 @@ router.put("/:encounter_id", async (req, res) => {
     }
   }
 });
+
+
+//Delete an existing encounter
+router.delete("/:encounter_id", async (req, res) => {
+  const encounter = await findEncounter(req, res);
+  if (encounter) {
+    //Delete encounter
+    try {
+      const response = await Encounter.deleteOne({ _id: encounter._id });
+      res.status(200).send("Encounter deleted successfull.");
+    } catch (error) {
+      //Throw error if failed to delete encounter
+      res.status(500).send({ error: error });
+    }
+  }
+});
+
 module.exports = router;
