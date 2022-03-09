@@ -330,4 +330,27 @@ router.delete("/:encounter_id/lab-tests/:template_id", async (req, res) => {
   }
 });
 
+
+// 2: Lab-Test-Results Endpoints
+
+//Re-usable function for checking if lab-test-template exists
+const findTestResult = async (req, res, encounter) => {
+  try {
+    const labTestResult = await encounter.lab_test_results.id(req.params.result_id);
+    if (!labTestResult) {
+      res.status(404).send({
+        error: `No lab-Test-Result found with id: ${req.params.result_id} `,
+      });
+      return false;
+    } else {
+      return labTestResult;
+    }
+  } catch (error) {
+    res.status(404).send({
+      error: `No lab-Test-Result found with id: ${req.params.result_id} `,
+    });
+    return false;
+  }
+};
+
 module.exports = router;
