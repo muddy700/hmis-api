@@ -499,4 +499,12 @@ const findMedicine = async (req, res, encounter) => {
     return false;
   }
 };
+
+//Get all medicines of an encounter by encounter-id
+router.get("/:encounter_id/medicines", async (req, res) => {
+  const encounter = await findEncounter(req, res);
+  if (encounter) res.status(200).send(encounter.medicines);
+});
+
+
 module.exports = router;
