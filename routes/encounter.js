@@ -23,6 +23,11 @@ const symptomPopulator = {
   populate: { path: "symptom", select: "name -_id" },
 };
 
+const diagnosisPopulator = {
+  path: "diagnosis",
+  populate: { path: "diagnosis", select: "name -_id" },
+};
+
 //Re-usable function for checking if encounter exists
 const findEncounter = async (req, res) => {
   try {
@@ -30,6 +35,7 @@ const findEncounter = async (req, res) => {
     const encounter = await Encounter.findById(req.params.encounter_id)
       .populate(symptomPopulator)
       .populate(patientPopulator)
+      .populate(diagnosisPopulator)
       .populate(appointmentPopulator)
       .populate(practitionerPopulator);
     if (!encounter) {
@@ -56,6 +62,7 @@ router.get("/", async (req, res) => {
     const encounters = await Encounter.find()
       .populate(patientPopulator)
       .populate(symptomPopulator)
+      .populate(diagnosisPopulator)
       .populate(appointmentPopulator)
       .populate(practitionerPopulator);
     res.status(200).send(encounters);
