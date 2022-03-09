@@ -405,4 +405,26 @@ router.delete(
   }
 );
 
+// 4: Final Diagnosis Endpoints
+
+//Re-usable function for checking if final-diagnosis exists
+const findFinalDiagnosis = async (req, res, encounter) => {
+  try {
+    const diagnosis = await encounter.final_diagnosis.id(req.params.diagnosis_id);
+    if (!diagnosis) {
+      res.status(404).send({
+        error: `No diagnosis found with id: ${req.params.diagnosis_id} `,
+      });
+      return false;
+    } else {
+      return diagnosis;
+    }
+  } catch (error) {
+    res.status(404).send({
+      error: `No diagnosis found with id: ${req.params.diagnosis_id} `,
+    });
+    return false;
+  }
+};
+
 module.exports = router;
