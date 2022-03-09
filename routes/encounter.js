@@ -193,4 +193,27 @@ router.delete("/:encounter_id/symptoms/:symptom_id", async (req, res) => {
     }
   }
 });
+
+// 2: Diagnosis Endpoints
+
+//Re-usable function for checking if diagnosis exists
+const findDiagnosis = async (req, res, encounter) => {
+  try {
+    const diagnosis = await encounter.diagnosis.id(req.params.diagnosis_id);
+    if (!diagnosis) {
+      res.status(404).send({
+        error: `No diagnosis found with id: ${req.params.diagnosis_id} `,
+      });
+      return false;
+    } else {
+      return diagnosis;
+    }
+  } catch (error) {
+    res.status(404).send({
+      error: `No diagnosis found with id: ${req.params.diagnosis_id} `,
+    });
+    return false;
+  }
+};
+
 module.exports = router;
