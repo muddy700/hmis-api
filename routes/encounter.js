@@ -383,4 +383,26 @@ router.post("/:encounter_id/lab-test-results", async (req, res) => {
   }
 });
 
+//Delete single lab-test-result
+router.delete(
+  "/:encounter_id/lab-test-results/:result_id",
+  async (req, res) => {
+    const encounter = await findEncounter(req, res);
+    if (encounter) {
+      const test_result = await findTestResult(req, res, encounter);
+      if (test_result) {
+        try {
+          const response = await Encounter.updateOne(
+            { _id: req.params.encounter_id },
+            { $pull: { lab_test_results: { _id: req.params.result_id } } }
+          );
+          res.status(200).send("lab-Test-Result deleted successfull.");
+        } catch (error) {
+          res.status(500).send({ error: error });
+        }
+      }
+    }
+  }
+);
+
 module.exports = router;
