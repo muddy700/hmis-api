@@ -222,4 +222,18 @@ router.get("/:encounter_id/diagnosis", async (req, res) => {
   if (encounter) res.status(200).send(encounter.diagnosis);
 });
 
+//Create new diagnosis and append to an encounter
+router.post("/:encounter_id/diagnosis", async (req, res) => {
+  const encounter = await findEncounter(req, res);
+  if (encounter) {
+    encounter.diagnosis.push(req.body);
+    try {
+      const response = await encounter.save();
+      res.status(200).send(response.diagnosis);
+    } catch (error) {
+      res.status(400).send({ error: error });
+    }
+  }
+});
+
 module.exports = router;
