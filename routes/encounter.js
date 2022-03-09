@@ -243,7 +243,6 @@ router.post("/:encounter_id/diagnosis", async (req, res) => {
   }
 });
 
-
 //Delete single diagnosis
 router.delete("/:encounter_id/diagnosis/:diagnosis_id", async (req, res) => {
   const encounter = await findEncounter(req, res);
@@ -262,5 +261,27 @@ router.delete("/:encounter_id/diagnosis/:diagnosis_id", async (req, res) => {
     }
   }
 });
+
+// 2: Lab-Test Endpoints
+
+//Re-usable function for checking if lab-test-template exists
+const findTestTemplate = async (req, res, encounter) => {
+  try {
+    const labTestTemplate = await encounter.labtests.id(req.params.template_id);
+    if (!labTestTemplate) {
+      res.status(404).send({
+        error: `No lab-Test-Template found with id: ${req.params.template_id} `,
+      });
+      return false;
+    } else {
+      return labTestTemplate;
+    }
+  } catch (error) {
+    res.status(404).send({
+      error: `No lab-Test-Template found with id: ${req.params.template_id} `,
+    });
+    return false;
+  }
+};
 
 module.exports = router;
