@@ -274,7 +274,7 @@ router.delete("/:encounter_id/diagnosis/:diagnosis_id", async (req, res) => {
 //Re-usable function for checking if lab-test-template exists
 const findTestTemplate = async (req, res, encounter) => {
   try {
-    const labTestTemplate = await encounter.labtests.id(req.params.template_id);
+    const labTestTemplate = await encounter.lab_tests.id(req.params.template_id);
     if (!labTestTemplate) {
       res.status(404).send({
         error: `No lab-Test-Template found with id: ${req.params.template_id} `,
@@ -307,6 +307,25 @@ router.post("/:encounter_id/lab-tests", async (req, res) => {
       res.status(200).send(response.lab_tests);
     } catch (error) {
       res.status(400).send({ error: error });
+    }
+  }
+});
+
+//Delete single lab-test-template
+router.delete("/:encounter_id/lab-tests/:template_id", async (req, res) => {
+  const encounter = await findEncounter(req, res);
+  if (encounter) {
+    const test_template = await findTestTemplate(req, res, encounter);
+    if (test_template) {
+      try {
+        const response = await Encounter.updateOne(
+          { _id: req.params.encounter_id },
+          { $pull: { lab_tests: { _id: req.params.template_id } } }
+        );
+        res.status(200).send("lab-Test-Template deleted successfull.");
+      } catch (error) {
+        res.status(500).send({ error: error });
+      }
     }
   }
 });
