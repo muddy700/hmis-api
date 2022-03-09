@@ -506,5 +506,18 @@ router.get("/:encounter_id/medicines", async (req, res) => {
   if (encounter) res.status(200).send(encounter.medicines);
 });
 
+//Create new medicine and append to an encounter
+router.post("/:encounter_id/medicines", async (req, res) => {
+  const encounter = await findEncounter(req, res);
+  if (encounter) {
+    encounter.medicines.push(req.body);
+    try {
+      const response = await encounter.save();
+      res.status(200).send(response.medicines);
+    } catch (error) {
+      res.status(400).send({ error: error });
+    }
+  }
+});
 
 module.exports = router;
