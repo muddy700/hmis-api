@@ -546,4 +546,25 @@ router.delete("/:encounter_id/medicines/:medicine_id", async (req, res) => {
   }
 });
 
+//Edit single medicine
+router.patch("/:encounter_id/medicines/:medicine_id", async (req, res) => {
+  const encounter = await findEncounter(req, res);
+  if (encounter) {
+    const medicine = await findMedicine(req, res, encounter);
+    if (medicine) {
+      //Edit only changed properties
+      Object.keys(req.body).forEach((prop, index) => {
+        if (req.body[prop]) medicine[prop] = req.body[prop];
+      });
+      //Save changes
+      try {
+        const response = await encounter.save();
+        res.status(200).send(medicine);
+      } catch (error) {
+        res.status(400).send({ error: error });
+      }
+    }
+  }
+});
+
 module.exports = router;
