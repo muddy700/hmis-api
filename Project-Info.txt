@@ -79,11 +79,13 @@ Tools Used: NodeJS, ExpressJS, MongoDB(Mongoose), JWT
     -Doctor/Practitioner: {User Id}
     -Patient: {Patient Id}
     -Status: ie.. Open/Closed
-    -Symptoms: [{Symptoms Table/Ids}]
-    -Diagnosis: [{Diagnosis Table/Ids}]
-    -Lab Test: [{Lab Test Table}]
-    -Final Diagnosis: [{Diagnosis Table/Ids}]
-    -Medicine:[{Dispensed Medicine Table}]
+    # CRUD End-point for embedded docs
+    //-Symptoms: [{Symptoms Table/Ids}]
+    //-Diagnosis: [{Diagnosis Table/Ids}]
+    //-Lab Test: [{Lab Test Template Table}]
+    //-Lab Test Results: [{Lab Test Table}]
+    //-Final Diagnosis: [{Diagnosis Table/Ids}]
+    //-Medicine:[{Dispensed Medicine Table}]
 
 -> Lab Test Template:
     -Lab Test Name
@@ -162,28 +164,28 @@ Tools Used: NodeJS, ExpressJS, MongoDB(Mongoose), JWT
 //-Test end-points created (unit test) and make some modifications if any
 //-Stage, commit and push changes made separately/grouped based on features (@feature with its own commit) to github
 
-//==> Day 2
+==> Day 2
 //-Create and handle Authentication and Authorization logics by creating end-points for register, login and logout
 //-Test Logics Created (unit test) and make some modifications if any
 //-Stage, commit and push changes made separately/grouped based on features (@feature with its own commit) to github
 
 ==> Day 3
--Create Schema, Model and API end-points to handle CRUD for independent tables(Collections with no foreign key) as listed below
+//-Create Schema, Model and API end-points to handle CRUD for independent tables(Collections with no foreign key) as listed below
     //-Patient
     //-Symptoms
     //-Diagnosis 
     //-Lab Test Template
     //-Mode of payment
     //-Medicine
--Test end-points created (unit test) and make some modifications if any
--Stage, commit and push changes made separately/grouped based on features (@feature with its own commit) to github
+//-Test end-points created (unit test) and make some modifications if any
+//-Stage, commit and push changes made separately/grouped based on features (@feature with its own commit) to github
 
 ==> Day 4
--Create Schema, Model and API end-points to handle CRUD for dependent tables(Collections with foreign key) as listed below
+//-Create Schema, Model and API end-points to handle CRUD for dependent tables(Collections with foreign key) as listed below
     //-Appointment
-    -Encounter
-   //-Lab Test
-    -Sales Invoice
+    //-Sales Invoice
+    //-Encounter
+    //-Lab Test
 -Test end-points created (unit test) and make some modifications if any
 -Stage, commit and push changes made separately/grouped based on features (@feature with its own commit) to github
 
@@ -203,7 +205,7 @@ Tools Used: NodeJS, ExpressJS, MongoDB(Mongoose), JWT
 
 <===== Pending Additional Tasks =====>
 1. Handle Files in mongoDB
-//2. Hash Passwords and skip them when retrieve users
+# 2. Hash Passwords and skip them when retrieve users
 3. Add .env in .gitignore
 4. Edit user's full-name in schema.pre function not in api routes(post and patch)
 5. Create logout end-point, by storing token in db
