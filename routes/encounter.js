@@ -284,4 +284,10 @@ const findTestTemplate = async (req, res, encounter) => {
   }
 };
 
+//Get all lab-test-template of an encounter by encounter-id
+router.get("/:encounter_id/lab-tests", async (req, res) => {
+  const encounter = await findEncounter(req, res);
+  if (encounter) res.status(200).send(encounter.lab_tests);
+});
+
 module.exports = router;
