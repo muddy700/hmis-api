@@ -243,4 +243,24 @@ router.post("/:encounter_id/diagnosis", async (req, res) => {
   }
 });
 
+
+//Delete single diagnosis
+router.delete("/:encounter_id/diagnosis/:diagnosis_id", async (req, res) => {
+  const encounter = await findEncounter(req, res);
+  if (encounter) {
+    const diagnosis = await findDiagnosis(req, res, encounter);
+    if (diagnosis) {
+      try {
+        const response = await Encounter.updateOne(
+          { _id: req.params.encounter_id },
+          { $pull: { diagnosis: { _id: req.params.diagnosis_id } } }
+        );
+        res.status(200).send("Diagnosis deleted successfull.");
+      } catch (error) {
+        res.status(500).send({ error: error });
+      }
+    }
+  }
+});
+
 module.exports = router;
