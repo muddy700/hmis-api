@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Encounter = require("../models/Encounter");
 
-//Populators
+//Object Populators
 const appointmentPopulator = {
   path: "appointment",
   select: "appointment_time practitioner patient -_id",
@@ -28,6 +28,11 @@ const diagnosisPopulator = {
   populate: { path: "diagnosis", select: "name -_id" },
 };
 
+const testTemplatePopulator = {
+  path: "lab_tests",
+  populate: { path: "test_template", select: "name price -_id" },
+};
+
 //Re-usable function for checking if encounter exists
 const findEncounter = async (req, res) => {
   try {
@@ -37,7 +42,8 @@ const findEncounter = async (req, res) => {
       .populate(patientPopulator)
       .populate(diagnosisPopulator)
       .populate(appointmentPopulator)
-      .populate(practitionerPopulator);
+      .populate(practitionerPopulator)
+      .populate(testTemplatePopulator);
     if (!encounter) {
       //If got null response, return error and exit function
       res.status(404).send({
@@ -64,7 +70,8 @@ router.get("/", async (req, res) => {
       .populate(symptomPopulator)
       .populate(diagnosisPopulator)
       .populate(appointmentPopulator)
-      .populate(practitionerPopulator);
+      .populate(practitionerPopulator)
+      .populate(testTemplatePopulator);
     res.status(200).send(encounters);
   } catch (error) {
     res.status(500).send({ error: error });
