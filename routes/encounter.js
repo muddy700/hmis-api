@@ -38,6 +38,11 @@ const testResultPopulator = {
   populate: { path: "lab_test", select: "results status invoiced -_id" },
 };
 
+const finalDiagnosisPopulator = {
+  path: "final_diagnosis",
+  populate: { path: "diagnosis", select: "name -_id" },
+};
+
 //Re-usable function for checking if encounter exists
 const findEncounter = async (req, res) => {
   try {
@@ -49,7 +54,8 @@ const findEncounter = async (req, res) => {
       .populate(testResultPopulator)
       .populate(appointmentPopulator)
       .populate(practitionerPopulator)
-      .populate(testTemplatePopulator);
+      .populate(testTemplatePopulator)
+      .populate(finalDiagnosisPopulator);
     if (!encounter) {
       //If got null response, return error and exit function
       res.status(404).send({
@@ -78,7 +84,8 @@ router.get("/", async (req, res) => {
       .populate(testResultPopulator)
       .populate(appointmentPopulator)
       .populate(practitionerPopulator)
-      .populate(testTemplatePopulator);
+      .populate(testTemplatePopulator)
+      .populate(finalDiagnosisPopulator);
     res.status(200).send(encounters);
   } catch (error) {
     res.status(500).send({ error: error });
@@ -410,7 +417,9 @@ router.delete(
 //Re-usable function for checking if final-diagnosis exists
 const findFinalDiagnosis = async (req, res, encounter) => {
   try {
-    const diagnosis = await encounter.final_diagnosis.id(req.params.diagnosis_id);
+    const diagnosis = await encounter.final_diagnosis.id(
+      req.params.diagnosis_id
+    );
     if (!diagnosis) {
       res.status(404).send({
         error: `No diagnosis found with id: ${req.params.diagnosis_id} `,
@@ -431,6 +440,20 @@ const findFinalDiagnosis = async (req, res, encounter) => {
 router.get("/:encounter_id/final-diagnosis", async (req, res) => {
   const encounter = await findEncounter(req, res);
   if (encounter) res.status(200).send(encounter.final_diagnosis);
+});
+
+//Create new final-diagnosis and append to an encounter
+router.post("/:encounter_id/final-diagnosis", async (req, res) => {
+  const encounter = await findEncounter(req, res);
+  if (encounter) {
+    encounter.final_diagnosis.push(req.body);
+    try {
+      const response = await encounter.save();
+      res.status(200).send(response.final_diagnosis);
+    } catch (error) {
+      res.status(400).send({ error: error });
+    }
+  }
 });
 
 module.exports = router;
