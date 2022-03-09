@@ -290,4 +290,18 @@ router.get("/:encounter_id/lab-tests", async (req, res) => {
   if (encounter) res.status(200).send(encounter.lab_tests);
 });
 
+//Create new lab-test-template and append to an encounter
+router.post("/:encounter_id/lab-tests", async (req, res) => {
+  const encounter = await findEncounter(req, res);
+  if (encounter) {
+    encounter.lab_tests.push(req.body);
+    try {
+      const response = await encounter.save();
+      res.status(200).send(response.lab_tests);
+    } catch (error) {
+      res.status(400).send({ error: error });
+    }
+  }
+});
+
 module.exports = router;
