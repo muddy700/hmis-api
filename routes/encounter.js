@@ -527,4 +527,23 @@ router.post("/:encounter_id/medicines", async (req, res) => {
   }
 });
 
+//Delete single medicine
+router.delete("/:encounter_id/medicines/:medicine_id", async (req, res) => {
+  const encounter = await findEncounter(req, res);
+  if (encounter) {
+    const medicine = await findMedicine(req, res, encounter);
+    if (medicine) {
+      try {
+        const response = await Encounter.updateOne(
+          { _id: req.params.encounter_id },
+          { $pull: { medicines: { _id: req.params.medicine_id } } }
+        );
+        res.status(200).send("Medicine deleted successfull.");
+      } catch (error) {
+        res.status(500).send({ error: error });
+      }
+    }
+  }
+});
+
 module.exports = router;
