@@ -33,6 +33,11 @@ const testTemplatePopulator = {
   populate: { path: "test_template", select: "name price -_id" },
 };
 
+const testResultPopulator = {
+  path: "lab_test_results",
+  populate: { path: "lab_test", select: "results status invoiced -_id" },
+};
+
 //Re-usable function for checking if encounter exists
 const findEncounter = async (req, res) => {
   try {
@@ -41,6 +46,7 @@ const findEncounter = async (req, res) => {
       .populate(symptomPopulator)
       .populate(patientPopulator)
       .populate(diagnosisPopulator)
+      .populate(testResultPopulator)
       .populate(appointmentPopulator)
       .populate(practitionerPopulator)
       .populate(testTemplatePopulator);
@@ -69,6 +75,7 @@ router.get("/", async (req, res) => {
       .populate(patientPopulator)
       .populate(symptomPopulator)
       .populate(diagnosisPopulator)
+      .populate(testResultPopulator)
       .populate(appointmentPopulator)
       .populate(practitionerPopulator)
       .populate(testTemplatePopulator);
@@ -274,7 +281,9 @@ router.delete("/:encounter_id/diagnosis/:diagnosis_id", async (req, res) => {
 //Re-usable function for checking if lab-test-template exists
 const findTestTemplate = async (req, res, encounter) => {
   try {
-    const labTestTemplate = await encounter.lab_tests.id(req.params.template_id);
+    const labTestTemplate = await encounter.lab_tests.id(
+      req.params.template_id
+    );
     if (!labTestTemplate) {
       res.status(404).send({
         error: `No lab-Test-Template found with id: ${req.params.template_id} `,
@@ -335,7 +344,9 @@ router.delete("/:encounter_id/lab-tests/:template_id", async (req, res) => {
 //Re-usable function for checking if lab-test-result exists
 const findTestResult = async (req, res, encounter) => {
   try {
-    const labTestResult = await encounter.lab_test_results.id(req.params.result_id);
+    const labTestResult = await encounter.lab_test_results.id(
+      req.params.result_id
+    );
     if (!labTestResult) {
       res.status(404).send({
         error: `No lab-Test-Result found with id: ${req.params.result_id} `,
