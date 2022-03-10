@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const rolesRouter = require("./routes/role");
 const usersRouter = require("./routes/user");
 const loginRouter = require("./routes/login");
+const logoutRouter = require("./routes/logout");
 const defaultRouter = require("./routes/index");
 const filtersRouter = require("./routes/filters");
 const patientsRouter = require("./routes/patient");
@@ -37,6 +38,7 @@ mongoose
     app.use("/api/v1/login", loginRouter);
     app.use("/api/v1/roles", rolesRouter);
     app.use("/api/v1/users", usersRouter);
+    app.use("/api/v1/logout", logoutRouter);
     app.use("/api/v1/filter", filtersRouter);
     app.use("/api/v1/patients", patientsRouter);
     app.use("/api/v1/symptoms", symptomsRouter);
