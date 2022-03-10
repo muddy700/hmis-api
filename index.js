@@ -1,21 +1,22 @@
 //Import Required Modules
+const dotenv = require("dotenv");
 const express = require("express");
 const mongoose = require("mongoose");
-const defaultRouter = require("./routes/index");
 const rolesRouter = require("./routes/role");
 const usersRouter = require("./routes/user");
-const patientsRouter = require("./routes/patient");
 const loginRouter = require("./routes/login");
-const paymentModesRouter = require("./routes/paymentMode");
-const labTestTemplateRouter = require("./routes/labTestTemplate");
+const defaultRouter = require("./routes/index");
+const filtersRouter = require("./routes/filters");
+const patientsRouter = require("./routes/patient");
 const symptomsRouter = require("./routes/symptom");
+const labTestsRouter = require("./routes/labTest");
 const medicinesRouter = require("./routes/medicine");
 const diagnosisRouter = require("./routes/diagnosis");
-const appointmentsRouter = require("./routes/appointment");
-const labTestsRouter = require("./routes/labTest");
 const encountersRouter = require("./routes/encounter");
+const paymentModesRouter = require("./routes/paymentMode");
+const appointmentsRouter = require("./routes/appointment");
 const salesInvoicesRouter = require("./routes/salesInvoice");
-const dotenv = require("dotenv");
+const labTestTemplateRouter = require("./routes/labTestTemplate");
 const bodyParser = require("body-parser"); //todo: uninstall if not used
 
 //Get Configuration Variables
@@ -36,6 +37,7 @@ mongoose
     app.use("/api/v1/login", loginRouter);
     app.use("/api/v1/roles", rolesRouter);
     app.use("/api/v1/users", usersRouter);
+    app.use("/api/v1/filter", filtersRouter);
     app.use("/api/v1/patients", patientsRouter);
     app.use("/api/v1/symptoms", symptomsRouter);
     app.use("/api/v1/lab-tests", labTestsRouter);
