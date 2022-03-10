@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const Patient = require("../models/Patient").patientModel;
+const Appointment = require("../models/Appointment");
 
 //Data Populators
 const userProjector = { password: 0 };
@@ -9,10 +10,18 @@ const rolePopulator = {
   path: "role",
   select: "role_name -_id",
 };
-const patientPopulator = {
-  path: "vital_signs",
-  populate: { path: "practitioner", select: "full_name gender -_id" },
+
+const practitionerPopulator = {
+  path: "practitioner",
+  select: "full_name gender -_id",
 };
+
+const vitalSignPopulator = {
+  path: "vital_signs",
+  populate: practitionerPopulator,
+};
+
+const patientPopulator = { path: "patient", select: "full_name phone -_id" };
 
 // <===== Filters For Users =====>
 //Get All Users By Role
@@ -59,10 +68,25 @@ router.get("/users-by-status", async (req, res) => {
 router.get("/patients-by-dob", async (req, res) => {
   try {
     const patients = await Patient.find({
-      dob: req.body.dob 
-    //   dob: { $gt: req.body.dob },
-    }).populate(patientPopulator);
+      dob: req.body.dob,
+      //   dob: { $gt: req.body.dob },
+    }).populate(vitalSignPopulator);
     res.status(200).send(patients);
+  } catch (error) {
+    res.status(400).send({ error: error });
+  }
+});
+
+// <===== Filters For Appointments =====>
+//Get All Appointments By Doctor-Id
+router.get("/doctors/:doctor_id/appointments", async (req, res) => {
+  try {
+    const appointments = await Appointment.find({
+      practitioner: req.params.doctor_id,
+    })
+      .populate(practitionerPopulator)
+      .populate(patientPopulator);
+    res.status(200).send(appointments);
   } catch (error) {
     res.status(400).send({ error: error });
   }
