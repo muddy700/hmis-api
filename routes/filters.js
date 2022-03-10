@@ -58,9 +58,10 @@ router.get("/users-by-status", async (req, res) => {
 //Get All Patients By Date of birth
 router.get("/patients-by-dob", async (req, res) => {
   try {
-    const patients = await Patient.find({ dob: req.body.dob }).populate(
-      patientPopulator
-    );
+    const patients = await Patient.find({
+      dob: req.body.dob 
+    //   dob: { $gt: req.body.dob },
+    }).populate(patientPopulator);
     res.status(200).send(patients);
   } catch (error) {
     res.status(400).send({ error: error });
