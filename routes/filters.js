@@ -92,4 +92,18 @@ router.get("/doctors/:doctor_id/appointments", async (req, res) => {
   }
 });
 
+//Get All Appointments By Invoice Status
+router.get("/appointments-by-invoice-status", async (req, res) => {
+  try {
+    const appointments = await Appointment.find({
+      invoiced: req.body.invoiced,
+    })
+      .populate(practitionerPopulator)
+      .populate(patientPopulator);
+    res.status(200).send(appointments);
+  } catch (error) {
+    res.status(400).send({ error: error });
+  }
+});
+
 module.exports = router;
