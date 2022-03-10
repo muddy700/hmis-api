@@ -15,9 +15,7 @@ router.get("/", async (req, res) => {
 //Create New Diagnosis
 router.post("/", async (req, res) => {
   //Initialize new instance/doc
-  const diagnosis = new Diagnosis({
-    name: req.body.name,
-  });
+  const diagnosis = new Diagnosis(req.body);
 
   try {
     const response = await diagnosis.save();
@@ -47,6 +45,7 @@ router.patch("/:id", async (req, res) => {
 
     //Update only modified properties
     if (req.body.name) diagnosis.name = req.body.name;
+    if (req.body.diagnosis_code) diagnosis.diagnosis_code = req.body.diagnosis_code;
 
     //Save changes
     try {

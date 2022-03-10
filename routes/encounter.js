@@ -25,7 +25,7 @@ const symptomPopulator = {
 
 const diagnosisPopulator = {
   path: "diagnosis",
-  populate: { path: "diagnosis", select: "name -_id" },
+  populate: { path: "diagnosis", select: "name diagnosis_code -_id" },
 };
 
 const testTemplatePopulator = {
@@ -40,7 +40,7 @@ const testResultPopulator = {
 
 const finalDiagnosisPopulator = {
   path: "final_diagnosis",
-  populate: { path: "diagnosis", select: "name -_id" },
+  populate: { path: "diagnosis", select: "name diagnosis_code -_id" },
 };
 
 const medicinePopulator = {

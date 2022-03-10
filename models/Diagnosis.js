@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const diagnosisSchema = mongoose.Schema(
   {
     name: { type: String, required: true, unique: true },
+    diagnosis_code: { type: String, required: true, unique: true },
   },
   { versionKey: false }
 );
