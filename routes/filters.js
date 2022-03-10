@@ -35,4 +35,17 @@ router.get("/users-by-gender", async (req, res) => {
   }
 });
 
+//Get All Users By Status
+router.get("/users-by-status", async (req, res) => {
+  try {
+    const users = await User.find(
+      { status: req.body.status },
+      userProjector
+    ).populate(rolePopulator);
+    res.status(200).send(users);
+  } catch (error) {
+    res.status(400).send({ error: error });
+  }
+});
+
 module.exports = router;
