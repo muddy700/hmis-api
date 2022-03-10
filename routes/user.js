@@ -4,7 +4,7 @@ const createToken = require("../token");
 const authenticate = require("../authentication");
 const router = express.Router();
 
-const userProjector = { password: 0 };
+const userProjector = { password: 0, token: 0 };
 
 //Get All Users
 router.get("/", authenticate, async (req, res) => {
