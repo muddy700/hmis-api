@@ -23,14 +23,27 @@ const userSchema = mongoose.Schema(
   { versionKey: false }
 );
 
+//Check if we need to modify full_name
+userSchema.pre("save", function (next) {
+  const user = this;
+
+  if (this.isModified("first_name") || this.isModified("last_name")) {
+    user.full_name = user.first_name + " " + user.last_name;
+    next();
+  } else next();
+});
+
+//Check if we need to encrypt passwords
 userSchema.pre("save", function (next) {
   const user = this;
 
   if (this.isModified("password") || this.isNew) {
+    //Generate Salt
     bcrypt.genSalt(saltRound, function (saltError, salt) {
       if (saltError) {
         return next(saltError);
       } else {
+        //Encrypt Password
         bcrypt.hash(user.password, salt, function (hashError, hash) {
           if (hashError) {
             return next(hashError);
@@ -41,11 +54,13 @@ userSchema.pre("save", function (next) {
         });
       }
     });
-  } else {
-    return next();
-  }
+
+    //modify full_name if it's new user
+    if (this.isNew) user.full_name = user.first_name + " " + user.last_name;
+  } else next();
 });
 
+//Function to compare passwords
 userSchema.methods.comparePasswords = function (password, callback) {
   bcrypt.compare(password, this.password, function (error, isMatch) {
     if (error) return callback(error);

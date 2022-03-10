@@ -19,12 +19,12 @@ router.get("/", authenticate, async (req, res) => {
 //Create New User
 router.post("/", authenticate, async (req, res) => {
   //Append full-name
-  const payload = {
-    ...req.body,
-    full_name: req.body.first_name + " " + req.body.last_name,
-  };
+  // const payload = {
+  //   ...req.body,
+  //   full_name: req.body.first_name + " " + req.body.last_name,
+  // };
   //Initialize new instance/doc
-  const user = new User(payload);
+  const user = new User(req.body);
 
   try {
     const response = await user.save();
@@ -91,14 +91,14 @@ router.patch("/:id", authenticate, async (req, res) => {
         user[key] = remainingData[key];
 
         //Update full-name if required
-        if (key === "first_name") {
-          user["full_name"] =
-            remainingData["first_name"] + " " + user["last_name"];
-        }
-        if (key === "last_name") {
-          user["full_name"] =
-            user["first_name"] + " " + remainingData["last_name"];
-        }
+        // if (key === "first_name") {
+        //   user["full_name"] =
+        //     remainingData["first_name"] + " " + user["last_name"];
+        // }
+        // if (key === "last_name") {
+        //   user["full_name"] =
+        //     user["first_name"] + " " + remainingData["last_name"];
+        // }
       }
     });
 
