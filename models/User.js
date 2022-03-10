@@ -14,6 +14,7 @@ const userSchema = mongoose.Schema(
     email: String,
     phone: String,
     gender: String,
+    token: String,
     profile_image: String,
     status: Boolean,
     password: { type: String, required: true, minlength: 8 },
