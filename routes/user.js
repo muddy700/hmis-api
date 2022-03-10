@@ -18,11 +18,6 @@ router.get("/", authenticate, async (req, res) => {
 
 //Create New User
 router.post("/", authenticate, async (req, res) => {
-  //Append full-name
-  // const payload = {
-  //   ...req.body,
-  //   full_name: req.body.first_name + " " + req.body.last_name,
-  // };
   //Initialize new instance/doc
   const user = new User(req.body);
 
@@ -45,7 +40,9 @@ router.post("/", authenticate, async (req, res) => {
 //Get User By Id
 router.get("/:id", authenticate, async (req, res) => {
   try {
-    const user = await User.findById(req.params.id, userProjector).populate("role");
+    const user = await User.findById(req.params.id, userProjector).populate(
+      "role"
+    );
     //If got null response, return error and exit function
     if (!user) {
       res
@@ -89,16 +86,6 @@ router.patch("/:id", authenticate, async (req, res) => {
         }
       } else {
         user[key] = remainingData[key];
-
-        //Update full-name if required
-        // if (key === "first_name") {
-        //   user["full_name"] =
-        //     remainingData["first_name"] + " " + user["last_name"];
-        // }
-        // if (key === "last_name") {
-        //   user["full_name"] =
-        //     user["first_name"] + " " + remainingData["last_name"];
-        // }
       }
     });
 
