@@ -4,6 +4,9 @@ const router = express.Router();
 
 //Get All Roles
 router.get("/", async (req, res) => {
+  // #swagger.tags = ['Role']
+  //  #swagger.path = '/roles'
+  // #swagger.description = 'Get all roles'
   try {
     const roles = await Role.find();
     res.status(200).send(roles);
@@ -14,6 +17,10 @@ router.get("/", async (req, res) => {
 
 //Create New Role
 router.post("/", async (req, res) => {
+  // #swagger.tags = ['Role']
+  //  #swagger.path = '/roles'
+  // #swagger.description = 'Create new role'
+
   //Initialize new instance/doc
   const role = new Role({
     role_name: req.body.role_name,
@@ -29,9 +36,21 @@ router.post("/", async (req, res) => {
 
 //Get Role By Id
 router.get("/:id", async (req, res) => {
+  // #swagger.tags = ['Role']
+  //  #swagger.path = '/roles/{id}'
+  // #swagger.description = 'Get single role by role_id'
+  // #swagger.parameters['id'] = { description: 'Role id.' }
+
   try {
     const role = await Role.findById(req.params.id);
-    res.status(200).send(role);
+    if (!role)
+      res
+        .status(404)
+        .send({ error: `No role found with id: ${req.params.id} ` });
+    /* #swagger.responses[200] = { 
+               schema: { $ref: "#/definitions/Role" },
+               description: 'Roles retrieved successfull.' 
+        } */ else res.status(200).send(role);
   } catch (error) {
     res.status(404).send({ error: `No role found with id: ${req.params.id} ` });
   }
@@ -39,6 +58,10 @@ router.get("/:id", async (req, res) => {
 
 //Update Existing Role
 router.patch("/:id", async (req, res) => {
+  // #swagger.tags = ['Role']
+  //  #swagger.path = '/roles/{id}'
+  // #swagger.description = 'Edit single role'
+
   try {
     //Check if document exists
     const role = await Role.findById(req.params.id);
@@ -62,6 +85,10 @@ router.patch("/:id", async (req, res) => {
 
 //Delete an existing role
 router.delete("/:id", async (req, res) => {
+  // #swagger.tags = ['Role']
+  //  #swagger.path = '/roles/{id}'
+  // #swagger.description = 'Delete single role by role_id'
+
   try {
     //Check if document exists
     const role = await Role.findById(req.params.id);

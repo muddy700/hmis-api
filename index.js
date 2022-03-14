@@ -22,6 +22,9 @@ const bodyParser = require("body-parser"); //todo: uninstall if not used
 const multer = require("multer");
 const upload = multer();
 
+const swaggerUi = require("swagger-ui-express");
+const swaggerFile = require("./swagger_output.json");
+
 //Get Configuration Variables
 dotenv.config();
 const db_url = process.env.DATABASE_URL;
@@ -43,7 +46,10 @@ mongoose
     app.use(upload.single("profile_image"));
     app.use(express.static("public"));
 
+    app.use("/api/v1/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
     app.use("/", defaultRouter);
+    app.use("/api/v1/test", defaultRouter);
     app.use("/api/v1/login", loginRouter);
     app.use("/api/v1/roles", rolesRouter);
     app.use("/api/v1/users", usersRouter);
