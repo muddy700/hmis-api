@@ -8,6 +8,9 @@ const userProjector = { password: 0, token: 0 };
 
 //Get All Users
 router.get("/", authenticate, async (req, res) => {
+  // #swagger.tags = ['User']
+  //  #swagger.path = '/users'
+  // #swagger.description = 'Get all users'
   try {
     const users = await User.find({}, userProjector).populate("role");
     res.status(200).send(users);
@@ -17,7 +20,16 @@ router.get("/", authenticate, async (req, res) => {
 });
 
 //Create New User
-router.post("/", authenticate, async (req, res) => {
+router.post("/", async (req, res) => {
+  // #swagger.tags = ['User']
+  //  #swagger.path = '/users'
+  // #swagger.description = 'Create new user'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'User Info',
+           schema: { $ref: "#/definitions/User" }
+    } */
+
   //Initialize new instance/doc
   const user = new User(req.body);
 
@@ -38,7 +50,11 @@ router.post("/", authenticate, async (req, res) => {
 });
 
 //Get User By Id
-router.get("/:id", authenticate, async (req, res) => {
+router.get("/:id", async (req, res) => {
+  // #swagger.tags = ['User']
+  //  #swagger.path = '/users/{id}'
+  // #swagger.description = 'Get single user by user_id'
+
   try {
     const user = await User.findById(req.params.id, userProjector).populate(
       "role"
@@ -50,6 +66,10 @@ router.get("/:id", authenticate, async (req, res) => {
         .send({ error: `No user found with id: ${req.params.id} ` });
       return;
     }
+    /* #swagger.responses[200] = { 
+               schema: { $ref: "#/definitions/User" },
+               description: 'User retrieved successfull.' 
+        } */
     res.status(200).send(user);
   } catch (error) {
     res.status(404).send({ error: `No User found with id: ${req.params.id} ` });
@@ -58,6 +78,15 @@ router.get("/:id", authenticate, async (req, res) => {
 
 //Update Existing User
 router.patch("/:id", authenticate, async (req, res) => {
+  // #swagger.tags = ['User']
+  //  #swagger.path = '/users/{id}'
+  // #swagger.description = 'Edit single user'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'User Info',
+           schema: { $ref: "#/definitions/User" }
+    } */
+
   try {
     //Check if user exists
     const user = await User.findById(req.params.id);
@@ -104,7 +133,11 @@ router.patch("/:id", authenticate, async (req, res) => {
 });
 
 //Delete an existing user
-router.delete("/:id", authenticate, async (req, res) => {
+router.delete("/:id", async (req, res) => {
+  // #swagger.tags = ['User']
+  //  #swagger.path = '/users/{id}'
+  // #swagger.description = 'Delete single user by user_id'
+
   try {
     //Check if user exists
     const user = await User.findById(req.params.id);

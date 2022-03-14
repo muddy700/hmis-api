@@ -1,7 +1,11 @@
 const swaggerAutogen = require("swagger-autogen")();
 
 const outputFile = "./swagger_output.json";
-const endpointsFiles = ["./routes/index.js", "./routes/role.js"];
+const endpointsFiles = [
+  "./routes/index.js",
+  "./routes/role.js",
+  "./routes/user.js",
+];
 
 const doc = {
   info: {
@@ -47,6 +51,23 @@ const doc = {
   definitions: {
     Role: {
       $role_name: "Administrator",
+    },
+    User: {
+      first_name: "John",
+      last_name: "Doe",
+      username: "jdoe",
+      gender: "male",
+      dob: "2010-02-25",
+      phone: '0789101112',
+      email: 'jdoe@gmail.com',
+      password: 'password',
+      status: true,
+      address: {
+        street: "kingugi",
+        city: 'Dar es salaam',
+        state: "Tanzania",
+        postal_code: "123 Tza",
+      },
     },
     // User: {
     //   name: "Jhon Doe",
