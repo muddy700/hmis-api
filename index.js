@@ -19,6 +19,8 @@ const appointmentsRouter = require("./routes/appointment");
 const salesInvoicesRouter = require("./routes/salesInvoice");
 const labTestTemplateRouter = require("./routes/labTestTemplate");
 const bodyParser = require("body-parser"); //todo: uninstall if not used
+const multer = require("multer");
+const upload = multer();
 
 //Get Configuration Variables
 dotenv.config();
@@ -30,9 +32,16 @@ mongoose
   .connect(db_url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     const app = express();
-    app.use(express.json()); //For JSON payload
-    app.use(express.urlencoded({ extended: true })); //For Form-Encoded
-    // app.use(bodyParser.urlencoded({ extended: true }));
+
+    // parse application/json
+    app.use(express.json());
+
+    // parse application/x-www-form-urlencoded
+    app.use(express.urlencoded({ extended: true }));
+
+    // for parsing multipart/form-data
+    app.use(upload.single("profile_image"));
+    app.use(express.static("public"));
 
     app.use("/", defaultRouter);
     app.use("/api/v1/login", loginRouter);
