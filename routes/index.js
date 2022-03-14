@@ -1,8 +1,13 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
-router.get('/', async (req, res) => {
-    res.status(200).send('Hellow Buddy! 👋 ')
-})
+router.get("/", async (req, res) => {
+  // #swagger.tags = [' Testing']
+  //  #swagger.path = '/test'
 
-module.exports = router
+  res
+    .status(200)
+    .send("Hellow Buddy! 👋, You're connected successfully. ✅✅ ");
+});
+
+module.exports = router;
