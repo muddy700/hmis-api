@@ -5,7 +5,7 @@ const Patient = require("../models/Patient").patientModel;
 const Appointment = require("../models/Appointment");
 
 //Data Populators
-const userProjector = { password: 0 };
+const userProjector = { password: 0, token: 0 };
 const rolePopulator = {
   path: "role",
   select: "role_name -_id",
