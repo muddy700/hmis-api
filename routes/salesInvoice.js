@@ -173,6 +173,10 @@ router.patch("/:id/sales-items/:item_id", async (req, res) => {
           sales_item[prop] = req.body[prop];
         }
       });
+
+      //Calculate grand-price
+      sales_item["grand_price"] = sales_item["price"] * sales_item["quantity"];
+
       //Save changes
       try {
         const response = await salesInvoice.save();
