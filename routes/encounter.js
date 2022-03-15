@@ -518,6 +518,7 @@ router.post("/:encounter_id/medicines", async (req, res) => {
   const encounter = await findEncounter(req, res);
   if (encounter) {
     encounter.medicines.push(req.body);
+    //Todo: Calculate grand-price for a medicine ie.. grand_price = drug.price * req.body['quantity']
     try {
       const response = await encounter.save();
       res.status(200).send(response.medicines);
@@ -556,6 +557,12 @@ router.patch("/:encounter_id/medicines/:medicine_id", async (req, res) => {
       Object.keys(req.body).forEach((prop, index) => {
         if (req.body[prop]) medicine[prop] = req.body[prop];
       });
+
+      //Calculate grand-price
+      if(req.body['quantity']){
+        medicine['grand_price'] = req.body['quantity'] * medicine['drug'].price
+      }
+
       //Save changes
       try {
         const response = await encounter.save();
