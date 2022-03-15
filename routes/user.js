@@ -3,8 +3,39 @@ const User = require("../models/User");
 const createToken = require("../token");
 const authenticate = require("../authentication");
 const router = express.Router();
+const AWS = require("aws-sdk");
+
+const dotenv = require("dotenv");
+dotenv.config();
+const aws_id = process.env.AWS_ID;
+const aws_secret = process.env.AWS_SECRET;
+const aws_bucket = process.env.AWS_BUCKET;
 
 const userProjector = { password: 0, token: 0 };
+
+//Create S3 service object
+const S3 = new AWS.S3({
+  accessKeyId: aws_id,
+  secretAccessKey: aws_secret,
+});
+
+//Function to upload images/files to AWS-S3
+const sendFile = async (req) => {
+  const params = {
+    Bucket: aws_bucket,
+    Key: req.file.originalname,
+    Body: req.file.buffer,
+  };
+
+  try {
+    const response = await S3.upload(params).promise();
+    // console.log(response);
+    return response.Location;
+  } catch (error) {
+    console.log({ error: error });
+    return false;
+  }
+};
 
 //Get All Users
 router.get("/", authenticate, async (req, res) => {
@@ -77,7 +108,7 @@ router.get("/:id", async (req, res) => {
 });
 
 //Update Existing User
-router.patch("/:id", authenticate, async (req, res) => {
+router.patch("/:id", async (req, res) => {
   // #swagger.tags = ['User']
   //  #swagger.path = '/users/{id}'
   // #swagger.description = 'Edit single user'
@@ -117,6 +148,15 @@ router.patch("/:id", authenticate, async (req, res) => {
         user[key] = remainingData[key];
       }
     });
+
+    //Check if request has profile-image attached
+    if (req.file) {
+      const imageURL = await sendFile(req);
+      if (imageURL) user["profile_image"] = imageURL;
+      else {
+        return res.status(500).send({ error: "Failed to save image" });
+      }
+    }
 
     //Save changes
     try {
