@@ -64,6 +64,15 @@ router.post("/", async (req, res) => {
   //Initialize new instance/doc
   const user = new User(req.body);
 
+  //Check if request has profile-image attached
+  if (req.file) {
+    const imageURL = await sendFile(req);
+    if (imageURL) user["profile_image"] = imageURL;
+    else {
+      return res.status(500).send({ error: "Failed to save image" });
+    }
+  }
+
   try {
     const response = await user.save();
     //create access token
