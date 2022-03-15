@@ -51,6 +51,7 @@
         "tags": [
           "Role"
         ],
+        "summary": "List all roles",
         "description": "Get all roles",
         "parameters": [],
         "responses": {
@@ -66,6 +67,7 @@
         "tags": [
           "Role"
         ],
+        "summary": "Create a new role",
         "description": "Create new role",
         "parameters": [
           {
@@ -96,6 +98,7 @@
         "tags": [
           "Role"
         ],
+        "summary": "Get a role by id",
         "description": "Get single role by role_id",
         "parameters": [
           {
@@ -122,6 +125,7 @@
         "tags": [
           "Role"
         ],
+        "summary": "Update a role",
         "description": "Edit single role",
         "parameters": [
           {
@@ -159,6 +163,7 @@
         "tags": [
           "Role"
         ],
+        "summary": "Delete a role by id",
         "description": "Delete single role by role_id",
         "parameters": [
           {

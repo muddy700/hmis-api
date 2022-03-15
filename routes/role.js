@@ -6,6 +6,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   // #swagger.tags = ['Role']
   //  #swagger.path = '/roles'
+  //  #swagger.summary = 'List all roles'
   // #swagger.description = 'Get all roles'
   try {
     const roles = await Role.find();
@@ -19,6 +20,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   // #swagger.tags = ['Role']
   //  #swagger.path = '/roles'
+  //  #swagger.summary = 'Create a new role'
   // #swagger.description = 'Create new role'
 
   //Initialize new instance/doc
@@ -38,6 +40,7 @@ router.post("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   // #swagger.tags = ['Role']
   //  #swagger.path = '/roles/{id}'
+  //  #swagger.summary = 'Get a role by id'
   // #swagger.description = 'Get single role by role_id'
   // #swagger.parameters['id'] = { description: 'Role id.' }
 
@@ -60,6 +63,7 @@ router.get("/:id", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   // #swagger.tags = ['Role']
   //  #swagger.path = '/roles/{id}'
+  //  #swagger.summary = 'Update a role'
   // #swagger.description = 'Edit single role'
 
   try {
@@ -87,6 +91,7 @@ router.patch("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   // #swagger.tags = ['Role']
   //  #swagger.path = '/roles/{id}'
+  //  #swagger.summary = 'Delete a role by id'
   // #swagger.description = 'Delete single role by role_id'
 
   try {
