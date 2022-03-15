@@ -23,7 +23,7 @@ const S3 = new AWS.S3({
 const sendFile = async (req) => {
   const params = {
     Bucket: aws_bucket,
-    Key: req.file.originalname,
+    Key: 'profiles-pictures/' + req.file.originalname,
     Body: req.file.buffer,
   };
 
