@@ -46,13 +46,11 @@ mongoose
     app.use(upload.single("profile_image"));
     app.use(express.static("public"));
 
-    app.use("/api/v1/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
-
     app.use("/", defaultRouter);
-    app.use("/api/v1/test", defaultRouter);
     app.use("/api/v1/login", loginRouter);
     app.use("/api/v1/roles", rolesRouter);
     app.use("/api/v1/users", usersRouter);
+    app.use("/api/v1/test", defaultRouter);
     app.use("/api/v1/logout", logoutRouter);
     app.use("/api/v1/filter", filtersRouter);
     app.use("/api/v1/patients", patientsRouter);
@@ -65,6 +63,7 @@ mongoose
     app.use("/api/v1/payment-modes", paymentModesRouter);
     app.use("/api/v1/sales-invoices", salesInvoicesRouter);
     app.use("/api/v1/lab-test-templates", labTestTemplateRouter);
+    app.use("/api/v1/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile, {explorer: false}));
 
     app.listen(PORT, () => {
       console.log(`Server Connected And App Is Running On Port #: ${PORT}`);
