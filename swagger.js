@@ -48,6 +48,10 @@ const doc = {
       description: "REST API for Patients",
     },
     {
+      name: "Appointment",
+      description: "REST API for Appointment",
+    },
+    {
       name: "User",
       description: "REST API for Users",
     },
