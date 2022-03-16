@@ -1337,27 +1337,27 @@
       }
     },
     "/": {
-      "get": {
+      "post": {
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
           }
         }
       }
@@ -2012,8 +2012,43 @@
         }
       }
     },
-    "/{id}": {
+    "/sales-invoices": {
       "get": {
+        "tags": [
+          "Sales Invoice"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Sales Invoice"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/sales-invoices/{id}": {
+      "get": {
+        "tags": [
+          "Sales Invoice"
+        ],
         "description": "",
         "parameters": [
           {
@@ -2033,6 +2068,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Sales Invoice"
+        ],
         "description": "",
         "parameters": [
           {
@@ -2055,6 +2093,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Sales Invoice"
+        ],
         "description": "",
         "parameters": [
           {
@@ -2077,8 +2118,11 @@
         }
       }
     },
-    "/{id}/sales-items": {
+    "/sales-invoices/{id}/sales-items": {
       "get": {
+        "tags": [
+          "Sales Invoice"
+        ],
         "description": "",
         "parameters": [
           {
@@ -2098,6 +2142,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Sales Invoice"
+        ],
         "description": "",
         "parameters": [
           {
@@ -2120,8 +2167,11 @@
         }
       }
     },
-    "/{id}/sales-items/{item_id}": {
+    "/sales-invoices/{id}/sales-items/{item_id}": {
       "get": {
+        "tags": [
+          "Sales Invoice"
+        ],
         "description": "",
         "parameters": [
           {
@@ -2147,6 +2197,9 @@
         }
       },
       "patch": {
+        "tags": [
+          "Sales Invoice"
+        ],
         "description": "",
         "parameters": [
           {
@@ -2175,6 +2228,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Sales Invoice"
+        ],
         "description": "",
         "parameters": [
           {

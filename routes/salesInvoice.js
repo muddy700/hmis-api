@@ -45,6 +45,9 @@ const findSalesInvoice = async (req, res) => {
 
 //Get All Sales Invoices
 router.get("/", async (req, res) => {
+  // #swagger.tags = ['Sales Invoice']
+  //  #swagger.path = '/sales-invoices'
+
   try {
     const salesInvoices = await SalesInvoice.find()
       .populate(patientPopulator)
@@ -58,6 +61,9 @@ router.get("/", async (req, res) => {
 
 //Create New Sales Invoice
 router.post("/", async (req, res) => {
+  // #swagger.tags = ['Sales Invoice']
+  //  #swagger.path = '/sales-invoices'
+
   //Initialize new instance/doc
   const salesInvoice = new SalesInvoice(req.body);
 
@@ -71,12 +77,18 @@ router.post("/", async (req, res) => {
 
 //Get SalesInvoice By Id
 router.get("/:id", async (req, res) => {
+  // #swagger.tags = ['Sales Invoice']
+  //  #swagger.path = '/sales-invoices/{id}'
+
   const salesInvoice = await findSalesInvoice(req, res);
   if (salesInvoice) res.status(200).send(salesInvoice);
 });
 
 //Update Existing SalesInvoice
 router.put("/:id", async (req, res) => {
+  // #swagger.tags = ['Sales Invoice']
+  //  #swagger.path = '/sales-invoices/{id}'
+
   const salesInvoice = await findSalesInvoice(req, res);
   if (salesInvoice) {
     //Loop and update only properties with data
@@ -99,6 +111,9 @@ router.put("/:id", async (req, res) => {
 
 //Delete an existing salesInvoice
 router.delete("/:id", async (req, res) => {
+  // #swagger.tags = ['Sales Invoice']
+  //  #swagger.path = '/sales-invoices/{id}'
+
   const salesInvoice = await findSalesInvoice(req, res);
   if (salesInvoice) {
     //Delete salesInvoice
@@ -134,12 +149,18 @@ const findSalesItem = async (req, res, salesInvoice) => {
 
 //Get all sales-items for a given sales invoice
 router.get("/:id/sales-items", async (req, res) => {
+  // #swagger.tags = ['Sales Invoice']
+  //  #swagger.path = '/sales-invoices/{id}/sales-items'
+
   const salesInvoice = await findSalesInvoice(req, res);
   if (salesInvoice) res.status(200).send(salesInvoice.items);
 });
 
 //Create new sales-item and append to a sales-invoice
 router.post("/:id/sales-items", async (req, res) => {
+  // #swagger.tags = ['Sales Invoice']
+  //  #swagger.path = '/sales-invoices/{id}/sales-items'
+
   const salesInvoice = await findSalesInvoice(req, res);
   if (salesInvoice) {
     salesInvoice.items.push(req.body);
@@ -154,6 +175,9 @@ router.post("/:id/sales-items", async (req, res) => {
 
 //Get single sales-item by sales-item-id and sales-invoice-id
 router.get("/:id/sales-items/:item_id", async (req, res) => {
+  // #swagger.tags = ['Sales Invoice']
+  //  #swagger.path = '/sales-invoices/{id}/sales-items/{item_id}'
+
   const salesInvoice = await findSalesInvoice(req, res);
   if (salesInvoice) {
     const sales_item = await findSalesItem(req, res, salesInvoice);
@@ -163,6 +187,9 @@ router.get("/:id/sales-items/:item_id", async (req, res) => {
 
 //Edit single sales-item
 router.patch("/:id/sales-items/:item_id", async (req, res) => {
+  // #swagger.tags = ['Sales Invoice']
+  //  #swagger.path = '/sales-invoices/{id}/sales-items/{item_id}'
+
   const salesInvoice = await findSalesInvoice(req, res);
   if (salesInvoice) {
     const sales_item = await findSalesItem(req, res, salesInvoice);
@@ -190,6 +217,9 @@ router.patch("/:id/sales-items/:item_id", async (req, res) => {
 
 //Delete single sales-item
 router.delete("/:id/sales-items/:item_id", async (req, res) => {
+  // #swagger.tags = ['Sales Invoice']
+  //  #swagger.path = '/sales-invoices/{id}/sales-items/{item_id}'
+
   const salesInvoice = await findSalesInvoice(req, res);
   if (salesInvoice) {
     const sales_item = await findSalesItem(req, res, salesInvoice);
