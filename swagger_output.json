@@ -351,8 +351,11 @@
         }
       }
     },
-    "/{encounter_id}": {
+    "/encounters/{encounter_id}": {
       "get": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -370,9 +373,7 @@
             "description": "Not Found"
           }
         }
-      }
-    },
-    "/encounters/{encounter_id}": {
+      },
       "put": {
         "tags": [
           "Encounter"

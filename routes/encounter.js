@@ -120,6 +120,9 @@ router.post("/", async (req, res) => {
 
 //Get Encounter By Id
 router.get("/:encounter_id", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters/{encounter_id}'
+
   const encounter = await findEncounter(req, res);
   if (encounter) res.status(200).send(encounter);
 });
