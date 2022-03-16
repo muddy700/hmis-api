@@ -5,6 +5,9 @@ const authenticate = require("../authentication");
 
 //Delete Token
 router.post("/", authenticate, async (req, res) => {
+  // #swagger.tags = ['Auth']
+  //  #swagger.path = '/logout'
+
   try {
     const response = await User.updateOne(
       { _id: req.user.userId },

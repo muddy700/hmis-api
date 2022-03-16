@@ -1399,8 +1399,11 @@
         }
       }
     },
-    "/": {
+    "/logout": {
       "post": {
+        "tags": [
+          "Auth"
+        ],
         "description": "",
         "parameters": [
           {
