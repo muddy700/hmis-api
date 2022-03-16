@@ -73,7 +73,6 @@
     "http",
     "https"
   ],
-  "securityDefinitions": {},
   "consumes": [
     "application/json",
     "multiparty/form-data"
@@ -224,7 +223,16 @@
           "Diagnosis"
         ],
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Diagnosis Info",
+            "schema": {
+              "$ref": "#/definitions/Diagnosis"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -2730,6 +2738,23 @@
       },
       "required": [
         "payment_mode_name"
+      ]
+    },
+    "Diagnosis": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Malaria"
+        },
+        "diagnosis_code": {
+          "type": "string",
+          "example": "B5.5"
+        }
+      },
+      "required": [
+        "name",
+        "diagnosis_code"
       ]
     },
     "User": {

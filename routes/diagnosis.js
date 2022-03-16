@@ -19,7 +19,12 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   // #swagger.tags = ['Diagnosis']
   //  #swagger.path = '/diagnosis'
-
+  /* #swagger.parameters['obj'] = { 
+    in: 'body',
+    description: 'Diagnosis Info',
+    schema: { $ref: "#/definitions/Diagnosis" }
+    }
+  */
   //Initialize new instance/doc
   const diagnosis = new Diagnosis(req.body);
 
