@@ -3,14 +3,14 @@
   "info": {
     "version": "1.0.0",
     "title": "HIMS APIs",
-    "description": "API for healthcare information management system."
+    "description": "APIs for Healthcare Information Management System(HIMS)."
   },
   "host": "localhost:3000",
   "basePath": "/api/v1",
   "tags": [
     {
       "name": " Testing",
-      "description": "REST API for testing connectivity"
+      "description": "REST API-Endpoint for testing connectivity"
     },
     {
       "name": "Role",
@@ -26,7 +26,8 @@
     "https"
   ],
   "consumes": [
-    "application/json"
+    "application/json",
+    "multiparty/form-data"
   ],
   "produces": [
     "application/json"
@@ -37,8 +38,16 @@
         "tags": [
           " Testing"
         ],
+        "summary": "Get greeting text",
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "name",
+            "description": "Your Name",
+            "in": "query",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -281,11 +290,6 @@
             "type": "string"
           },
           {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
             "name": "obj",
             "in": "body",
             "description": "User Info",
@@ -301,14 +305,11 @@
           "400": {
             "description": "Bad Request"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
           "404": {
             "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },

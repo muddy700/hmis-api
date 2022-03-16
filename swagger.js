@@ -11,17 +11,17 @@ const doc = {
   info: {
     version: "1.0.0",
     title: "HIMS APIs",
-    description: "API for healthcare information management system.",
+    description: "APIs for Healthcare Information Management System(HIMS).",
   },
   host: "localhost:3000",
   basePath: "/api/v1",
   schemes: ["http", "https"],
-  consumes: ["application/json"],
+  consumes: ["application/json", "multiparty/form-data"],
   produces: ["application/json"],
   tags: [
     {
       name: " Testing",
-      description: "REST API for testing connectivity",
+      description: "REST API-Endpoint for testing connectivity",
     },
     {
       name: "Role",
@@ -58,13 +58,13 @@ const doc = {
       username: "jdoe",
       gender: "male",
       dob: "2010-02-25",
-      phone: '0789101112',
-      email: 'jdoe@gmail.com',
-      password: 'password',
+      phone: "0789101112",
+      email: "jdoe@gmail.com",
+      password: "password",
       status: true,
       address: {
         street: "kingugi",
-        city: 'Dar es salaam',
+        city: "Dar es salaam",
         state: "Tanzania",
         postal_code: "123 Tza",
       },
