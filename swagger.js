@@ -35,6 +35,10 @@ const doc = {
       name: "Symptoms",
       description: "REST API for Symptoms",
     },
+    {
+      name: "Diagnosis",
+      description: "REST API for Diagnosis",
+    },
   ],
   //   securityDefinitions: {
   //     api_key: {
