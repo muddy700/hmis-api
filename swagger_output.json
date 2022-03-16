@@ -1465,7 +1465,16 @@
           "Medicine"
         ],
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Medicine Info",
+            "schema": {
+              "$ref": "#/definitions/Medicine"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1510,6 +1519,27 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "drug_code": {
+                  "example": "any"
+                },
+                "drug_name": {
+                  "example": "any"
+                },
+                "price": {
+                  "example": "any"
+                },
+                "dosage": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -2755,6 +2785,33 @@
       "required": [
         "name",
         "diagnosis_code"
+      ]
+    },
+    "Medicine": {
+      "type": "object",
+      "properties": {
+        "drug_code": {
+          "type": "string",
+          "example": "B21"
+        },
+        "drug_name": {
+          "type": "string",
+          "example": "Morphine"
+        },
+        "price": {
+          "type": "number",
+          "example": 10
+        },
+        "dosage": {
+          "type": "string",
+          "example": "1 x 3"
+        }
+      },
+      "required": [
+        "drug_code",
+        "drug_name",
+        "price",
+        "dosage"
       ]
     },
     "User": {

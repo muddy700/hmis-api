@@ -19,9 +19,16 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   // #swagger.tags = ['Medicine']
   //  #swagger.path = '/medicines'
+  /* #swagger.parameters['obj'] = {
+    in: 'body',
+    description: 'Medicine Info',
+    schema: { $ref: "#/definitions/Medicine"}
+  }
+   */
 
   //Initialize new instance/doc
   const medicine = new Medicine(req.body);
+  // const { drug_code, drug_name, price, dosage } = req.body;
 
   try {
     const response = await medicine.save();
@@ -54,6 +61,9 @@ router.patch("/:id", async (req, res) => {
   try {
     //Check if document exists
     const medicine = await Medicine.findById(req.params.id);
+
+    //Destructure Medicine-Properties For Swagger to recognize them
+    const { drug_code, drug_name, price, dosage } = req.body;
 
     //Update only modified properties
     Object.keys(req.body).forEach((prop, index) => {

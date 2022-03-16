@@ -114,6 +114,12 @@ const doc = {
       $name: "Malaria",
       $diagnosis_code: "B5.5",
     },
+    Medicine: {
+      $drug_code: "B21",
+      $drug_name: "Morphine",
+      $price: 10,
+      $dosage: "1 x 3",
+    },
     User: {
       first_name: "John",
       last_name: "Doe",
