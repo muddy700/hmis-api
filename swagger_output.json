@@ -19,6 +19,10 @@
     {
       "name": "User",
       "description": "REST API for Users"
+    },
+    {
+      "name": "Mode of Payment",
+      "description": "REST API for Payment Modes"
     }
   ],
   "schemes": [
@@ -1024,6 +1028,142 @@
           },
           {
             "name": "vital_sign_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/payment-modes": {
+      "get": {
+        "tags": [
+          "Mode of Payment"
+        ],
+        "summary": "List all Modes of Payment",
+        "description": "Get all Modes of Payment",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Mode of Payment"
+        ],
+        "summary": "Create a Mode of Payment",
+        "description": "Create new payment mode",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "payment_mode_name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/payment-modes/{id}": {
+      "get": {
+        "tags": [
+          "Mode of Payment"
+        ],
+        "summary": "Get a Mode of Payment by id",
+        "description": "Retrieve single payment mode by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Mode of Payment"
+        ],
+        "summary": "Edit a Mode of Payment",
+        "description": "Modify single payment mode by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "payment_mode_name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Mode of Payment"
+        ],
+        "summary": "Remove a Mode of Payment by id",
+        "description": "Delete single payment mode by id",
+        "parameters": [
+          {
+            "name": "id",
             "in": "path",
             "required": true,
             "type": "string"

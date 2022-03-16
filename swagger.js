@@ -27,6 +27,10 @@ const doc = {
       name: "User",
       description: "REST API for Users",
     },
+    {
+      name: "Mode of Payment",
+      description: "REST API for Payment Modes",
+    },
   ],
   //   securityDefinitions: {
   //     api_key: {

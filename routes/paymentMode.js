@@ -4,6 +4,10 @@ const router = express.Router();
 
 //Get All PaymentModes
 router.get("/", async (req, res) => {
+  // #swagger.tags = ['Mode of Payment']
+  //  #swagger.path = '/payment-modes'
+  //  #swagger.summary = 'List all Modes of Payment'
+  // #swagger.description = 'Get all Modes of Payment'
   try {
     const paymentModes = await PaymentMode.find();
     res.status(200).send(paymentModes);
@@ -14,6 +18,11 @@ router.get("/", async (req, res) => {
 
 //Create New PaymentMode
 router.post("/", async (req, res) => {
+  // #swagger.tags = ['Mode of Payment']
+  //  #swagger.path = '/payment-modes'
+  //  #swagger.summary = 'Create a Mode of Payment'
+  // #swagger.description = 'Create new payment mode'
+
   //Initialize new instance/doc
   const paymentMode = new PaymentMode({
     payment_mode_name: req.body.payment_mode_name,
@@ -29,6 +38,11 @@ router.post("/", async (req, res) => {
 
 //Get PaymentMode By Id
 router.get("/:id", async (req, res) => {
+  // #swagger.tags = ['Mode of Payment']
+  //  #swagger.path = '/payment-modes/{id}'
+  //  #swagger.summary = 'Get a Mode of Payment by id'
+  // #swagger.description = 'Retrieve single payment mode by id'
+
   try {
     const paymentMode = await PaymentMode.findById(req.params.id);
     res.status(200).send(paymentMode);
@@ -41,6 +55,11 @@ router.get("/:id", async (req, res) => {
 
 //Update Existing PaymentMode
 router.patch("/:id", async (req, res) => {
+  // #swagger.tags = ['Mode of Payment']
+  //  #swagger.path = '/payment-modes/{id}'
+  //  #swagger.summary = 'Edit a Mode of Payment'
+  // #swagger.description = 'Modify single payment mode by id'
+
   try {
     //Check if document exists
     const paymentMode = await PaymentMode.findById(req.params.id);
@@ -67,6 +86,11 @@ router.patch("/:id", async (req, res) => {
 
 //Delete an existing paymentMode
 router.delete("/:id", async (req, res) => {
+  // #swagger.tags = ['Mode of Payment']
+  //  #swagger.path = '/payment-modes/{id}'
+  //  #swagger.summary = 'Remove a Mode of Payment by id'
+  // #swagger.description = 'Delete single payment mode by id'
+
   try {
     //Check if document exists
     const paymentMode = await PaymentMode.findById(req.params.id);
