@@ -4,6 +4,9 @@ const router = express.Router();
 
 //Get All Diagnosis
 router.get("/", async (req, res) => {
+  // #swagger.tags = ['Diagnosis']
+  //  #swagger.path = '/diagnosis'
+
   try {
     const diagnosis = await Diagnosis.find();
     res.status(200).send(diagnosis);
@@ -14,6 +17,9 @@ router.get("/", async (req, res) => {
 
 //Create New Diagnosis
 router.post("/", async (req, res) => {
+  // #swagger.tags = ['Diagnosis']
+  //  #swagger.path = '/diagnosis'
+
   //Initialize new instance/doc
   const diagnosis = new Diagnosis(req.body);
 
@@ -27,6 +33,9 @@ router.post("/", async (req, res) => {
 
 //Get Diagnosis By Id
 router.get("/:id", async (req, res) => {
+  // #swagger.tags = ['Diagnosis']
+  //  #swagger.path = '/diagnosis/{id}'
+
   try {
     const diagnosis = await Diagnosis.findById(req.params.id);
     res.status(200).send(diagnosis);
@@ -39,13 +48,17 @@ router.get("/:id", async (req, res) => {
 
 //Update Existing Diagnosis
 router.patch("/:id", async (req, res) => {
+  // #swagger.tags = ['Diagnosis']
+  //  #swagger.path = '/diagnosis/{id}'
+
   try {
     //Check if document exists
     const diagnosis = await Diagnosis.findById(req.params.id);
 
     //Update only modified properties
     if (req.body.name) diagnosis.name = req.body.name;
-    if (req.body.diagnosis_code) diagnosis.diagnosis_code = req.body.diagnosis_code;
+    if (req.body.diagnosis_code)
+      diagnosis.diagnosis_code = req.body.diagnosis_code;
 
     //Save changes
     try {
@@ -65,6 +78,9 @@ router.patch("/:id", async (req, res) => {
 
 //Delete an existing diagnosis
 router.delete("/:id", async (req, res) => {
+  // #swagger.tags = ['Diagnosis']
+  //  #swagger.path = '/diagnosis/{id}'
+
   try {
     //Check if document exists
     const diagnosis = await Diagnosis.findById(req.params.id);
