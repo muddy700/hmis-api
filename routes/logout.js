@@ -7,6 +7,11 @@ const authenticate = require("../authentication");
 router.post("/", authenticate, async (req, res) => {
   // #swagger.tags = ['Auth']
   //  #swagger.path = '/logout'
+  /* #swagger.parameters['request-source-domain'] = { 
+           in: 'header',
+           description: 'Request Source Domain',
+           required: true
+    } */
 
   try {
     const response = await User.updateOne(

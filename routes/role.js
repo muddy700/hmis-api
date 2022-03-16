@@ -1,13 +1,20 @@
 const express = require("express");
 const Role = require("../models/Role");
 const router = express.Router();
+const authenticate = require("../authentication");
 
 //Get All Roles
-router.get("/", async (req, res) => {
+router.get("/", authenticate, async (req, res) => {
   // #swagger.tags = ['Role']
   //  #swagger.path = '/roles'
   //  #swagger.summary = 'List all roles'
   // #swagger.description = 'Get all roles'
+  /* #swagger.parameters['request-source-domain'] = { 
+           in: 'header',
+           description: 'Request Source Domain',
+           required: true
+    } */
+
   try {
     const roles = await Role.find();
     res.status(200).send(roles);
