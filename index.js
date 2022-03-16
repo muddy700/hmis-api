@@ -28,7 +28,7 @@ const swaggerFile = require("./swagger_output.json");
 //Get Configuration Variables
 dotenv.config();
 const db_url = process.env.DATABASE_URL;
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 //Initialize Database Connection
 mongoose
