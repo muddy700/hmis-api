@@ -5,6 +5,9 @@ const createToken = require("../token");
 
 //Login endpoint
 router.post("/", async (req, res) => {
+  // #swagger.tags = ['Auth']
+  //  #swagger.path = '/login'
+
   //Check if user exists
   try {
     const user = await User.findOne({

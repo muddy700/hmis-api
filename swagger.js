@@ -20,6 +20,10 @@ const doc = {
       description: "REST API-Endpoint for testing connectivity",
     },
     {
+      name: "Auth",
+      description: "REST API-Endpoints for authentication",
+    },
+    {
       name: "Role",
       description: "REST API for Roles",
     },
