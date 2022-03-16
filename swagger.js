@@ -59,6 +59,14 @@ const doc = {
       name: "Encounter",
       description: "REST API for Encounter",
     },
+    {
+      name: "Lab Test",
+      description: "REST API for Lab Test",
+    },
+    {
+      name: "Sales Invoice",
+      description: "REST API for Sales Invoice",
+    },
   ],
   //   securityDefinitions: {
   //     api_key: {
