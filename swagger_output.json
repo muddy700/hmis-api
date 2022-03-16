@@ -51,6 +51,14 @@
     {
       "name": "Encounter",
       "description": "REST API for Encounter"
+    },
+    {
+      "name": "Lab Test",
+      "description": "REST API for Lab Test"
+    },
+    {
+      "name": "Sales Invoice",
+      "description": "REST API for Sales Invoice"
     }
   ],
   "schemes": [
@@ -1085,8 +1093,11 @@
         }
       }
     },
-    "/": {
+    "/lab-tests": {
       "get": {
+        "tags": [
+          "Lab Test"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -1099,6 +1110,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Lab Test"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -1111,8 +1125,11 @@
         }
       }
     },
-    "/{id}": {
+    "/lab-tests/{id}": {
       "get": {
+        "tags": [
+          "Lab Test"
+        ],
         "description": "",
         "parameters": [
           {
@@ -1131,7 +1148,10 @@
           }
         }
       },
-      "put": {
+      "patch": {
+        "tags": [
+          "Lab Test"
+        ],
         "description": "",
         "parameters": [
           {
@@ -1154,6 +1174,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Lab Test"
+        ],
         "description": "",
         "parameters": [
           {
@@ -1309,6 +1332,32 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -1942,6 +1991,71 @@
         ],
         "summary": "Delete a role by id",
         "description": "Delete single role by role_id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
         "parameters": [
           {
             "name": "id",

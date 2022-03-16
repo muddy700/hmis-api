@@ -42,8 +42,11 @@ const findLabTest = async (req, res) => {
   }
 };
 
-//Get All LabTest
+//Get All LabTest Lab Test
 router.get("/", async (req, res) => {
+  // #swagger.tags = ['Lab Test']
+  //  #swagger.path = '/lab-tests'
+
   try {
     const labTests = await LabTest.find()
       .populate(patientPopulator)
@@ -57,6 +60,9 @@ router.get("/", async (req, res) => {
 
 //Create New LabTest
 router.post("/", async (req, res) => {
+  // #swagger.tags = ['Lab Test']
+  //  #swagger.path = '/lab-tests'
+
   //Initialize new instance/doc
   const labTest = new LabTest(req.body);
 
@@ -70,12 +76,18 @@ router.post("/", async (req, res) => {
 
 //Get labTest by id
 router.get("/:id", async (req, res) => {
+  // #swagger.tags = ['Lab Test']
+  //  #swagger.path = '/lab-tests/{id}'
+
   const labTest = await findLabTest(req, res);
   if (labTest) res.status(200).send(labTest);
 });
 
 //Update Existing labTest
 router.patch("/:id", async (req, res) => {
+  // #swagger.tags = ['Lab Test']
+  //  #swagger.path = '/lab-tests/{id}'
+
   const labTest = await findLabTest(req, res);
   if (labTest) {
     // const { date_created, ...remainingData } = req.body;
@@ -93,6 +105,9 @@ router.patch("/:id", async (req, res) => {
 
 //Delete an existing labTest
 router.delete("/:id", async (req, res) => {
+  // #swagger.tags = ['Lab Test']
+  //  #swagger.path = '/lab-tests/{id}'
+
   const labTest = await findLabTest(req, res);
   if (labTest) {
     try {
