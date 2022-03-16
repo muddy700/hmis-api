@@ -4,6 +4,9 @@ const router = express.Router();
 
 //Get All Symptoms
 router.get("/", async (req, res) => {
+  // #swagger.tags = ['Symptoms']
+  //  #swagger.path = '/symptoms'
+
   try {
     const symptoms = await Symptom.find();
     res.status(200).send(symptoms);
@@ -14,6 +17,9 @@ router.get("/", async (req, res) => {
 
 //Create New Symptom
 router.post("/", async (req, res) => {
+  // #swagger.tags = ['Symptoms']
+  //  #swagger.path = '/symptoms'
+
   //Initialize new instance/doc
   const symptom = new Symptom({
     name: req.body.name,
@@ -29,17 +35,25 @@ router.post("/", async (req, res) => {
 
 //Get Symptom By Id
 router.get("/:id", async (req, res) => {
+  // #swagger.tags = ['Symptoms']
+  //  #swagger.path = '/symptoms/{id}'
+
   try {
     const symptom = await Symptom.findById(req.params.id);
     res.status(200).send(symptom);
   } catch (error) {
-    res.status(404).send({ error: `No symptom found with id: ${req.params.id} ` });
+    res
+      .status(404)
+      .send({ error: `No symptom found with id: ${req.params.id} ` });
   }
 });
 
 
 //Update Existing Symptom
 router.patch("/:id", async (req, res) => {
+  // #swagger.tags = ['Symptoms']
+  //  #swagger.path = '/symptoms/{id}'
+
   try {
     //Check if document exists
     const symptom = await Symptom.findById(req.params.id);
@@ -57,13 +71,18 @@ router.patch("/:id", async (req, res) => {
     }
   } catch (error) {
     //Throw error if no document found
-    res.status(404).send({ error: `No symptom found with id: ${req.params.id} ` });
+    res
+      .status(404)
+      .send({ error: `No symptom found with id: ${req.params.id} ` });
   }
 });
 
 
 //Delete an existing symptom
 router.delete("/:id", async (req, res) => {
+  // #swagger.tags = ['Symptoms']
+  //  #swagger.path = '/symptoms/{id}'
+
   try {
     //Check if document exists
     const symptom = await Symptom.findById(req.params.id);
@@ -86,7 +105,9 @@ router.delete("/:id", async (req, res) => {
     }
   } catch (error) {
     //Throw error if no document found
-    res.status(404).send({ error: `No symptom found with id: ${req.params.id} ` });
+    res
+      .status(404)
+      .send({ error: `No symptom found with id: ${req.params.id} ` });
   }
 });
 
