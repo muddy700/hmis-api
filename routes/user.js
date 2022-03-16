@@ -23,7 +23,7 @@ const S3 = new AWS.S3({
 const sendFile = async (req) => {
   const params = {
     Bucket: aws_bucket,
-    Key: 'profiles-pictures/' + req.file.originalname,
+    Key: "profiles-pictures/" + req.file.originalname,
     Body: req.file.buffer,
   };
 
@@ -42,6 +42,11 @@ router.get("/", authenticate, async (req, res) => {
   // #swagger.tags = ['User']
   //  #swagger.path = '/users'
   // #swagger.description = 'Get all users'
+  /* #swagger.parameters['request-source-domain'] = { 
+           in: 'header',
+           description: 'Request Source Domain',
+           required: true
+    } */
   try {
     const users = await User.find({}, userProjector).populate("role");
     res.status(200).send(users);
@@ -51,10 +56,15 @@ router.get("/", authenticate, async (req, res) => {
 });
 
 //Create New User
-router.post("/", async (req, res) => {
+router.post("/", authenticate, async (req, res) => {
   // #swagger.tags = ['User']
   //  #swagger.path = '/users'
   // #swagger.description = 'Create new user'
+  /* #swagger.parameters['request-source-domain'] = { 
+           in: 'header',
+           description: 'Request Source Domain',
+           required: true
+    } */
   /* #swagger.parameters['obj'] = { 
            in: 'body',
            description: 'User Info',
@@ -90,10 +100,15 @@ router.post("/", async (req, res) => {
 });
 
 //Get User By Id
-router.get("/:id", async (req, res) => {
+router.get("/:id", authenticate, async (req, res) => {
   // #swagger.tags = ['User']
   //  #swagger.path = '/users/{id}'
   // #swagger.description = 'Get single user by user_id'
+  /* #swagger.parameters['request-source-domain'] = { 
+           in: 'header',
+           description: 'Request Source Domain',
+           required: true
+    } */
 
   try {
     const user = await User.findById(req.params.id, userProjector).populate(
@@ -117,10 +132,15 @@ router.get("/:id", async (req, res) => {
 });
 
 //Update Existing User
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", authenticate, async (req, res) => {
   // #swagger.tags = ['User']
   //  #swagger.path = '/users/{id}'
   // #swagger.description = 'Edit single user'
+  /* #swagger.parameters['request-source-domain'] = { 
+           in: 'header',
+           description: 'Request Source Domain',
+           required: true
+    } */
   /* #swagger.parameters['obj'] = { 
            in: 'body',
            description: 'User Info',
@@ -182,10 +202,15 @@ router.patch("/:id", async (req, res) => {
 });
 
 //Delete an existing user
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authenticate, async (req, res) => {
   // #swagger.tags = ['User']
   //  #swagger.path = '/users/{id}'
   // #swagger.description = 'Delete single user by user_id'
+  /* #swagger.parameters['request-source-domain'] = { 
+           in: 'header',
+           description: 'Request Source Domain',
+           required: true
+    } */
 
   try {
     //Check if user exists
