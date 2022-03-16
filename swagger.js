@@ -24,10 +24,6 @@ const doc = {
       description: "REST API for Roles",
     },
     {
-      name: "User",
-      description: "REST API for Users",
-    },
-    {
       name: "Mode of Payment",
       description: "REST API for Payment Modes",
     },
@@ -38,6 +34,14 @@ const doc = {
     {
       name: "Diagnosis",
       description: "REST API for Diagnosis",
+    },
+    {
+      name: "Medicine",
+      description: "REST API for Medicines",
+    },
+    {
+      name: "User",
+      description: "REST API for Users",
     },
   ],
   //   securityDefinitions: {
