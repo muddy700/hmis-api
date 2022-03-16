@@ -37,6 +37,9 @@ const findAppointment = async (req, res) => {
 
 //Get All Appointments
 router.get("/", async (req, res) => {
+  // #swagger.tags = ['Appointment']
+  //  #swagger.path = '/appointments'
+
   try {
     const appointments = await Appointment.find()
       .populate(practitionerPopulator)
@@ -49,6 +52,9 @@ router.get("/", async (req, res) => {
 
 //Create New Appointment
 router.post("/", async (req, res) => {
+  // #swagger.tags = ['Appointment']
+  //  #swagger.path = '/appointments'
+
   //Initialize new instance/doc
   const appointment = new Appointment(req.body);
 
@@ -62,12 +68,18 @@ router.post("/", async (req, res) => {
 
 //Get appointment by id
 router.get("/:id", async (req, res) => {
+  // #swagger.tags = ['Appointment']
+  //  #swagger.path = '/appointments/{id}'
+
   const appointment = await findAppointment(req, res);
   if (appointment) res.status(200).send(appointment);
 });
 
 //Update Existing appointment
 router.patch("/:id", async (req, res) => {
+  // #swagger.tags = ['Appointment']
+  //  #swagger.path = '/appointments/{id}'
+
   const appointment = await findAppointment(req, res);
   if (appointment) {
     const { date_created, ...remainingData } = req.body;
@@ -85,6 +97,9 @@ router.patch("/:id", async (req, res) => {
 
 //Delete an existing appointment
 router.delete("/:id", async (req, res) => {
+  // #swagger.tags = ['Appointment']
+  //  #swagger.path = '/appointments/{id}'
+
   const appointment = await findAppointment(req, res);
   if (appointment) {
     try {

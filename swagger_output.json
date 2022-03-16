@@ -41,6 +41,10 @@
       "description": "REST API for Patients"
     },
     {
+      "name": "Appointment",
+      "description": "REST API for Appointment"
+    },
+    {
       "name": "User",
       "description": "REST API for Users"
     }
@@ -57,8 +61,11 @@
     "application/json"
   ],
   "paths": {
-    "/": {
+    "/appointments": {
       "get": {
+        "tags": [
+          "Appointment"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -71,6 +78,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Appointment"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -83,8 +93,11 @@
         }
       }
     },
-    "/{id}": {
+    "/appointments/{id}": {
       "get": {
+        "tags": [
+          "Appointment"
+        ],
         "description": "",
         "parameters": [
           {
@@ -103,7 +116,10 @@
           }
         }
       },
-      "put": {
+      "patch": {
+        "tags": [
+          "Appointment"
+        ],
         "description": "",
         "parameters": [
           {
@@ -111,6 +127,21 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "date_created": {
+                  "example": "any"
+                },
+                "remainingData": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -126,6 +157,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Appointment"
+        ],
         "description": "",
         "parameters": [
           {
@@ -265,6 +299,32 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -946,6 +1006,71 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
