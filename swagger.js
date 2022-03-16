@@ -31,6 +31,10 @@ const doc = {
       name: "Mode of Payment",
       description: "REST API for Payment Modes",
     },
+    {
+      name: "Symptoms",
+      description: "REST API for Symptoms",
+    },
   ],
   //   securityDefinitions: {
   //     api_key: {
@@ -51,6 +55,10 @@ const doc = {
   definitions: {
     Role: {
       $role_name: "Administrator",
+    },
+    PaymentMode: {
+      //Todo: This Definition not used
+      $payment_mode_name: "Cash",
     },
     User: {
       first_name: "John",
