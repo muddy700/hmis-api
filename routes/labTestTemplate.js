@@ -4,6 +4,9 @@ const router = express.Router();
 
 //Get All LabTestTemplate
 router.get("/", async (req, res) => {
+  // #swagger.tags = ['Lab Test Template']
+  //  #swagger.path = '/lab-test-templates'
+
   try {
     const labTestTemplates = await LabTestTemplate.find();
     res.status(200).send(labTestTemplates);
@@ -14,6 +17,9 @@ router.get("/", async (req, res) => {
 
 //Create New LabTestTemplate
 router.post("/", async (req, res) => {
+  // #swagger.tags = ['Lab Test Template']
+  //  #swagger.path = '/lab-test-templates'
+
   //Initialize new instance/doc
   const labTestTemplate = new LabTestTemplate({
     name: req.body.name,
@@ -30,6 +36,9 @@ router.post("/", async (req, res) => {
 
 //Get Lab Test Template By Id
 router.get("/:id", async (req, res) => {
+  // #swagger.tags = ['Lab Test Template']
+  //  #swagger.path = '/lab-test-templates/{id}'
+
   try {
     const labTestTemplate = await LabTestTemplate.findById(req.params.id);
     res.status(200).send(labTestTemplate);
@@ -42,6 +51,9 @@ router.get("/:id", async (req, res) => {
 
 //Update Existing LabTestTemplate
 router.patch("/:id", async (req, res) => {
+  // #swagger.tags = ['Lab Test Template']
+  //  #swagger.path = '/lab-test-templates/{id}'
+
   try {
     //Check if document exists
     const labTestTemplate = await LabTestTemplate.findById(req.params.id);
@@ -68,6 +80,9 @@ router.patch("/:id", async (req, res) => {
 
 //Delete an existing lab-Test-Template
 router.delete("/:id", async (req, res) => {
+  // #swagger.tags = ['Lab Test Template']
+  //  #swagger.path = '/lab-test-templates/{id}'
+
   try {
     //Check if document exists
     const labTestTemplate = await LabTestTemplate.findById(req.params.id);
@@ -75,7 +90,9 @@ router.delete("/:id", async (req, res) => {
     if (!labTestTemplate) {
       res
         .status(404)
-        .send({ error: `No lab-Test-Template found with id: ${req.params.id} ` });
+        .send({
+          error: `No lab-Test-Template found with id: ${req.params.id} `,
+        });
       return;
     }
 
