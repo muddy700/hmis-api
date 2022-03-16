@@ -82,6 +82,9 @@ const findEncounter = async (req, res) => {
 
 //Get All Encounters
 router.get("/", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters'
+
   try {
     const encounters = await Encounter.find()
       .populate(symptomPopulator)
@@ -101,6 +104,9 @@ router.get("/", async (req, res) => {
 
 //Create New Encounter
 router.post("/", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters'
+
   //Initialize new instance/doc
   const encounter = new Encounter(req.body);
 
@@ -120,6 +126,9 @@ router.get("/:encounter_id", async (req, res) => {
 
 //Update Existing Encounter
 router.put("/:encounter_id", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters/{encounter_id}'
+
   const encounter = await findEncounter(req, res);
   if (encounter) {
     //Ignore array properties
@@ -153,6 +162,9 @@ router.put("/:encounter_id", async (req, res) => {
 
 //Delete an existing encounter
 router.delete("/:encounter_id", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters/{encounter_id}'
+
   const encounter = await findEncounter(req, res);
   if (encounter) {
     //Delete encounter
@@ -192,12 +204,18 @@ const findSymptom = async (req, res, encounter) => {
 
 //Get all symptoms of an encounter by encounter-id
 router.get("/:encounter_id/symptoms", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters/{encounter_id}/symptoms'
+
   const encounter = await findEncounter(req, res);
   if (encounter) res.status(200).send(encounter.symptoms);
 });
 
 //Create new symptom and append to an encounter
 router.post("/:encounter_id/symptoms", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters/{encounter_id}/symptoms'
+
   const encounter = await findEncounter(req, res);
   if (encounter) {
     encounter.symptoms.push(req.body);
@@ -212,6 +230,9 @@ router.post("/:encounter_id/symptoms", async (req, res) => {
 
 //Delete single symptom
 router.delete("/:encounter_id/symptoms/:symptom_id", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters/{encounter_id}/symptoms/{symptom_id}'
+
   const encounter = await findEncounter(req, res);
   if (encounter) {
     const symptom = await findSymptom(req, res, encounter);
@@ -253,12 +274,18 @@ const findDiagnosis = async (req, res, encounter) => {
 
 //Get all diagnosis of an encounter by encounter-id
 router.get("/:encounter_id/diagnosis", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters/{encounter_id}/diagnosis'
+
   const encounter = await findEncounter(req, res);
   if (encounter) res.status(200).send(encounter.diagnosis);
 });
 
 //Create new diagnosis and append to an encounter
 router.post("/:encounter_id/diagnosis", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters/{encounter_id}/diagnosis'
+
   const encounter = await findEncounter(req, res);
   if (encounter) {
     encounter.diagnosis.push(req.body);
@@ -273,6 +300,9 @@ router.post("/:encounter_id/diagnosis", async (req, res) => {
 
 //Delete single diagnosis
 router.delete("/:encounter_id/diagnosis/:diagnosis_id", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters/{encounter_id}/diagnosis/{diagnosis_id}'
+
   const encounter = await findEncounter(req, res);
   if (encounter) {
     const diagnosis = await findDiagnosis(req, res, encounter);
@@ -290,7 +320,7 @@ router.delete("/:encounter_id/diagnosis/:diagnosis_id", async (req, res) => {
   }
 });
 
-// 2: Lab-Test Endpoints
+// 3: Lab-Test Endpoints
 
 //Re-usable function for checking if lab-test-template exists
 const findTestTemplate = async (req, res, encounter) => {
@@ -316,12 +346,18 @@ const findTestTemplate = async (req, res, encounter) => {
 
 //Get all lab-test-template of an encounter by encounter-id
 router.get("/:encounter_id/lab-tests", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters/{encounter_id}/lab-tests'
+
   const encounter = await findEncounter(req, res);
   if (encounter) res.status(200).send(encounter.lab_tests);
 });
 
 //Create new lab-test-template and append to an encounter
 router.post("/:encounter_id/lab-tests", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters/{encounter_id}/lab-tests'
+
   const encounter = await findEncounter(req, res);
   if (encounter) {
     encounter.lab_tests.push(req.body);
@@ -336,6 +372,9 @@ router.post("/:encounter_id/lab-tests", async (req, res) => {
 
 //Delete single lab-test-template
 router.delete("/:encounter_id/lab-tests/:template_id", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters/{encounter_id}/lab-tests/{template_id}'
+
   const encounter = await findEncounter(req, res);
   if (encounter) {
     const test_template = await findTestTemplate(req, res, encounter);
@@ -353,7 +392,7 @@ router.delete("/:encounter_id/lab-tests/:template_id", async (req, res) => {
   }
 });
 
-// 3: Lab-Test-Results Endpoints
+// 4: Lab-Test-Results Endpoints
 
 //Re-usable function for checking if lab-test-result exists
 const findTestResult = async (req, res, encounter) => {
@@ -379,12 +418,18 @@ const findTestResult = async (req, res, encounter) => {
 
 //Get all lab-test-results of an encounter by encounter-id
 router.get("/:encounter_id/lab-test-results", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters/{encounter_id}/lab-test-results'
+
   const encounter = await findEncounter(req, res);
   if (encounter) res.status(200).send(encounter.lab_test_results);
 });
 
 //Create new lab-test-result and append to an encounter
 router.post("/:encounter_id/lab-test-results", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters/{encounter_id}/lab-test-results'
+
   const encounter = await findEncounter(req, res);
   if (encounter) {
     encounter.lab_test_results.push(req.body);
@@ -401,6 +446,9 @@ router.post("/:encounter_id/lab-test-results", async (req, res) => {
 router.delete(
   "/:encounter_id/lab-test-results/:result_id",
   async (req, res) => {
+    // #swagger.tags = ['Encounter']
+    //  #swagger.path = '/encounters/{encounter_id}/lab-test-results/{result_id}'
+
     const encounter = await findEncounter(req, res);
     if (encounter) {
       const test_result = await findTestResult(req, res, encounter);
@@ -419,7 +467,7 @@ router.delete(
   }
 );
 
-// 4: Final Diagnosis Endpoints
+// 5: Final Diagnosis Endpoints
 
 //Re-usable function for checking if final-diagnosis exists
 const findFinalDiagnosis = async (req, res, encounter) => {
@@ -445,12 +493,18 @@ const findFinalDiagnosis = async (req, res, encounter) => {
 
 //Get all final-diagnosis of an encounter by encounter-id
 router.get("/:encounter_id/final-diagnosis", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters/{encounter_id}/final-diagnosis'
+
   const encounter = await findEncounter(req, res);
   if (encounter) res.status(200).send(encounter.final_diagnosis);
 });
 
 //Create new final-diagnosis and append to an encounter
 router.post("/:encounter_id/final-diagnosis", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters/{encounter_id}/final-diagnosis'
+
   const encounter = await findEncounter(req, res);
   if (encounter) {
     encounter.final_diagnosis.push(req.body);
@@ -467,6 +521,9 @@ router.post("/:encounter_id/final-diagnosis", async (req, res) => {
 router.delete(
   "/:encounter_id/final-diagnosis/:diagnosis_id",
   async (req, res) => {
+    // #swagger.tags = ['Encounter']
+    //  #swagger.path = '/encounters/{encounter_id}/final-diagnosis/{diagnosis_id'
+
     const encounter = await findEncounter(req, res);
     if (encounter) {
       const diagnosis = await findFinalDiagnosis(req, res, encounter);
@@ -485,7 +542,7 @@ router.delete(
   }
 );
 
-// 5: Medicine Endpoints
+// 6: Medicine Endpoints
 
 //Re-usable function for checking if medicine exists
 const findMedicine = async (req, res, encounter) => {
@@ -509,12 +566,18 @@ const findMedicine = async (req, res, encounter) => {
 
 //Get all medicines of an encounter by encounter-id
 router.get("/:encounter_id/medicines", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters/{encounter_id}/medicines'
+
   const encounter = await findEncounter(req, res);
   if (encounter) res.status(200).send(encounter.medicines);
 });
 
 //Create new medicine and append to an encounter
 router.post("/:encounter_id/medicines", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters/{encounter_id}/medicines'
+
   const encounter = await findEncounter(req, res);
   if (encounter) {
     encounter.medicines.push(req.body);
@@ -528,8 +591,41 @@ router.post("/:encounter_id/medicines", async (req, res) => {
   }
 });
 
+//Edit single medicine
+router.patch("/:encounter_id/medicines/:medicine_id", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters/{encounter_id}/medicines/{medicine_id}'
+
+  const encounter = await findEncounter(req, res);
+  if (encounter) {
+    const medicine = await findMedicine(req, res, encounter);
+    if (medicine) {
+      //Edit only changed properties
+      Object.keys(req.body).forEach((prop, index) => {
+        if (req.body[prop]) medicine[prop] = req.body[prop];
+      });
+
+      //Calculate grand-price
+      if (req.body["quantity"]) {
+        medicine["grand_price"] = req.body["quantity"] * medicine["drug"].price;
+      }
+
+      //Save changes
+      try {
+        const response = await encounter.save();
+        res.status(200).send(medicine);
+      } catch (error) {
+        res.status(400).send({ error: error });
+      }
+    }
+  }
+});
+
 //Delete single medicine
 router.delete("/:encounter_id/medicines/:medicine_id", async (req, res) => {
+  // #swagger.tags = ['Encounter']
+  //  #swagger.path = '/encounters/{encounter_id}/medicines/{medicine_id}'
+
   const encounter = await findEncounter(req, res);
   if (encounter) {
     const medicine = await findMedicine(req, res, encounter);
@@ -542,33 +638,6 @@ router.delete("/:encounter_id/medicines/:medicine_id", async (req, res) => {
         res.status(200).send("Medicine deleted successfull.");
       } catch (error) {
         res.status(500).send({ error: error });
-      }
-    }
-  }
-});
-
-//Edit single medicine
-router.patch("/:encounter_id/medicines/:medicine_id", async (req, res) => {
-  const encounter = await findEncounter(req, res);
-  if (encounter) {
-    const medicine = await findMedicine(req, res, encounter);
-    if (medicine) {
-      //Edit only changed properties
-      Object.keys(req.body).forEach((prop, index) => {
-        if (req.body[prop]) medicine[prop] = req.body[prop];
-      });
-
-      //Calculate grand-price
-      if(req.body['quantity']){
-        medicine['grand_price'] = req.body['quantity'] * medicine['drug'].price
-      }
-
-      //Save changes
-      try {
-        const response = await encounter.save();
-        res.status(200).send(medicine);
-      } catch (error) {
-        res.status(400).send({ error: error });
       }
     }
   }

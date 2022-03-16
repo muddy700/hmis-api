@@ -41,12 +41,16 @@
       "description": "REST API for Patients"
     },
     {
+      "name": "User",
+      "description": "REST API for Users"
+    },
+    {
       "name": "Appointment",
       "description": "REST API for Appointment"
     },
     {
-      "name": "User",
-      "description": "REST API for Users"
+      "name": "Encounter",
+      "description": "REST API for Encounter"
     }
   ],
   "schemes": [
@@ -303,8 +307,11 @@
         }
       }
     },
-    "/": {
+    "/encounters": {
       "get": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -317,6 +324,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -348,8 +358,13 @@
             "description": "Not Found"
           }
         }
-      },
+      }
+    },
+    "/encounters/{encounter_id}": {
       "put": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -402,6 +417,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -424,8 +442,11 @@
         }
       }
     },
-    "/{encounter_id}/symptoms": {
+    "/encounters/{encounter_id}/symptoms": {
       "get": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -445,6 +466,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -467,8 +491,11 @@
         }
       }
     },
-    "/{encounter_id}/symptoms/{symptom_id}": {
+    "/encounters/{encounter_id}/symptoms/{symptom_id}": {
       "delete": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -497,8 +524,11 @@
         }
       }
     },
-    "/{encounter_id}/diagnosis": {
+    "/encounters/{encounter_id}/diagnosis": {
       "get": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -518,6 +548,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -540,8 +573,11 @@
         }
       }
     },
-    "/{encounter_id}/diagnosis/{diagnosis_id}": {
+    "/encounters/{encounter_id}/diagnosis/{diagnosis_id}": {
       "delete": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -570,8 +606,11 @@
         }
       }
     },
-    "/{encounter_id}/lab-tests": {
+    "/encounters/{encounter_id}/lab-tests": {
       "get": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -591,6 +630,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -613,8 +655,11 @@
         }
       }
     },
-    "/{encounter_id}/lab-tests/{template_id}": {
+    "/encounters/{encounter_id}/lab-tests/{template_id}": {
       "delete": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -643,8 +688,11 @@
         }
       }
     },
-    "/{encounter_id}/lab-test-results": {
+    "/encounters/{encounter_id}/lab-test-results": {
       "get": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -664,6 +712,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -686,8 +737,11 @@
         }
       }
     },
-    "/{encounter_id}/lab-test-results/{result_id}": {
+    "/encounters/{encounter_id}/lab-test-results/{result_id}": {
       "delete": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -716,8 +770,11 @@
         }
       }
     },
-    "/{encounter_id}/final-diagnosis": {
+    "/encounters/{encounter_id}/final-diagnosis": {
       "get": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -737,6 +794,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -759,8 +819,11 @@
         }
       }
     },
-    "/{encounter_id}/final-diagnosis/{diagnosis_id}": {
+    "/encounters/{encounter_id}/final-diagnosis/{diagnosis_id": {
       "delete": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -770,7 +833,7 @@
             "type": "string"
           },
           {
-            "name": "diagnosis_id",
+            "name": null,
             "in": "path",
             "required": true,
             "type": "string"
@@ -789,8 +852,11 @@
         }
       }
     },
-    "/{encounter_id}/medicines": {
+    "/encounters/{encounter_id}/medicines": {
       "get": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -810,6 +876,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -832,36 +901,11 @@
         }
       }
     },
-    "/{encounter_id}/medicines/{medicine_id}": {
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "encounter_id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "medicine_id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
+    "/encounters/{encounter_id}/medicines/{medicine_id}": {
       "patch": {
+        "tags": [
+          "Encounter"
+        ],
         "description": "",
         "parameters": [
           {
@@ -886,6 +930,37 @@
           },
           "404": {
             "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Encounter"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "encounter_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "medicine_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -1006,6 +1081,32 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
