@@ -37,6 +37,10 @@
       "description": "REST API for Lab Test Templates"
     },
     {
+      "name": "Patient",
+      "description": "REST API for Patients"
+    },
+    {
       "name": "User",
       "description": "REST API for Users"
     }
@@ -1189,8 +1193,43 @@
         }
       }
     },
-    "/{patient_id}": {
+    "/patients": {
       "get": {
+        "tags": [
+          "Patient"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Patient"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/patients/{patient_id}": {
+      "get": {
+        "tags": [
+          "Patient"
+        ],
         "description": "",
         "parameters": [
           {
@@ -1210,6 +1249,9 @@
         }
       },
       "patch": {
+        "tags": [
+          "Patient"
+        ],
         "description": "",
         "parameters": [
           {
@@ -1253,6 +1295,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Patient"
+        ],
         "description": "",
         "parameters": [
           {
@@ -1275,8 +1320,11 @@
         }
       }
     },
-    "/{patient_id}/vital-signs": {
+    "/patients/{patient_id}/vital-signs": {
       "get": {
+        "tags": [
+          "Patient"
+        ],
         "description": "",
         "parameters": [
           {
@@ -1296,6 +1344,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Patient"
+        ],
         "description": "",
         "parameters": [
           {
@@ -1318,8 +1369,11 @@
         }
       }
     },
-    "/{patient_id}/vital-signs/{vital_sign_id}": {
+    "/patients/{patient_id}/vital-signs/{vital_sign_id}": {
       "get": {
+        "tags": [
+          "Patient"
+        ],
         "description": "",
         "parameters": [
           {
@@ -1345,6 +1399,9 @@
         }
       },
       "patch": {
+        "tags": [
+          "Patient"
+        ],
         "description": "",
         "parameters": [
           {
@@ -1373,6 +1430,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Patient"
+        ],
         "description": "",
         "parameters": [
           {

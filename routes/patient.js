@@ -7,8 +7,12 @@ const patientPopulator = {
   path: "vital_signs",
   populate: { path: "practitioner", select: "full_name gender -_id" },
 };
+
 //Get All Patients
 router.get("/", async (req, res) => {
+  // #swagger.tags = ['Patient']
+  //  #swagger.path = '/patients'
+
   try {
     const patients = await Patient.find().populate(patientPopulator);
     res.status(200).send(patients);
@@ -19,6 +23,9 @@ router.get("/", async (req, res) => {
 
 //Create New Patient
 router.post("/", async (req, res) => {
+  // #swagger.tags = ['Patient']
+  //  #swagger.path = '/patients'
+
   //Initialize new instance/doc
   const patient = new Patient(req.body);
 
@@ -32,12 +39,18 @@ router.post("/", async (req, res) => {
 
 //Get Patient By Id
 router.get("/:patient_id", async (req, res) => {
+  // #swagger.tags = ['Patient']
+  //  #swagger.path = '/patients/{patient_id}'
+
   const patient = await findPatient(req, res);
   if (patient) res.status(200).send(patient);
 });
 
 //Update Existing Patient
 router.patch("/:patient_id", async (req, res) => {
+  // #swagger.tags = ['Patient']
+  //  #swagger.path = '/patients/{patient_id}'
+
   const patient = await findPatient(req, res);
   if (patient) {
     //Ignore read only properties
@@ -81,6 +94,9 @@ router.patch("/:patient_id", async (req, res) => {
 
 //Delete an existing patient
 router.delete("/:patient_id", async (req, res) => {
+  // #swagger.tags = ['Patient']
+  //  #swagger.path = '/patients/{patient_id}'
+
   const patient = await findPatient(req, res);
   if (patient) {
     //Delete patient
@@ -142,12 +158,18 @@ const findVitalSign = async (req, res, patient) => {
 
 //Get all vital-signs of a patient by patient-id
 router.get("/:patient_id/vital-signs", async (req, res) => {
+  // #swagger.tags = ['Patient']
+  //  #swagger.path = '/patients/{patient_id}/vital-signs'
+
   const patient = await findPatient(req, res);
   if (patient) res.status(200).send(patient.vital_signs);
 });
 
 //Create new vital-sign and append to a patient
 router.post("/:patient_id/vital-signs", async (req, res) => {
+  // #swagger.tags = ['Patient']
+  //  #swagger.path = '/patients/{patient_id}/vital-signs'
+
   const patient = await findPatient(req, res);
   if (patient) {
     patient.vital_signs.push(req.body);
@@ -162,6 +184,9 @@ router.post("/:patient_id/vital-signs", async (req, res) => {
 
 //Get single vital-sign by patient-id and vital-sign-id
 router.get("/:patient_id/vital-signs/:vital_sign_id", async (req, res) => {
+  // #swagger.tags = ['Patient']
+  //  #swagger.path = '/patients/{patient_id}/vital-signs/{vital_sign_id}'
+
   const patient = await findPatient(req, res);
   if (patient) {
     const vital_sign = await findVitalSign(req, res, patient);
@@ -171,6 +196,9 @@ router.get("/:patient_id/vital-signs/:vital_sign_id", async (req, res) => {
 
 //Edit single vital-sign
 router.patch("/:patient_id/vital-signs/:vital_sign_id", async (req, res) => {
+  // #swagger.tags = ['Patient']
+  //  #swagger.path = '/patients/{patient_id}/vital-signs/{vital_sign_id}'
+
   const patient = await findPatient(req, res);
   if (patient) {
     const vital_sign = await findVitalSign(req, res, patient);
@@ -194,6 +222,9 @@ router.patch("/:patient_id/vital-signs/:vital_sign_id", async (req, res) => {
 
 //Delete single vital-sign
 router.delete("/:patient_id/vital-signs/:vital_sign_id", async (req, res) => {
+  // #swagger.tags = ['Patient']
+  //  #swagger.path = '/patients/{patient_id}/vital-signs/{vital_sign_id}'
+
   const patient = await findPatient(req, res);
   if (patient) {
     const vital_sign = await findVitalSign(req, res, patient);
