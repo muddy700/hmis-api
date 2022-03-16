@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
   // #swagger.tags = ['Role']
   //  #swagger.path = '/roles'
   //  #swagger.summary = 'Create a new role'
-  // #swagger.description = 'Create new role'
+  // #swagger.description = 'Create a new role'
 
   //Initialize new instance/doc
   const role = new Role({
@@ -43,6 +43,10 @@ router.get("/:id", async (req, res) => {
   //  #swagger.summary = 'Get a role by id'
   // #swagger.description = 'Get single role by role_id'
   // #swagger.parameters['id'] = { description: 'Role id.' }
+  /* #swagger.responses[200] = { 
+             schema: { $ref: "#/definitions/Role" },
+             description: 'Roles retrieved successfull.' 
+      } */
 
   try {
     const role = await Role.findById(req.params.id);
@@ -50,10 +54,7 @@ router.get("/:id", async (req, res) => {
       res
         .status(404)
         .send({ error: `No role found with id: ${req.params.id} ` });
-    /* #swagger.responses[200] = { 
-               schema: { $ref: "#/definitions/Role" },
-               description: 'Roles retrieved successfull.' 
-        } */ else res.status(200).send(role);
+    else res.status(200).send(role);
   } catch (error) {
     res.status(404).send({ error: `No role found with id: ${req.params.id} ` });
   }
