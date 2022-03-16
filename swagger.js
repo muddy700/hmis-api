@@ -44,6 +44,10 @@ const doc = {
       description: "REST API for Lab Test Templates",
     },
     {
+      name: "Patient",
+      description: "REST API for Patients",
+    },
+    {
       name: "User",
       description: "REST API for Users",
     },
