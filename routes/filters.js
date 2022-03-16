@@ -26,6 +26,9 @@ const patientPopulator = { path: "patient", select: "full_name phone -_id" };
 // <===== Filters For Users =====>
 //Get All Users By Role
 router.get("/roles/:role_id/users", async (req, res) => {
+  // #swagger.tags = ['Filters']
+  //  #swagger.path = '/filter/roles/{role_id}/users'
+
   try {
     const users = await User.find(
       { role: req.params.role_id },
@@ -39,6 +42,9 @@ router.get("/roles/:role_id/users", async (req, res) => {
 
 //Get All Users By Gender
 router.get("/users-by-gender", async (req, res) => {
+  // #swagger.tags = ['Filters']
+  //  #swagger.path = '/filter/users-by-gender'
+
   try {
     const users = await User.find(
       { gender: req.body.gender },
@@ -52,6 +58,9 @@ router.get("/users-by-gender", async (req, res) => {
 
 //Get All Users By Status
 router.get("/users-by-status", async (req, res) => {
+  // #swagger.tags = ['Filters']
+  //  #swagger.path = '/filter/users-by-status'
+
   try {
     const users = await User.find(
       { status: req.body.status },
@@ -66,6 +75,9 @@ router.get("/users-by-status", async (req, res) => {
 // <===== Filters For Patients =====>
 //Get All Patients By Date of birth
 router.get("/patients-by-dob", async (req, res) => {
+  // #swagger.tags = ['Filters']
+  //  #swagger.path = '/filter/patients-by-dob'
+
   try {
     const patients = await Patient.find({
       dob: req.body.dob,
@@ -80,6 +92,9 @@ router.get("/patients-by-dob", async (req, res) => {
 // <===== Filters For Appointments =====>
 //Get All Appointments By Doctor-Id
 router.get("/doctors/:doctor_id/appointments", async (req, res) => {
+  // #swagger.tags = ['Filters']
+  //  #swagger.path = '/filter/doctors/{doctor_id}/appointments'
+
   try {
     const appointments = await Appointment.find({
       practitioner: req.params.doctor_id,
@@ -94,6 +109,9 @@ router.get("/doctors/:doctor_id/appointments", async (req, res) => {
 
 //Get All Appointments By Invoice Status
 router.get("/appointments-by-invoice-status", async (req, res) => {
+  // #swagger.tags = ['Filters']
+  //  #swagger.path = '/filter/appointments-by-invoice-status'
+
   try {
     const appointments = await Appointment.find({
       invoiced: req.body.invoiced,

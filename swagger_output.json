@@ -59,6 +59,10 @@
     {
       "name": "Sales Invoice",
       "description": "REST API for Sales Invoice"
+    },
+    {
+      "name": "Filters",
+      "description": "REST API for Data Filters"
     }
   ],
   "schemes": [
@@ -973,8 +977,11 @@
         }
       }
     },
-    "/roles/{role_id}/users": {
+    "/filter/roles/{role_id}/users": {
       "get": {
+        "tags": [
+          "Filters"
+        ],
         "description": "",
         "parameters": [
           {
@@ -994,8 +1001,11 @@
         }
       }
     },
-    "/users-by-gender": {
+    "/filter/users-by-gender": {
       "get": {
+        "tags": [
+          "Filters"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -1008,8 +1018,11 @@
         }
       }
     },
-    "/users-by-status": {
+    "/filter/users-by-status": {
       "get": {
+        "tags": [
+          "Filters"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -1022,8 +1035,11 @@
         }
       }
     },
-    "/patients-by-dob": {
+    "/filter/patients-by-dob": {
       "get": {
+        "tags": [
+          "Filters"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -1036,8 +1052,11 @@
         }
       }
     },
-    "/doctors/{doctor_id}/appointments": {
+    "/filter/doctors/{doctor_id}/appointments": {
       "get": {
+        "tags": [
+          "Filters"
+        ],
         "description": "",
         "parameters": [
           {
@@ -1057,8 +1076,11 @@
         }
       }
     },
-    "/appointments-by-invoice-status": {
+    "/filter/appointments-by-invoice-status": {
       "get": {
+        "tags": [
+          "Filters"
+        ],
         "description": "",
         "parameters": [],
         "responses": {

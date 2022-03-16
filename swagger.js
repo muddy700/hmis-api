@@ -67,6 +67,10 @@ const doc = {
       name: "Sales Invoice",
       description: "REST API for Sales Invoice",
     },
+    {
+      name: "Filters",
+      description: "REST API for Data Filters",
+    },
   ],
   //   securityDefinitions: {
   //     api_key: {
