@@ -349,6 +349,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "List all encounters",
         "description": "",
         "parameters": [],
         "responses": {
@@ -364,8 +365,18 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "Create a new encounter",
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Encounter Info",
+            "schema": {
+              "$ref": "#/definitions/Encounter"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -381,6 +392,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "Get an encounter by id",
         "description": "",
         "parameters": [
           {
@@ -403,6 +415,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "Update an encounter by id",
         "description": "",
         "parameters": [
           {
@@ -412,33 +425,11 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "obj",
             "in": "body",
+            "description": "Encounter Info",
             "schema": {
-              "type": "object",
-              "properties": {
-                "symptoms": {
-                  "example": "any"
-                },
-                "diagnosis": {
-                  "example": "any"
-                },
-                "lab_tests": {
-                  "example": "any"
-                },
-                "lab_test_results": {
-                  "example": "any"
-                },
-                "final_diagnosis": {
-                  "example": "any"
-                },
-                "medicine": {
-                  "example": "any"
-                },
-                "remainingData": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/Encounter"
             }
           }
         ],
@@ -458,6 +449,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "Delete an encounter by id",
         "description": "",
         "parameters": [
           {
@@ -485,6 +477,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "List all symptoms of a given encounter_id",
         "description": "",
         "parameters": [
           {
@@ -507,6 +500,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "Create a new symptom for a given encounter_id",
         "description": "",
         "parameters": [
           {
@@ -514,6 +508,20 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Symptom Details",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "symptom": {
+                  "type": "string",
+                  "example": "symptom_id"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -534,6 +542,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "Delete single symptom from a given encounter_id",
         "description": "",
         "parameters": [
           {
@@ -567,6 +576,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "List all diagnosis of a given encounter_id",
         "description": "",
         "parameters": [
           {
@@ -589,6 +599,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "Create a new diagnosis for a given encounter_id",
         "description": "",
         "parameters": [
           {
@@ -596,6 +607,20 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Diagnosis Details",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "diagnosis": {
+                  "type": "string",
+                  "example": "diagnosis_id"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -616,6 +641,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "Delete single diagnosis from a given encounter_id",
         "description": "",
         "parameters": [
           {
@@ -649,6 +675,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "List all lab-tests of a given encounter_id",
         "description": "",
         "parameters": [
           {
@@ -671,6 +698,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "Create a new lab-test for a given encounter_id",
         "description": "",
         "parameters": [
           {
@@ -678,6 +706,20 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Lab Test Template",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "test_template": {
+                  "type": "string",
+                  "example": "lab_test_template_id"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -698,6 +740,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "Delete single lab-test from a given encounter_id",
         "description": "",
         "parameters": [
           {
@@ -731,6 +774,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "List all lab-test-results of a given encounter_id",
         "description": "",
         "parameters": [
           {
@@ -753,6 +797,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "Create a new lab-test-result for a given encounter_id",
         "description": "",
         "parameters": [
           {
@@ -760,6 +805,20 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Lab Test Details",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "lab_test": {
+                  "type": "string",
+                  "example": "lab_test_id"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -780,6 +839,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "Delete single lab-test-result from a given encounter_id",
         "description": "",
         "parameters": [
           {
@@ -813,6 +873,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "List all final-diagnosis of a given encounter_id",
         "description": "",
         "parameters": [
           {
@@ -835,6 +896,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "Create a new final-diagnosis for a given encounter_id",
         "description": "",
         "parameters": [
           {
@@ -842,6 +904,20 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Final-diagnosis Details",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "diagnosis": {
+                  "type": "string",
+                  "example": "diagnosis_id"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -862,6 +938,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "Delete single final-diagnosis from a given encounter_id",
         "description": "",
         "parameters": [
           {
@@ -895,6 +972,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "List all medicines of a given encounter_id",
         "description": "",
         "parameters": [
           {
@@ -917,6 +995,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "Create a new medicine for a given encounter_id",
         "description": "",
         "parameters": [
           {
@@ -924,6 +1003,14 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Medicine Details",
+            "schema": {
+              "$ref": "#/definitions/Medicine"
+            }
           }
         ],
         "responses": {
@@ -944,6 +1031,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "Edit single medicine for a given encounter_id",
         "description": "",
         "parameters": [
           {
@@ -957,6 +1045,14 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Medicine Details",
+            "schema": {
+              "$ref": "#/definitions/Medicine"
+            }
           }
         ],
         "responses": {
@@ -975,6 +1071,7 @@
         "tags": [
           "Encounter"
         ],
+        "summary": "Delete single medicine from a given encounter_id",
         "description": "",
         "parameters": [
           {
@@ -2932,29 +3029,23 @@
     "Medicine": {
       "type": "object",
       "properties": {
-        "drug_code": {
+        "drug": {
           "type": "string",
-          "example": "B21"
+          "example": "Medicine_id"
         },
-        "drug_name": {
-          "type": "string",
-          "example": "Morphine"
-        },
-        "price": {
+        "quantity": {
           "type": "number",
           "example": 10
         },
-        "dosage": {
-          "type": "string",
-          "example": "1 x 3"
+        "grand_price": {
+          "type": "number",
+          "example": 25000
+        },
+        "invoiced": {
+          "type": "boolean",
+          "example": true
         }
-      },
-      "required": [
-        "drug_code",
-        "drug_name",
-        "price",
-        "dosage"
-      ]
+      }
     },
     "AddUser": {
       "type": "object",
@@ -3346,6 +3437,27 @@
         "grand_price": {
           "type": "number",
           "example": 20000
+        }
+      }
+    },
+    "Encounter": {
+      "type": "object",
+      "properties": {
+        "appointment": {
+          "type": "string",
+          "example": "appointment_id"
+        },
+        "practitioner": {
+          "type": "string",
+          "example": "practitioner_id"
+        },
+        "patient": {
+          "type": "string",
+          "example": "patient_id"
+        },
+        "status": {
+          "type": "boolean",
+          "example": true
         }
       }
     }

@@ -230,6 +230,18 @@ const doc = {
       quantity: 2,
       grand_price: 20000,
     },
+    Encounter: {
+      appointment: "appointment_id",
+      practitioner: "practitioner_id",
+      patient: "patient_id",
+      status: true,
+    },
+    Medicine: {
+      drug: "Medicine_id",
+      quantity: 10,
+      grand_price: 25000,
+      invoiced: true,
+    },
     // User: {
     //   name: "Jhon Doe",
     //   age: 29,

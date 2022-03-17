@@ -84,6 +84,7 @@ const findEncounter = async (req, res) => {
 router.get("/", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters'
+  //  #swagger.summary = 'List all encounters'
 
   try {
     const encounters = await Encounter.find()
@@ -106,6 +107,12 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters'
+  //  #swagger.summary = 'Create a new encounter'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Encounter Info',
+           schema: { $ref: "#/definitions/Encounter" }
+    } */
 
   //Initialize new instance/doc
   const encounter = new Encounter(req.body);
@@ -122,6 +129,7 @@ router.post("/", async (req, res) => {
 router.get("/:encounter_id", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters/{encounter_id}'
+  //  #swagger.summary = 'Get an encounter by id'
 
   const encounter = await findEncounter(req, res);
   if (encounter) res.status(200).send(encounter);
@@ -131,6 +139,12 @@ router.get("/:encounter_id", async (req, res) => {
 router.put("/:encounter_id", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters/{encounter_id}'
+  //  #swagger.summary = 'Update an encounter by id'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Encounter Info',
+           schema: { $ref: "#/definitions/Encounter" }
+    } */
 
   const encounter = await findEncounter(req, res);
   if (encounter) {
@@ -167,6 +181,7 @@ router.put("/:encounter_id", async (req, res) => {
 router.delete("/:encounter_id", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters/{encounter_id}'
+  //  #swagger.summary = 'Delete an encounter by id'
 
   const encounter = await findEncounter(req, res);
   if (encounter) {
@@ -209,6 +224,7 @@ const findSymptom = async (req, res, encounter) => {
 router.get("/:encounter_id/symptoms", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters/{encounter_id}/symptoms'
+  //  #swagger.summary = 'List all symptoms of a given encounter_id'
 
   const encounter = await findEncounter(req, res);
   if (encounter) res.status(200).send(encounter.symptoms);
@@ -218,6 +234,12 @@ router.get("/:encounter_id/symptoms", async (req, res) => {
 router.post("/:encounter_id/symptoms", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters/{encounter_id}/symptoms'
+  //  #swagger.summary = 'Create a new symptom for a given encounter_id'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Symptom Details',
+           schema: { symptom: 'symptom_id' }
+    } */
 
   const encounter = await findEncounter(req, res);
   if (encounter) {
@@ -235,6 +257,7 @@ router.post("/:encounter_id/symptoms", async (req, res) => {
 router.delete("/:encounter_id/symptoms/:symptom_id", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters/{encounter_id}/symptoms/{symptom_id}'
+  //  #swagger.summary = 'Delete single symptom from a given encounter_id'
 
   const encounter = await findEncounter(req, res);
   if (encounter) {
@@ -279,6 +302,7 @@ const findDiagnosis = async (req, res, encounter) => {
 router.get("/:encounter_id/diagnosis", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters/{encounter_id}/diagnosis'
+  //  #swagger.summary = 'List all diagnosis of a given encounter_id'
 
   const encounter = await findEncounter(req, res);
   if (encounter) res.status(200).send(encounter.diagnosis);
@@ -288,6 +312,12 @@ router.get("/:encounter_id/diagnosis", async (req, res) => {
 router.post("/:encounter_id/diagnosis", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters/{encounter_id}/diagnosis'
+  //  #swagger.summary = 'Create a new diagnosis for a given encounter_id'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Diagnosis Details',
+           schema: { diagnosis: 'diagnosis_id' }
+    } */
 
   const encounter = await findEncounter(req, res);
   if (encounter) {
@@ -305,6 +335,7 @@ router.post("/:encounter_id/diagnosis", async (req, res) => {
 router.delete("/:encounter_id/diagnosis/:diagnosis_id", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters/{encounter_id}/diagnosis/{diagnosis_id}'
+  //  #swagger.summary = 'Delete single diagnosis from a given encounter_id'
 
   const encounter = await findEncounter(req, res);
   if (encounter) {
@@ -351,6 +382,7 @@ const findTestTemplate = async (req, res, encounter) => {
 router.get("/:encounter_id/lab-tests", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters/{encounter_id}/lab-tests'
+  //  #swagger.summary = 'List all lab-tests of a given encounter_id'
 
   const encounter = await findEncounter(req, res);
   if (encounter) res.status(200).send(encounter.lab_tests);
@@ -360,6 +392,12 @@ router.get("/:encounter_id/lab-tests", async (req, res) => {
 router.post("/:encounter_id/lab-tests", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters/{encounter_id}/lab-tests'
+  //  #swagger.summary = 'Create a new lab-test for a given encounter_id'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Lab Test Template',
+           schema: { test_template: 'lab_test_template_id' }
+    } */
 
   const encounter = await findEncounter(req, res);
   if (encounter) {
@@ -377,6 +415,7 @@ router.post("/:encounter_id/lab-tests", async (req, res) => {
 router.delete("/:encounter_id/lab-tests/:template_id", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters/{encounter_id}/lab-tests/{template_id}'
+  //  #swagger.summary = 'Delete single lab-test from a given encounter_id'
 
   const encounter = await findEncounter(req, res);
   if (encounter) {
@@ -423,6 +462,7 @@ const findTestResult = async (req, res, encounter) => {
 router.get("/:encounter_id/lab-test-results", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters/{encounter_id}/lab-test-results'
+  //  #swagger.summary = 'List all lab-test-results of a given encounter_id'
 
   const encounter = await findEncounter(req, res);
   if (encounter) res.status(200).send(encounter.lab_test_results);
@@ -432,6 +472,12 @@ router.get("/:encounter_id/lab-test-results", async (req, res) => {
 router.post("/:encounter_id/lab-test-results", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters/{encounter_id}/lab-test-results'
+  //  #swagger.summary = 'Create a new lab-test-result for a given encounter_id'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Lab Test Details',
+           schema: { lab_test: 'lab_test_id' }
+    } */
 
   const encounter = await findEncounter(req, res);
   if (encounter) {
@@ -451,6 +497,7 @@ router.delete(
   async (req, res) => {
     // #swagger.tags = ['Encounter']
     //  #swagger.path = '/encounters/{encounter_id}/lab-test-results/{result_id}'
+    //  #swagger.summary = 'Delete single lab-test-result from a given encounter_id'
 
     const encounter = await findEncounter(req, res);
     if (encounter) {
@@ -498,6 +545,7 @@ const findFinalDiagnosis = async (req, res, encounter) => {
 router.get("/:encounter_id/final-diagnosis", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters/{encounter_id}/final-diagnosis'
+  //  #swagger.summary = 'List all final-diagnosis of a given encounter_id'
 
   const encounter = await findEncounter(req, res);
   if (encounter) res.status(200).send(encounter.final_diagnosis);
@@ -507,6 +555,12 @@ router.get("/:encounter_id/final-diagnosis", async (req, res) => {
 router.post("/:encounter_id/final-diagnosis", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters/{encounter_id}/final-diagnosis'
+  //  #swagger.summary = 'Create a new final-diagnosis for a given encounter_id'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Final-diagnosis Details',
+           schema: { diagnosis: 'diagnosis_id' }
+    } */
 
   const encounter = await findEncounter(req, res);
   if (encounter) {
@@ -526,6 +580,7 @@ router.delete(
   async (req, res) => {
     // #swagger.tags = ['Encounter']
     //  #swagger.path = '/encounters/{encounter_id}/final-diagnosis/{diagnosis_id'
+    //  #swagger.summary = 'Delete single final-diagnosis from a given encounter_id'
 
     const encounter = await findEncounter(req, res);
     if (encounter) {
@@ -571,6 +626,7 @@ const findMedicine = async (req, res, encounter) => {
 router.get("/:encounter_id/medicines", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters/{encounter_id}/medicines'
+  //  #swagger.summary = 'List all medicines of a given encounter_id'
 
   const encounter = await findEncounter(req, res);
   if (encounter) res.status(200).send(encounter.medicines);
@@ -580,6 +636,12 @@ router.get("/:encounter_id/medicines", async (req, res) => {
 router.post("/:encounter_id/medicines", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters/{encounter_id}/medicines'
+  //  #swagger.summary = 'Create a new medicine for a given encounter_id'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Medicine Details',
+           schema: { $ref: "#/definitions/Medicine" }
+    } */
 
   const encounter = await findEncounter(req, res);
   if (encounter) {
@@ -598,6 +660,12 @@ router.post("/:encounter_id/medicines", async (req, res) => {
 router.patch("/:encounter_id/medicines/:medicine_id", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters/{encounter_id}/medicines/{medicine_id}'
+  //  #swagger.summary = 'Edit single medicine for a given encounter_id'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Medicine Details',
+           schema: { $ref: "#/definitions/Medicine" }
+    } */
 
   const encounter = await findEncounter(req, res);
   if (encounter) {
@@ -628,6 +696,7 @@ router.patch("/:encounter_id/medicines/:medicine_id", async (req, res) => {
 router.delete("/:encounter_id/medicines/:medicine_id", async (req, res) => {
   // #swagger.tags = ['Encounter']
   //  #swagger.path = '/encounters/{encounter_id}/medicines/{medicine_id}'
+  //  #swagger.summary = 'Delete single medicine from a given encounter_id'
 
   const encounter = await findEncounter(req, res);
   if (encounter) {
