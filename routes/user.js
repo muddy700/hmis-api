@@ -41,6 +41,7 @@ const sendFile = async (req) => {
 router.get("/", authenticate, async (req, res) => {
   // #swagger.tags = ['User']
   //  #swagger.path = '/users'
+  //  #swagger.summary = 'List all users'
   // #swagger.description = 'Get all users'
   /* #swagger.parameters['request-source-domain'] = { 
            in: 'header',
@@ -59,6 +60,7 @@ router.get("/", authenticate, async (req, res) => {
 router.post("/", async (req, res) => {
   // #swagger.tags = ['User']
   //  #swagger.path = '/users'
+  //  #swagger.summary = 'Create a new user'
   // #swagger.description = 'Create new user'
   /* #swagger.parameters['request-source-domain'] = { 
            in: 'header',
@@ -68,7 +70,7 @@ router.post("/", async (req, res) => {
   /* #swagger.parameters['obj'] = { 
            in: 'body',
            description: 'User Info',
-           schema: { $ref: "#/definitions/User" }
+           schema: { $ref: "#/definitions/AddUser" }
     } */
 
   //Initialize new instance/doc
@@ -103,6 +105,7 @@ router.post("/", async (req, res) => {
 router.get("/:id", authenticate, async (req, res) => {
   // #swagger.tags = ['User']
   //  #swagger.path = '/users/{id}'
+  //  #swagger.summary = 'Get a user by id'
   // #swagger.description = 'Get single user by user_id'
   /* #swagger.parameters['request-source-domain'] = { 
            in: 'header',
@@ -135,6 +138,7 @@ router.get("/:id", authenticate, async (req, res) => {
 router.patch("/:id", authenticate, async (req, res) => {
   // #swagger.tags = ['User']
   //  #swagger.path = '/users/{id}'
+  //  #swagger.summary = 'Update a user'
   // #swagger.description = 'Edit single user'
   /* #swagger.parameters['request-source-domain'] = { 
            in: 'header',
@@ -144,7 +148,7 @@ router.patch("/:id", authenticate, async (req, res) => {
   /* #swagger.parameters['obj'] = { 
            in: 'body',
            description: 'User Info',
-           schema: { $ref: "#/definitions/User" }
+           schema: { $ref: "#/definitions/EditUser" }
     } */
 
   try {
@@ -205,6 +209,7 @@ router.patch("/:id", authenticate, async (req, res) => {
 router.delete("/:id", authenticate, async (req, res) => {
   // #swagger.tags = ['User']
   //  #swagger.path = '/users/{id}'
+  //  #swagger.summary = 'Delete a user by id'
   // #swagger.description = 'Delete single user by user_id'
   /* #swagger.parameters['request-source-domain'] = { 
            in: 'header',

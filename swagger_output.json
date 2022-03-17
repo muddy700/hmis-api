@@ -2526,6 +2526,7 @@
         "tags": [
           "User"
         ],
+        "summary": "List all users",
         "description": "Get all users",
         "parameters": [
           {
@@ -2560,6 +2561,7 @@
         "tags": [
           "User"
         ],
+        "summary": "Create a new user",
         "description": "Create new user",
         "parameters": [
           {
@@ -2574,7 +2576,7 @@
             "in": "body",
             "description": "User Info",
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/AddUser"
             }
           }
         ],
@@ -2596,6 +2598,7 @@
         "tags": [
           "User"
         ],
+        "summary": "Get a user by id",
         "description": "Get single user by user_id",
         "parameters": [
           {
@@ -2639,6 +2642,7 @@
         "tags": [
           "User"
         ],
+        "summary": "Update a user",
         "description": "Edit single user",
         "parameters": [
           {
@@ -2664,7 +2668,7 @@
             "in": "body",
             "description": "User Info",
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/EditUser"
             }
           }
         ],
@@ -2693,6 +2697,7 @@
         "tags": [
           "User"
         ],
+        "summary": "Delete a user by id",
         "description": "Delete single user by user_id",
         "parameters": [
           {
@@ -2803,7 +2808,7 @@
         "dosage"
       ]
     },
-    "User": {
+    "AddUser": {
       "type": "object",
       "properties": {
         "first_name": {
@@ -2822,6 +2827,10 @@
           "type": "string",
           "example": "male"
         },
+        "profile_image": {
+          "type": "string",
+          "example": "./public/images/usb-3.jpeg"
+        },
         "dob": {
           "type": "string",
           "example": "2010-02-25"
@@ -2829,6 +2838,81 @@
         "phone": {
           "type": "string",
           "example": "0789101112"
+        },
+        "role": {
+          "type": "string",
+          "example": "ewwe7sc6wefwc9sc7vf"
+        },
+        "email": {
+          "type": "string",
+          "example": "jdoe@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "password"
+        },
+        "status": {
+          "type": "boolean",
+          "example": true
+        },
+        "address": {
+          "type": "object",
+          "properties": {
+            "street": {
+              "type": "string",
+              "example": "kingugi"
+            },
+            "city": {
+              "type": "string",
+              "example": "Dar es salaam"
+            },
+            "state": {
+              "type": "string",
+              "example": "Tanzania"
+            },
+            "postal_code": {
+              "type": "string",
+              "example": "123 Tza"
+            }
+          }
+        }
+      },
+      "required": [
+        "username",
+        "role",
+        "password"
+      ]
+    },
+    "EditUser": {
+      "type": "object",
+      "properties": {
+        "first_name": {
+          "type": "string",
+          "example": "John"
+        },
+        "last_name": {
+          "type": "string",
+          "example": "Doe"
+        },
+        "gender": {
+          "type": "string",
+          "example": "male"
+        },
+        "profile_image": {
+          "type": "string",
+          "example": "./public/images/usb-3.jpeg"
+        },
+        "dob": {
+          "type": "string",
+          "example": "2010-02-25"
+        },
+        "phone": {
+          "type": "string",
+          "example": "0789101112"
+        },
+        "role": {
+          "type": "string",
+          "example": "ewwe7sc6wefwc9sc7vf"
         },
         "email": {
           "type": "string",
