@@ -47,6 +47,7 @@ const findSalesInvoice = async (req, res) => {
 router.get("/", async (req, res) => {
   // #swagger.tags = ['Sales Invoice']
   //  #swagger.path = '/sales-invoices'
+  //  #swagger.summary = 'List all sales invoices'
 
   try {
     const salesInvoices = await SalesInvoice.find()
@@ -63,6 +64,12 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   // #swagger.tags = ['Sales Invoice']
   //  #swagger.path = '/sales-invoices'
+  //  #swagger.summary = 'Create new sales-invoice'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Patient Info',
+           schema: { $ref: "#/definitions/SalesInvoice" }
+    } */
 
   //Initialize new instance/doc
   const salesInvoice = new SalesInvoice(req.body);
@@ -79,6 +86,7 @@ router.post("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   // #swagger.tags = ['Sales Invoice']
   //  #swagger.path = '/sales-invoices/{id}'
+  //  #swagger.summary = 'Retrieve single sales-invoice by id'
 
   const salesInvoice = await findSalesInvoice(req, res);
   if (salesInvoice) res.status(200).send(salesInvoice);
@@ -88,6 +96,12 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   // #swagger.tags = ['Sales Invoice']
   //  #swagger.path = '/sales-invoices/{id}'
+  //  #swagger.summary = 'Edit single sales-invoice by id'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Patient Info',
+           schema: { $ref: "#/definitions/EditSalesInvoice" }
+    } */
 
   const salesInvoice = await findSalesInvoice(req, res);
   if (salesInvoice) {
@@ -113,6 +127,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   // #swagger.tags = ['Sales Invoice']
   //  #swagger.path = '/sales-invoices/{id}'
+  //  #swagger.summary = 'Delete single sales-invoice by id'
 
   const salesInvoice = await findSalesInvoice(req, res);
   if (salesInvoice) {
@@ -151,6 +166,7 @@ const findSalesItem = async (req, res, salesInvoice) => {
 router.get("/:id/sales-items", async (req, res) => {
   // #swagger.tags = ['Sales Invoice']
   //  #swagger.path = '/sales-invoices/{id}/sales-items'
+  //  #swagger.summary = 'Retrieve all sales-items of a given sales-invoice id'
 
   const salesInvoice = await findSalesInvoice(req, res);
   if (salesInvoice) res.status(200).send(salesInvoice.items);
@@ -160,6 +176,12 @@ router.get("/:id/sales-items", async (req, res) => {
 router.post("/:id/sales-items", async (req, res) => {
   // #swagger.tags = ['Sales Invoice']
   //  #swagger.path = '/sales-invoices/{id}/sales-items'
+  //  #swagger.summary = 'Create new sales-item'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Patient Info',
+           schema: { $ref: "#/definitions/SalesItem" }
+    } */
 
   const salesInvoice = await findSalesInvoice(req, res);
   if (salesInvoice) {
@@ -177,6 +199,7 @@ router.post("/:id/sales-items", async (req, res) => {
 router.get("/:id/sales-items/:item_id", async (req, res) => {
   // #swagger.tags = ['Sales Invoice']
   //  #swagger.path = '/sales-invoices/{id}/sales-items/{item_id}'
+  //  #swagger.summary = 'Get a single sales-item by  id'
 
   const salesInvoice = await findSalesInvoice(req, res);
   if (salesInvoice) {
@@ -189,6 +212,12 @@ router.get("/:id/sales-items/:item_id", async (req, res) => {
 router.patch("/:id/sales-items/:item_id", async (req, res) => {
   // #swagger.tags = ['Sales Invoice']
   //  #swagger.path = '/sales-invoices/{id}/sales-items/{item_id}'
+  //  #swagger.summary = 'Update a single sales-item by  id'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Patient Info',
+           schema: { $ref: "#/definitions/SalesItem" }
+    } */
 
   const salesInvoice = await findSalesInvoice(req, res);
   if (salesInvoice) {
@@ -219,6 +248,7 @@ router.patch("/:id/sales-items/:item_id", async (req, res) => {
 router.delete("/:id/sales-items/:item_id", async (req, res) => {
   // #swagger.tags = ['Sales Invoice']
   //  #swagger.path = '/sales-invoices/{id}/sales-items/{item_id}'
+  //  #swagger.summary = 'Delete a single sales-item by id'
 
   const salesInvoice = await findSalesInvoice(req, res);
   if (salesInvoice) {

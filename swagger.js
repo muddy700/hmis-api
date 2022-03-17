@@ -198,6 +198,38 @@ const doc = {
       status: false,
       invoiced: true,
     },
+    SalesInvoice: {
+      due_date: "2022-12-05",
+      patient: "h23f132j31n1vc12v1",
+      cashier: "h23f132j31n1vc12v1",
+      payment_mode: "h23f132j31n1vc12v1",
+      items: [
+        {
+          collection_name: "Appointment",
+          item_id: "2n1c23n12c1",
+          price: 100,
+          quantity: 2,
+          grand_price: 20000,
+        },
+      ],
+      total_amount: 100000,
+      status: true,
+    },
+    EditSalesInvoice: {
+      due_date: "2022-12-05",
+      patient: "h23f132j31n1vc12v1",
+      cashier: "h23f132j31n1vc12v1",
+      payment_mode: "h23f132j31n1vc12v1",
+      total_amount: 100000,
+      status: true,
+    },
+    SalesItem: {
+      collection_name: "Appointment",
+      item_id: "2n1c23n12c1",
+      price: 100,
+      quantity: 2,
+      grand_price: 20000,
+    },
     // User: {
     //   name: "Jhon Doe",
     //   age: 29,

@@ -2199,6 +2199,7 @@
         "tags": [
           "Sales Invoice"
         ],
+        "summary": "List all sales invoices",
         "description": "",
         "parameters": [],
         "responses": {
@@ -2214,8 +2215,18 @@
         "tags": [
           "Sales Invoice"
         ],
+        "summary": "Create new sales-invoice",
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Patient Info",
+            "schema": {
+              "$ref": "#/definitions/SalesInvoice"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -2231,6 +2242,7 @@
         "tags": [
           "Sales Invoice"
         ],
+        "summary": "Retrieve single sales-invoice by id",
         "description": "",
         "parameters": [
           {
@@ -2253,6 +2265,7 @@
         "tags": [
           "Sales Invoice"
         ],
+        "summary": "Edit single sales-invoice by id",
         "description": "",
         "parameters": [
           {
@@ -2260,6 +2273,14 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Patient Info",
+            "schema": {
+              "$ref": "#/definitions/EditSalesInvoice"
+            }
           }
         ],
         "responses": {
@@ -2278,6 +2299,7 @@
         "tags": [
           "Sales Invoice"
         ],
+        "summary": "Delete single sales-invoice by id",
         "description": "",
         "parameters": [
           {
@@ -2305,6 +2327,7 @@
         "tags": [
           "Sales Invoice"
         ],
+        "summary": "Retrieve all sales-items of a given sales-invoice id",
         "description": "",
         "parameters": [
           {
@@ -2327,6 +2350,7 @@
         "tags": [
           "Sales Invoice"
         ],
+        "summary": "Create new sales-item",
         "description": "",
         "parameters": [
           {
@@ -2334,6 +2358,14 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Patient Info",
+            "schema": {
+              "$ref": "#/definitions/SalesItem"
+            }
           }
         ],
         "responses": {
@@ -2354,6 +2386,7 @@
         "tags": [
           "Sales Invoice"
         ],
+        "summary": "Get a single sales-item by id",
         "description": "",
         "parameters": [
           {
@@ -2382,6 +2415,7 @@
         "tags": [
           "Sales Invoice"
         ],
+        "summary": "Update a single sales-item by id",
         "description": "",
         "parameters": [
           {
@@ -2395,6 +2429,14 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Patient Info",
+            "schema": {
+              "$ref": "#/definitions/SalesItem"
+            }
           }
         ],
         "responses": {
@@ -2413,6 +2455,7 @@
         "tags": [
           "Sales Invoice"
         ],
+        "summary": "Delete a single sales-item by id",
         "description": "",
         "parameters": [
           {
@@ -3138,6 +3181,117 @@
         "invoiced": {
           "type": "boolean",
           "example": true
+        }
+      }
+    },
+    "SalesInvoice": {
+      "type": "object",
+      "properties": {
+        "due_date": {
+          "type": "string",
+          "example": "2022-12-05"
+        },
+        "patient": {
+          "type": "string",
+          "example": "h23f132j31n1vc12v1"
+        },
+        "cashier": {
+          "type": "string",
+          "example": "h23f132j31n1vc12v1"
+        },
+        "payment_mode": {
+          "type": "string",
+          "example": "h23f132j31n1vc12v1"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "collection_name": {
+                "type": "string",
+                "example": "Appointment"
+              },
+              "item_id": {
+                "type": "string",
+                "example": "2n1c23n12c1"
+              },
+              "price": {
+                "type": "number",
+                "example": 100
+              },
+              "quantity": {
+                "type": "number",
+                "example": 2
+              },
+              "grand_price": {
+                "type": "number",
+                "example": 20000
+              }
+            }
+          }
+        },
+        "total_amount": {
+          "type": "number",
+          "example": 100000
+        },
+        "status": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "EditSalesInvoice": {
+      "type": "object",
+      "properties": {
+        "due_date": {
+          "type": "string",
+          "example": "2022-12-05"
+        },
+        "patient": {
+          "type": "string",
+          "example": "h23f132j31n1vc12v1"
+        },
+        "cashier": {
+          "type": "string",
+          "example": "h23f132j31n1vc12v1"
+        },
+        "payment_mode": {
+          "type": "string",
+          "example": "h23f132j31n1vc12v1"
+        },
+        "total_amount": {
+          "type": "number",
+          "example": 100000
+        },
+        "status": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "SalesItem": {
+      "type": "object",
+      "properties": {
+        "collection_name": {
+          "type": "string",
+          "example": "Appointment"
+        },
+        "item_id": {
+          "type": "string",
+          "example": "2n1c23n12c1"
+        },
+        "price": {
+          "type": "number",
+          "example": 100
+        },
+        "quantity": {
+          "type": "number",
+          "example": 2
+        },
+        "grand_price": {
+          "type": "number",
+          "example": 20000
         }
       }
     }
