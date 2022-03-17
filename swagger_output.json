@@ -1585,6 +1585,7 @@
         "tags": [
           "Patient"
         ],
+        "summary": "List all patients",
         "description": "",
         "parameters": [],
         "responses": {
@@ -1600,8 +1601,18 @@
         "tags": [
           "Patient"
         ],
+        "summary": "Create a new patient",
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Patient Info",
+            "schema": {
+              "$ref": "#/definitions/Patient"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1617,6 +1628,7 @@
         "tags": [
           "Patient"
         ],
+        "summary": "Get a patient by id",
         "description": "",
         "parameters": [
           {
@@ -1639,6 +1651,7 @@
         "tags": [
           "Patient"
         ],
+        "summary": "Edit a patient",
         "description": "",
         "parameters": [
           {
@@ -1648,24 +1661,11 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "obj",
             "in": "body",
+            "description": "Patient Info",
             "schema": {
-              "type": "object",
-              "properties": {
-                "full_name": {
-                  "example": "any"
-                },
-                "date_registered": {
-                  "example": "any"
-                },
-                "vital_signs": {
-                  "example": "any"
-                },
-                "remainingData": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/Patient"
             }
           }
         ],
@@ -1685,6 +1685,7 @@
         "tags": [
           "Patient"
         ],
+        "summary": "Delete a patient by id",
         "description": "",
         "parameters": [
           {
@@ -1712,6 +1713,7 @@
         "tags": [
           "Patient"
         ],
+        "summary": "List all vital-signs of a patient by patient_id",
         "description": "",
         "parameters": [
           {
@@ -1734,6 +1736,7 @@
         "tags": [
           "Patient"
         ],
+        "summary": "Create a new vital-sign of a patient",
         "description": "",
         "parameters": [
           {
@@ -1741,6 +1744,14 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Vital Sign Info",
+            "schema": {
+              "$ref": "#/definitions/VitalSign"
+            }
           }
         ],
         "responses": {
@@ -1761,6 +1772,7 @@
         "tags": [
           "Patient"
         ],
+        "summary": "Retrieve single vital-sign of a patient",
         "description": "",
         "parameters": [
           {
@@ -1789,6 +1801,7 @@
         "tags": [
           "Patient"
         ],
+        "summary": "Edit single vital-sign of a patient",
         "description": "",
         "parameters": [
           {
@@ -1802,6 +1815,14 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Vital Sign Info",
+            "schema": {
+              "$ref": "#/definitions/VitalSign"
+            }
           }
         ],
         "responses": {
@@ -1820,6 +1841,7 @@
         "tags": [
           "Patient"
         ],
+        "summary": "Delete single vital-sign of a patient",
         "description": "",
         "parameters": [
           {
@@ -2946,6 +2968,85 @@
               "example": "123 Tza"
             }
           }
+        }
+      }
+    },
+    "Patient": {
+      "type": "object",
+      "properties": {
+        "first_name": {
+          "type": "string",
+          "example": "John"
+        },
+        "last_name": {
+          "type": "string",
+          "example": "Doe"
+        },
+        "dob": {
+          "type": "string",
+          "example": "2010-02-25"
+        },
+        "email": {
+          "type": "string",
+          "example": "jdoe@gmail.com"
+        },
+        "phone": {
+          "type": "string",
+          "example": "0789101112"
+        },
+        "gender": {
+          "type": "string",
+          "example": "male"
+        },
+        "address": {
+          "type": "object",
+          "properties": {
+            "street": {
+              "type": "string",
+              "example": "kingugi"
+            },
+            "city": {
+              "type": "string",
+              "example": "Dar es salaam"
+            },
+            "state": {
+              "type": "string",
+              "example": "Tanzania"
+            },
+            "postal_code": {
+              "type": "string",
+              "example": "123 Tza"
+            }
+          }
+        }
+      },
+      "required": [
+        "first_name",
+        "last_name"
+      ]
+    },
+    "VitalSign": {
+      "type": "object",
+      "properties": {
+        "practitioner": {
+          "type": "string",
+          "example": "dwd7dvcdv5advfbgbf43"
+        },
+        "weight": {
+          "type": "number",
+          "example": 80
+        },
+        "height": {
+          "type": "number",
+          "example": 5
+        },
+        "body_temperature": {
+          "type": "number",
+          "example": 37
+        },
+        "blood_pressure": {
+          "type": "string",
+          "example": "120/110"
         }
       }
     }

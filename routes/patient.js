@@ -12,6 +12,7 @@ const patientPopulator = {
 router.get("/", async (req, res) => {
   // #swagger.tags = ['Patient']
   //  #swagger.path = '/patients'
+  //  #swagger.summary = 'List all patients'
 
   try {
     const patients = await Patient.find().populate(patientPopulator);
@@ -25,6 +26,12 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   // #swagger.tags = ['Patient']
   //  #swagger.path = '/patients'
+  //  #swagger.summary = 'Create a new patient'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Patient Info',
+           schema: { $ref: "#/definitions/Patient" }
+    } */
 
   //Initialize new instance/doc
   const patient = new Patient(req.body);
@@ -41,6 +48,7 @@ router.post("/", async (req, res) => {
 router.get("/:patient_id", async (req, res) => {
   // #swagger.tags = ['Patient']
   //  #swagger.path = '/patients/{patient_id}'
+  //  #swagger.summary = 'Get a patient by id'
 
   const patient = await findPatient(req, res);
   if (patient) res.status(200).send(patient);
@@ -50,6 +58,12 @@ router.get("/:patient_id", async (req, res) => {
 router.patch("/:patient_id", async (req, res) => {
   // #swagger.tags = ['Patient']
   //  #swagger.path = '/patients/{patient_id}'
+  //  #swagger.summary = 'Edit a patient'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Patient Info',
+           schema: { $ref: "#/definitions/Patient" }
+    } */
 
   const patient = await findPatient(req, res);
   if (patient) {
@@ -96,6 +110,7 @@ router.patch("/:patient_id", async (req, res) => {
 router.delete("/:patient_id", async (req, res) => {
   // #swagger.tags = ['Patient']
   //  #swagger.path = '/patients/{patient_id}'
+  //  #swagger.summary = 'Delete a patient by id'
 
   const patient = await findPatient(req, res);
   if (patient) {
@@ -160,6 +175,7 @@ const findVitalSign = async (req, res, patient) => {
 router.get("/:patient_id/vital-signs", async (req, res) => {
   // #swagger.tags = ['Patient']
   //  #swagger.path = '/patients/{patient_id}/vital-signs'
+  //  #swagger.summary = 'List all vital-signs of a patient by patient_id'
 
   const patient = await findPatient(req, res);
   if (patient) res.status(200).send(patient.vital_signs);
@@ -169,6 +185,12 @@ router.get("/:patient_id/vital-signs", async (req, res) => {
 router.post("/:patient_id/vital-signs", async (req, res) => {
   // #swagger.tags = ['Patient']
   //  #swagger.path = '/patients/{patient_id}/vital-signs'
+  //  #swagger.summary = 'Create a new vital-sign of a patient'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Vital Sign Info',
+           schema: { $ref: "#/definitions/VitalSign" }
+    } */
 
   const patient = await findPatient(req, res);
   if (patient) {
@@ -186,6 +208,7 @@ router.post("/:patient_id/vital-signs", async (req, res) => {
 router.get("/:patient_id/vital-signs/:vital_sign_id", async (req, res) => {
   // #swagger.tags = ['Patient']
   //  #swagger.path = '/patients/{patient_id}/vital-signs/{vital_sign_id}'
+  //  #swagger.summary = 'Retrieve single vital-sign of a patient'
 
   const patient = await findPatient(req, res);
   if (patient) {
@@ -198,6 +221,12 @@ router.get("/:patient_id/vital-signs/:vital_sign_id", async (req, res) => {
 router.patch("/:patient_id/vital-signs/:vital_sign_id", async (req, res) => {
   // #swagger.tags = ['Patient']
   //  #swagger.path = '/patients/{patient_id}/vital-signs/{vital_sign_id}'
+  //  #swagger.summary = 'Edit single vital-sign of a patient'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Vital Sign Info',
+           schema: { $ref: "#/definitions/VitalSign" }
+    } */
 
   const patient = await findPatient(req, res);
   if (patient) {
@@ -224,6 +253,7 @@ router.patch("/:patient_id/vital-signs/:vital_sign_id", async (req, res) => {
 router.delete("/:patient_id/vital-signs/:vital_sign_id", async (req, res) => {
   // #swagger.tags = ['Patient']
   //  #swagger.path = '/patients/{patient_id}/vital-signs/{vital_sign_id}'
+  //  #swagger.summary = 'Delete single vital-sign of a patient'
 
   const patient = await findPatient(req, res);
   if (patient) {
