@@ -15,7 +15,7 @@ const doc = {
   host:
     parseInt(is_local) === 1
       ? "localhost:3000"
-      : "https://hims-apis.herokuapp.com",
+      : "hims-apis.herokuapp.com",
   basePath: "/api/v1",
   schemes: ["http", "https"],
   consumes: ["application/json", "multiparty/form-data"],
