@@ -6,6 +6,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   // #swagger.tags = ['Medicine']
   //  #swagger.path = '/medicines'
+  //  #swagger.summary = 'List all medicines'
 
   try {
     const medicines = await Medicine.find();
@@ -19,6 +20,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   // #swagger.tags = ['Medicine']
   //  #swagger.path = '/medicines'
+  //  #swagger.summary = 'Create new medicine'
   /* #swagger.parameters['obj'] = {
     in: 'body',
     description: 'Medicine Info',
@@ -42,6 +44,7 @@ router.post("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   // #swagger.tags = ['Medicine']
   //  #swagger.path = '/medicines/{id}'
+  //  #swagger.summary = 'Get single medicine by id'
 
   try {
     const medicine = await Medicine.findById(req.params.id);
@@ -57,6 +60,7 @@ router.get("/:id", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   // #swagger.tags = ['Medicine']
   //  #swagger.path = '/medicines/{id}'
+  //  #swagger.summary = 'Edit single medicine by id'
 
   try {
     //Check if document exists
@@ -90,6 +94,7 @@ router.patch("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   // #swagger.tags = ['Medicine']
   //  #swagger.path = '/medicines/{id}'
+  //  #swagger.summary = 'Delete single medicine by id'
 
   try {
     //Check if document exists

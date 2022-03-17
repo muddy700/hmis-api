@@ -1483,6 +1483,7 @@
         "tags": [
           "Medicine"
         ],
+        "summary": "List all medicines",
         "description": "",
         "parameters": [],
         "responses": {
@@ -1498,6 +1499,7 @@
         "tags": [
           "Medicine"
         ],
+        "summary": "Create new medicine",
         "description": "",
         "parameters": [
           {
@@ -1524,6 +1526,7 @@
         "tags": [
           "Medicine"
         ],
+        "summary": "Get single medicine by id",
         "description": "",
         "parameters": [
           {
@@ -1546,6 +1549,7 @@
         "tags": [
           "Medicine"
         ],
+        "summary": "Edit single medicine by id",
         "description": "",
         "parameters": [
           {
@@ -1592,6 +1596,7 @@
         "tags": [
           "Medicine"
         ],
+        "summary": "Delete single medicine by id",
         "description": "",
         "parameters": [
           {
