@@ -18,7 +18,6 @@ const paymentModesRouter = require("./routes/paymentMode");
 const appointmentsRouter = require("./routes/appointment");
 const salesInvoicesRouter = require("./routes/salesInvoice");
 const labTestTemplateRouter = require("./routes/labTestTemplate");
-const bodyParser = require("body-parser"); //todo: uninstall if not used
 const multer = require("multer");
 const upload = multer();
 
@@ -27,12 +26,18 @@ const swaggerFile = require("./swagger_output.json");
 
 //Get Configuration Variables
 dotenv.config();
-const db_url = process.env.DATABASE_URL;
+const local_db_url = process.env.LOCAL_DATABASE_URL;
+const cloud_db_url = process.env.CLOUD_DATABASE_URL;
+const is_local = process.env.IS_LOCAL;
 const PORT = process.env.PORT;
+const db_url = parseInt(is_local) === 1 ? local_db_url : cloud_db_url;
 
 //Initialize Database Connection
 mongoose
-  .connect(db_url, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(db_url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     const app = express();
 
@@ -63,9 +68,14 @@ mongoose
     app.use("/api/v1/payment-modes", paymentModesRouter);
     app.use("/api/v1/sales-invoices", salesInvoicesRouter);
     app.use("/api/v1/lab-test-templates", labTestTemplateRouter);
-    app.use("/api/v1/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile, {explorer: false}));
+    app.use(
+      "/api/v1/doc",
+      swaggerUi.serve,
+      swaggerUi.setup(swaggerFile, { explorer: false })
+    );
 
     app.listen(PORT, () => {
       console.log(`Server Connected And App Is Running On Port #: ${PORT}`);
     });
-  });
+  })
+  .catch((err) => console.log({ error: err }));

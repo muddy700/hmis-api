@@ -12,7 +12,10 @@ const doc = {
     title: "HIMS APIs",
     description: "APIs for Healthcare Information Management System(HIMS).",
   },
-  host: is_local ? "localhost:3000" : "https://hims-apis.herokuapp.com",
+  host:
+    parseInt(is_local) === 1
+      ? "localhost:3000"
+      : "https://hims-apis.herokuapp.com",
   basePath: "/api/v1",
   schemes: ["http", "https"],
   consumes: ["application/json", "multiparty/form-data"],
