@@ -46,6 +46,7 @@ const findLabTest = async (req, res) => {
 router.get("/", async (req, res) => {
   // #swagger.tags = ['Lab Test']
   //  #swagger.path = '/lab-tests'
+  //  #swagger.summary = 'Retrieve all lab-tests'
 
   try {
     const labTests = await LabTest.find()
@@ -62,6 +63,12 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   // #swagger.tags = ['Lab Test']
   //  #swagger.path = '/lab-tests'
+  //  #swagger.summary = 'Create new lab-test'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Lab-Test Details',
+           schema: { $ref: "#/definitions/LabTest" }
+    } */
 
   //Initialize new instance/doc
   const labTest = new LabTest(req.body);
@@ -78,6 +85,7 @@ router.post("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   // #swagger.tags = ['Lab Test']
   //  #swagger.path = '/lab-tests/{id}'
+  //  #swagger.summary = 'Retrieve single lab-test by id'
 
   const labTest = await findLabTest(req, res);
   if (labTest) res.status(200).send(labTest);
@@ -87,6 +95,12 @@ router.get("/:id", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   // #swagger.tags = ['Lab Test']
   //  #swagger.path = '/lab-tests/{id}'
+  //  #swagger.summary = 'Edit single lab-test by id'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Lab-Test Details',
+           schema: { $ref: "#/definitions/LabTest" }
+    } */
 
   const labTest = await findLabTest(req, res);
   if (labTest) {
@@ -107,6 +121,7 @@ router.patch("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   // #swagger.tags = ['Lab Test']
   //  #swagger.path = '/lab-tests/{id}'
+  //  #swagger.summary = 'Delete single lab-test by id'
 
   const labTest = await findLabTest(req, res);
   if (labTest) {

@@ -189,6 +189,15 @@ const doc = {
       status: false,
       invoiced: true,
     },
+    LabTest: {
+      test_template: "h23f132j31n1vc12v1",
+      lab_technician: "h23f132j31n1vc12v1",
+      patient: "h23f132j31n1vc12v1",
+      encounter: "h23f132j31n1vc12v1",
+      results: "mg/dg 12 positive",
+      status: false,
+      invoiced: true,
+    },
     // User: {
     //   name: "Jhon Doe",
     //   age: 29,

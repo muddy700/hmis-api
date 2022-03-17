@@ -1141,6 +1141,7 @@
         "tags": [
           "Lab Test"
         ],
+        "summary": "Retrieve all lab-tests",
         "description": "",
         "parameters": [],
         "responses": {
@@ -1156,8 +1157,18 @@
         "tags": [
           "Lab Test"
         ],
+        "summary": "Create new lab-test",
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Lab-Test Details",
+            "schema": {
+              "$ref": "#/definitions/LabTest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1173,6 +1184,7 @@
         "tags": [
           "Lab Test"
         ],
+        "summary": "Retrieve single lab-test by id",
         "description": "",
         "parameters": [
           {
@@ -1195,6 +1207,7 @@
         "tags": [
           "Lab Test"
         ],
+        "summary": "Edit single lab-test by id",
         "description": "",
         "parameters": [
           {
@@ -1202,6 +1215,14 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Lab-Test Details",
+            "schema": {
+              "$ref": "#/definitions/LabTest"
+            }
           }
         ],
         "responses": {
@@ -1220,6 +1241,7 @@
         "tags": [
           "Lab Test"
         ],
+        "summary": "Delete single lab-test by id",
         "description": "",
         "parameters": [
           {
@@ -3075,6 +3097,39 @@
         "price": {
           "type": "number",
           "example": 5000
+        },
+        "status": {
+          "type": "boolean",
+          "example": false
+        },
+        "invoiced": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "LabTest": {
+      "type": "object",
+      "properties": {
+        "test_template": {
+          "type": "string",
+          "example": "h23f132j31n1vc12v1"
+        },
+        "lab_technician": {
+          "type": "string",
+          "example": "h23f132j31n1vc12v1"
+        },
+        "patient": {
+          "type": "string",
+          "example": "h23f132j31n1vc12v1"
+        },
+        "encounter": {
+          "type": "string",
+          "example": "h23f132j31n1vc12v1"
+        },
+        "results": {
+          "type": "string",
+          "example": "mg/dg 12 positive"
         },
         "status": {
           "type": "boolean",
