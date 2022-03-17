@@ -56,7 +56,7 @@ router.get("/", authenticate, async (req, res) => {
 });
 
 //Create New User
-router.post("/", authenticate, async (req, res) => {
+router.post("/", async (req, res) => {
   // #swagger.tags = ['User']
   //  #swagger.path = '/users'
   // #swagger.description = 'Create new user'
