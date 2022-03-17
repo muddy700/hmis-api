@@ -1,4 +1,5 @@
 //Import Required Modules
+const multer = require("multer");
 const dotenv = require("dotenv");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -7,10 +8,12 @@ const usersRouter = require("./routes/user");
 const loginRouter = require("./routes/login");
 const logoutRouter = require("./routes/logout");
 const defaultRouter = require("./routes/index");
+const swaggerUi = require("swagger-ui-express");
 const filtersRouter = require("./routes/filters");
 const patientsRouter = require("./routes/patient");
-const symptomsRouter = require("./routes/symptom");
 const labTestsRouter = require("./routes/labTest");
+const symptomsRouter = require("./routes/symptom");
+const swaggerFile = require("./swagger_output.json");
 const medicinesRouter = require("./routes/medicine");
 const diagnosisRouter = require("./routes/diagnosis");
 const encountersRouter = require("./routes/encounter");
@@ -18,18 +21,14 @@ const paymentModesRouter = require("./routes/paymentMode");
 const appointmentsRouter = require("./routes/appointment");
 const salesInvoicesRouter = require("./routes/salesInvoice");
 const labTestTemplateRouter = require("./routes/labTestTemplate");
-const multer = require("multer");
-const upload = multer();
-
-const swaggerUi = require("swagger-ui-express");
-const swaggerFile = require("./swagger_output.json");
 
 //Get Configuration Variables
 dotenv.config();
+const upload = multer();
+const PORT = process.env.PORT;
+const is_local = process.env.IS_LOCAL;
 const local_db_url = process.env.LOCAL_DATABASE_URL;
 const cloud_db_url = process.env.CLOUD_DATABASE_URL;
-const is_local = process.env.IS_LOCAL;
-const PORT = process.env.PORT;
 const db_url = parseInt(is_local) === 1 ? local_db_url : cloud_db_url;
 
 //Initialize Database Connection
@@ -49,8 +48,11 @@ mongoose
 
     // for parsing multipart/form-data
     app.use(upload.single("profile_image"));
+
+    //For storing static files
     app.use(express.static("public"));
 
+    //Add/Configure Routes
     app.use("/", defaultRouter);
     app.use("/api/v1/login", loginRouter);
     app.use("/api/v1/roles", rolesRouter);
