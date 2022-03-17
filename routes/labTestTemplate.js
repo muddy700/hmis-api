@@ -6,6 +6,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   // #swagger.tags = ['Lab Test Template']
   //  #swagger.path = '/lab-test-templates'
+  //  #swagger.summary = 'List all lab-test-templates'
 
   try {
     const labTestTemplates = await LabTestTemplate.find();
@@ -19,6 +20,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   // #swagger.tags = ['Lab Test Template']
   //  #swagger.path = '/lab-test-templates'
+  //  #swagger.summary = 'Create new lab-test-template'
 
   //Initialize new instance/doc
   const labTestTemplate = new LabTestTemplate({
@@ -38,6 +40,7 @@ router.post("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   // #swagger.tags = ['Lab Test Template']
   //  #swagger.path = '/lab-test-templates/{id}'
+  //  #swagger.summary = 'Get a lab-test-template by id'
 
   try {
     const labTestTemplate = await LabTestTemplate.findById(req.params.id);
@@ -53,6 +56,7 @@ router.get("/:id", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   // #swagger.tags = ['Lab Test Template']
   //  #swagger.path = '/lab-test-templates/{id}'
+  //  #swagger.summary = 'Edit a lab-test-template by id'
 
   try {
     //Check if document exists
@@ -82,17 +86,16 @@ router.patch("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   // #swagger.tags = ['Lab Test Template']
   //  #swagger.path = '/lab-test-templates/{id}'
+  //  #swagger.summary = 'Delete a lab-test-template by id'
 
   try {
     //Check if document exists
     const labTestTemplate = await LabTestTemplate.findById(req.params.id);
     //If got null response, return error and exit function
     if (!labTestTemplate) {
-      res
-        .status(404)
-        .send({
-          error: `No lab-Test-Template found with id: ${req.params.id} `,
-        });
+      res.status(404).send({
+        error: `No lab-Test-Template found with id: ${req.params.id} `,
+      });
       return;
     }
 

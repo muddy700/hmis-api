@@ -1274,6 +1274,7 @@
         "tags": [
           "Lab Test Template"
         ],
+        "summary": "List all lab-test-templates",
         "description": "",
         "parameters": [],
         "responses": {
@@ -1289,6 +1290,7 @@
         "tags": [
           "Lab Test Template"
         ],
+        "summary": "Create new lab-test-template",
         "description": "",
         "parameters": [
           {
@@ -1322,6 +1324,7 @@
         "tags": [
           "Lab Test Template"
         ],
+        "summary": "Get a lab-test-template by id",
         "description": "",
         "parameters": [
           {
@@ -1344,6 +1347,7 @@
         "tags": [
           "Lab Test Template"
         ],
+        "summary": "Edit a lab-test-template by id",
         "description": "",
         "parameters": [
           {
@@ -1384,6 +1388,7 @@
         "tags": [
           "Lab Test Template"
         ],
+        "summary": "Delete a lab-test-template by id",
         "description": "",
         "parameters": [
           {
