@@ -24,11 +24,16 @@ router.get("/", authenticate, async (req, res) => {
 });
 
 //Create New Role
-router.post("/", async (req, res) => {
+router.post("/", authenticate, async (req, res) => {
   // #swagger.tags = ['Role']
   //  #swagger.path = '/roles'
   //  #swagger.summary = 'Create a new role'
   // #swagger.description = 'Create a new role'
+  /* #swagger.parameters['request-source-domain'] = { 
+           in: 'header',
+           description: 'Request Source Domain',
+           required: true
+    } */
 
   //Initialize new instance/doc
   const role = new Role({
@@ -44,7 +49,7 @@ router.post("/", async (req, res) => {
 });
 
 //Get Role By Id
-router.get("/:id", async (req, res) => {
+router.get("/:id", authenticate, async (req, res) => {
   // #swagger.tags = ['Role']
   //  #swagger.path = '/roles/{id}'
   //  #swagger.summary = 'Get a role by id'
@@ -54,6 +59,11 @@ router.get("/:id", async (req, res) => {
              schema: { $ref: "#/definitions/Role" },
              description: 'Roles retrieved successfull.' 
       } */
+  /* #swagger.parameters['request-source-domain'] = { 
+           in: 'header',
+           description: 'Request Source Domain',
+           required: true
+    } */
 
   try {
     const role = await Role.findById(req.params.id);
@@ -68,11 +78,16 @@ router.get("/:id", async (req, res) => {
 });
 
 //Update Existing Role
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", authenticate, async (req, res) => {
   // #swagger.tags = ['Role']
   //  #swagger.path = '/roles/{id}'
   //  #swagger.summary = 'Update a role'
   // #swagger.description = 'Edit single role'
+  /* #swagger.parameters['request-source-domain'] = { 
+           in: 'header',
+           description: 'Request Source Domain',
+           required: true
+    } */
 
   try {
     //Check if document exists
@@ -96,11 +111,16 @@ router.patch("/:id", async (req, res) => {
 });
 
 //Delete an existing role
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authenticate, async (req, res) => {
   // #swagger.tags = ['Role']
   //  #swagger.path = '/roles/{id}'
   //  #swagger.summary = 'Delete a role by id'
   // #swagger.description = 'Delete single role by role_id'
+  /* #swagger.parameters['request-source-domain'] = { 
+           in: 'header',
+           description: 'Request Source Domain',
+           required: true
+    } */
 
   try {
     //Check if document exists
