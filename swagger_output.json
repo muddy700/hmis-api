@@ -214,6 +214,7 @@
         "tags": [
           "Diagnosis"
         ],
+        "summary": "List all diagnosis",
         "description": "",
         "parameters": [],
         "responses": {
@@ -229,6 +230,7 @@
         "tags": [
           "Diagnosis"
         ],
+        "summary": "Create new diagnosis",
         "description": "",
         "parameters": [
           {
@@ -255,6 +257,7 @@
         "tags": [
           "Diagnosis"
         ],
+        "summary": "Get single diagnosis by id",
         "description": "",
         "parameters": [
           {
@@ -277,6 +280,7 @@
         "tags": [
           "Diagnosis"
         ],
+        "summary": "Edit single diagnosis by id",
         "description": "",
         "parameters": [
           {
@@ -317,6 +321,7 @@
         "tags": [
           "Diagnosis"
         ],
+        "summary": "Delete single diagnosis by id",
         "description": "",
         "parameters": [
           {

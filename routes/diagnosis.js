@@ -6,6 +6,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   // #swagger.tags = ['Diagnosis']
   //  #swagger.path = '/diagnosis'
+  //  #swagger.summary = 'List all diagnosis'
 
   try {
     const diagnosis = await Diagnosis.find();
@@ -19,6 +20,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   // #swagger.tags = ['Diagnosis']
   //  #swagger.path = '/diagnosis'
+  //  #swagger.summary = 'Create new diagnosis'
   /* #swagger.parameters['obj'] = { 
     in: 'body',
     description: 'Diagnosis Info',
@@ -40,6 +42,7 @@ router.post("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   // #swagger.tags = ['Diagnosis']
   //  #swagger.path = '/diagnosis/{id}'
+  //  #swagger.summary = 'Get single diagnosis by id'
 
   try {
     const diagnosis = await Diagnosis.findById(req.params.id);
@@ -55,6 +58,7 @@ router.get("/:id", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   // #swagger.tags = ['Diagnosis']
   //  #swagger.path = '/diagnosis/{id}'
+  //  #swagger.summary = 'Edit single diagnosis by id'
 
   try {
     //Check if document exists
@@ -85,6 +89,7 @@ router.patch("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   // #swagger.tags = ['Diagnosis']
   //  #swagger.path = '/diagnosis/{id}'
+  //  #swagger.summary = 'Delete single diagnosis by id'
 
   try {
     //Check if document exists
