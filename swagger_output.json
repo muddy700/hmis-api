@@ -1008,6 +1008,7 @@
         "tags": [
           "Filters"
         ],
+        "summary": "List all users with a given role-id",
         "description": "",
         "parameters": [
           {
@@ -1032,8 +1033,16 @@
         "tags": [
           "Filters"
         ],
+        "summary": "Retrieve all users with a given gender",
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "gender",
+            "description": "Gender",
+            "in": "query",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1049,8 +1058,16 @@
         "tags": [
           "Filters"
         ],
+        "summary": "Retrieve users by status",
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "status",
+            "description": "status",
+            "in": "query",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1066,8 +1083,16 @@
         "tags": [
           "Filters"
         ],
+        "summary": "List patients by dob",
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "dob",
+            "description": "Date of Birth",
+            "in": "query",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1083,6 +1108,7 @@
         "tags": [
           "Filters"
         ],
+        "summary": "Retrieve appointments by doctor-id",
         "description": "",
         "parameters": [
           {
@@ -1107,8 +1133,16 @@
         "tags": [
           "Filters"
         ],
+        "summary": "Retrieve appointments by invoice-status",
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "invoiced",
+            "description": "Invoice Status",
+            "in": "query",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"

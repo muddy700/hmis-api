@@ -28,6 +28,7 @@ const patientPopulator = { path: "patient", select: "full_name phone -_id" };
 router.get("/roles/:role_id/users", async (req, res) => {
   // #swagger.tags = ['Filters']
   //  #swagger.path = '/filter/roles/{role_id}/users'
+  //  #swagger.summary = 'List all users with a given role-id'
 
   try {
     const users = await User.find(
@@ -44,10 +45,12 @@ router.get("/roles/:role_id/users", async (req, res) => {
 router.get("/users-by-gender", async (req, res) => {
   // #swagger.tags = ['Filters']
   //  #swagger.path = '/filter/users-by-gender'
+  //  #swagger.summary = 'Retrieve all users with a given gender'
+  // #swagger.parameters['gender'] = { description: 'Gender' }
 
   try {
     const users = await User.find(
-      { gender: req.body.gender },
+      { gender: req.query.gender },
       userProjector
     ).populate(rolePopulator);
     res.status(200).send(users);
@@ -60,10 +63,12 @@ router.get("/users-by-gender", async (req, res) => {
 router.get("/users-by-status", async (req, res) => {
   // #swagger.tags = ['Filters']
   //  #swagger.path = '/filter/users-by-status'
+  //  #swagger.summary = 'Retrieve users by status'
+  // #swagger.parameters['status'] = { description: 'status' }
 
   try {
     const users = await User.find(
-      { status: req.body.status },
+      { status: req.query.status },
       userProjector
     ).populate(rolePopulator);
     res.status(200).send(users);
@@ -77,11 +82,13 @@ router.get("/users-by-status", async (req, res) => {
 router.get("/patients-by-dob", async (req, res) => {
   // #swagger.tags = ['Filters']
   //  #swagger.path = '/filter/patients-by-dob'
+  //  #swagger.summary = 'List patients by dob'
+  // #swagger.parameters['dob'] = { description: 'Date of Birth' }
 
   try {
     const patients = await Patient.find({
-      dob: req.body.dob,
-      //   dob: { $gt: req.body.dob },
+      dob: req.query.dob,
+      //   dob: { $gt: req.query.dob },
     }).populate(vitalSignPopulator);
     res.status(200).send(patients);
   } catch (error) {
@@ -94,6 +101,7 @@ router.get("/patients-by-dob", async (req, res) => {
 router.get("/doctors/:doctor_id/appointments", async (req, res) => {
   // #swagger.tags = ['Filters']
   //  #swagger.path = '/filter/doctors/{doctor_id}/appointments'
+  //  #swagger.summary = 'Retrieve appointments by doctor-id'
 
   try {
     const appointments = await Appointment.find({
@@ -111,10 +119,12 @@ router.get("/doctors/:doctor_id/appointments", async (req, res) => {
 router.get("/appointments-by-invoice-status", async (req, res) => {
   // #swagger.tags = ['Filters']
   //  #swagger.path = '/filter/appointments-by-invoice-status'
+  //  #swagger.summary = 'Retrieve appointments by invoice-status'
+  // #swagger.parameters['invoiced'] = { description: 'Invoice Status' }
 
   try {
     const appointments = await Appointment.find({
-      invoiced: req.body.invoiced,
+      invoiced: req.query.invoiced,
     })
       .populate(practitionerPopulator)
       .populate(patientPopulator);
