@@ -6,6 +6,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   // #swagger.tags = ['Symptoms']
   //  #swagger.path = '/symptoms'
+  //  #swagger.summary = 'List all symptoms'
 
   try {
     const symptoms = await Symptom.find();
@@ -19,6 +20,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   // #swagger.tags = ['Symptoms']
   //  #swagger.path = '/symptoms'
+  //  #swagger.summary = 'Create new symptom'
 
   //Initialize new instance/doc
   const symptom = new Symptom({
@@ -37,6 +39,7 @@ router.post("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   // #swagger.tags = ['Symptoms']
   //  #swagger.path = '/symptoms/{id}'
+  //  #swagger.summary = 'Get single symptom by id'
 
   try {
     const symptom = await Symptom.findById(req.params.id);
@@ -53,6 +56,7 @@ router.get("/:id", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   // #swagger.tags = ['Symptoms']
   //  #swagger.path = '/symptoms/{id}'
+  //  #swagger.summary = 'Edit single symptom by id'
 
   try {
     //Check if document exists
@@ -82,6 +86,7 @@ router.patch("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   // #swagger.tags = ['Symptoms']
   //  #swagger.path = '/symptoms/{id}'
+  //  #swagger.summary = 'Delete single symptom by id'
 
   try {
     //Check if document exists

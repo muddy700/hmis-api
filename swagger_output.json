@@ -2489,6 +2489,7 @@
         "tags": [
           "Symptoms"
         ],
+        "summary": "List all symptoms",
         "description": "",
         "parameters": [],
         "responses": {
@@ -2504,6 +2505,7 @@
         "tags": [
           "Symptoms"
         ],
+        "summary": "Create new symptom",
         "description": "",
         "parameters": [
           {
@@ -2534,6 +2536,7 @@
         "tags": [
           "Symptoms"
         ],
+        "summary": "Get single symptom by id",
         "description": "",
         "parameters": [
           {
@@ -2556,6 +2559,7 @@
         "tags": [
           "Symptoms"
         ],
+        "summary": "Edit single symptom by id",
         "description": "",
         "parameters": [
           {
@@ -2593,6 +2597,7 @@
         "tags": [
           "Symptoms"
         ],
+        "summary": "Delete single symptom by id",
         "description": "",
         "parameters": [
           {
