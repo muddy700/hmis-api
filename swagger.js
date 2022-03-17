@@ -181,6 +181,14 @@ const doc = {
       body_temperature: 37,
       blood_pressure: "120/110",
     },
+    Appointment: {
+      appointment_time: "2022-03-03T21:00:00.000Z",
+      practitioner: "123mn343vhjh5443k",
+      patient: "123mn343vhjh5443k",
+      price: 5000,
+      status: false,
+      invoiced: true,
+    },
     // User: {
     //   name: "Jhon Doe",
     //   age: 29,

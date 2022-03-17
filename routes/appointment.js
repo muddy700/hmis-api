@@ -39,6 +39,7 @@ const findAppointment = async (req, res) => {
 router.get("/", async (req, res) => {
   // #swagger.tags = ['Appointment']
   //  #swagger.path = '/appointments'
+  //  #swagger.summary = 'List all appointments'
 
   try {
     const appointments = await Appointment.find()
@@ -54,6 +55,12 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   // #swagger.tags = ['Appointment']
   //  #swagger.path = '/appointments'
+  //  #swagger.summary = 'Create new  appointment'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Appointment Details',
+           schema: { $ref: "#/definitions/Appointment" }
+    } */
 
   //Initialize new instance/doc
   const appointment = new Appointment(req.body);
@@ -70,6 +77,7 @@ router.post("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   // #swagger.tags = ['Appointment']
   //  #swagger.path = '/appointments/{id}'
+  //  #swagger.summary = 'Retrieve an appointment by id'
 
   const appointment = await findAppointment(req, res);
   if (appointment) res.status(200).send(appointment);
@@ -79,6 +87,12 @@ router.get("/:id", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   // #swagger.tags = ['Appointment']
   //  #swagger.path = '/appointments/{id}'
+  //  #swagger.summary = 'Update an appointment by id'
+  /* #swagger.parameters['obj'] = { 
+           in: 'body',
+           description: 'Appointment Details',
+           schema: { $ref: "#/definitions/Appointment" }
+    } */
 
   const appointment = await findAppointment(req, res);
   if (appointment) {
@@ -99,6 +113,7 @@ router.patch("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   // #swagger.tags = ['Appointment']
   //  #swagger.path = '/appointments/{id}'
+  //  #swagger.summary = 'Delete an appointment by id'
 
   const appointment = await findAppointment(req, res);
   if (appointment) {

@@ -86,6 +86,7 @@
         "tags": [
           "Appointment"
         ],
+        "summary": "List all appointments",
         "description": "",
         "parameters": [],
         "responses": {
@@ -101,8 +102,18 @@
         "tags": [
           "Appointment"
         ],
+        "summary": "Create new appointment",
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Appointment Details",
+            "schema": {
+              "$ref": "#/definitions/Appointment"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -118,6 +129,7 @@
         "tags": [
           "Appointment"
         ],
+        "summary": "Retrieve an appointment by id",
         "description": "",
         "parameters": [
           {
@@ -140,6 +152,7 @@
         "tags": [
           "Appointment"
         ],
+        "summary": "Update an appointment by id",
         "description": "",
         "parameters": [
           {
@@ -149,18 +162,11 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "obj",
             "in": "body",
+            "description": "Appointment Details",
             "schema": {
-              "type": "object",
-              "properties": {
-                "date_created": {
-                  "example": "any"
-                },
-                "remainingData": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/Appointment"
             }
           }
         ],
@@ -180,6 +186,7 @@
         "tags": [
           "Appointment"
         ],
+        "summary": "Delete an appointment by id",
         "description": "",
         "parameters": [
           {
@@ -3047,6 +3054,35 @@
         "blood_pressure": {
           "type": "string",
           "example": "120/110"
+        }
+      }
+    },
+    "Appointment": {
+      "type": "object",
+      "properties": {
+        "appointment_time": {
+          "type": "string",
+          "example": "2022-03-03T21:00:00.000Z"
+        },
+        "practitioner": {
+          "type": "string",
+          "example": "123mn343vhjh5443k"
+        },
+        "patient": {
+          "type": "string",
+          "example": "123mn343vhjh5443k"
+        },
+        "price": {
+          "type": "number",
+          "example": 5000
+        },
+        "status": {
+          "type": "boolean",
+          "example": false
+        },
+        "invoiced": {
+          "type": "boolean",
+          "example": true
         }
       }
     }
